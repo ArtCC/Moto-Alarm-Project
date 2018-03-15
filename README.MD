@@ -1,10 +1,17 @@
 ## Do it yourself!
 
-#### Moto Alarm Project (Linkit One version)
+# Moto Alarm Project (Linkit One version)
 
-#### LOCATE YOUR MOTORCYCLE 24 HOURS A DAY AND 365 DAYS A YEAR
+##### LOCATE YOUR MOTORCYCLE 24 HOURS A DAY AND 365 DAYS A YEAR
 
 [Moto Alarm Project Website](https://motoalarm-project.com "Moto Alarm Project")
+
+#### PROJECT FUNCTIONALITIES:
+
+- Activate and deactivate the service via bluetooth or sms from the application
+- Alert by SMS of the change of position of the motorcycle
+- Control of the battery status of the device from the application
+- Motorcycle position
 
 ### DOWNLOAD iOS VERSION:
 
