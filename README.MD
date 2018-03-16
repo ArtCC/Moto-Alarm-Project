@@ -115,15 +115,9 @@ If you have a 3D printer or you know someone who has it, here are the .stl files
 
 ### INSTALLING IN YOUR MOTORBIKE
 
-I have changed the 1000mAh battery for a 4000mAh, so it lasts a lot longer without charging.
+I have changed the 1000mAh battery for a 6000mAh, so it lasts a lot longer without charging.
 
 Example:
-
-![MacDown Screenshot](Resources/Battery4000.jpg)
-
-[Battery in Amazon](https://www.amazon.es/gp/product/B01D64BPYQ/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
-
-or 6000mAh:
 
 ![MacDown Screenshot](Resources/Battery6600.png)
 
@@ -141,7 +135,7 @@ This project is free and use CC BY-SA.
 
 ![MacDown Screenshot](https://licensebuttons.net/l/by-sa/3.0/88x31.png)
 
-This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to ‚Äúcopyleft‚Äù free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. This is the license used by Wikipedia, and is recommended for materials that would benefit from incorporating content from Wikipedia and similarly licensed projects.
+This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to ìcopyleftî free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. This is the license used by Wikipedia, and is recommended for materials that would benefit from incorporating content from Wikipedia and similarly licensed projects.
 
 [View License Deed](https://creativecommons.org/licenses/by-nd/4.0) | [View Legal Code](https://creativecommons.org/licenses/by-nd/4.0/legalcode)
 
