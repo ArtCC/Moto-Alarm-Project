@@ -14,7 +14,7 @@ unsigned long previousMillisUpdate = 0;
 String textForWetSMS = "I'm very wet... ";
 String textForColdSMS = "I'm very cold... ";
 String textForHotSMS = "I'm very hot... ";
-String textForAlarmSMS = "Your motorcycle is moving: ";
+String textForAlarmSMS = "Hey! I'm moving! Speed: ";
 
 // Private functions
 void configureGPRSConnection() {
@@ -141,7 +141,7 @@ bool isDebug() {
 }
 
 String getFeel() {
-  String text = getCity() + ": " + getWeatherTitle() + " - " + getTemp() + "C - " + getHumidity() + "%";
+  String text = getCity() + ": " + getWeatherTitle() + " , " + getTemp() + "C , " + getHumidity() + "%";
 
   int temp = getTemp().toInt();
   int humidity = getHumidity().toInt();
