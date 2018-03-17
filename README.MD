@@ -12,7 +12,7 @@
 - Alert by SMS of the change of position of the motorcycle
 - Control of the battery status of the device from the application
 - Motorcycle position
-- Chart with motorcycle for get battery status and other functions
+- Chat with motorcycle for get battery status and other functions
 
 ### DOWNLOAD iOS VERSION:
 
