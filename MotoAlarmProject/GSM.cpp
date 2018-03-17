@@ -7,6 +7,7 @@ bool permissionForSendSMS = true;
 // SMS text
 String statusFromSMS = "status";
 String textForStatusSMS = "My coordinates on map: ";
+String textForStatusErrorSMS = "Sorry, my coordinates on map contain errors...";
 String googleMapsURL = "https://www.google.com/maps/search/?api=1&query=";
 String googleZoom = "&zoom=8";
 String batteryFromSMS = "battery";
@@ -115,8 +116,14 @@ void receivedSMS() {
 
     if (message == statusFromSMS) {
 
-      String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-      sendSMSToPhoneNumber(userPhone, textString);
+      if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
+
+        sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
+      } else {
+
+        String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
+        sendSMSToPhoneNumber(userPhone, textString);
+      }
     } else if (message == batteryFromSMS) {
 
       String textString = textForBatterySMS + getBatteryLevel() + "%";
