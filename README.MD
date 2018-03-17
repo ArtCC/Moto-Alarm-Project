@@ -12,6 +12,7 @@
 - Alert by SMS of the change of position of the motorcycle
 - Control of the battery status of the device from the application
 - Motorcycle position
+- Chart with motorcycle for get battery status and other functions
 
 ### DOWNLOAD iOS VERSION:
 
@@ -58,6 +59,14 @@ In order to use this board with the Arduino IDE, you need to follow some steps:
 
 You have to add a SIM card in your Linkit One with the PIN code deactivated in order to use the GPRS connection, in addition, I use a card with SMS to be able to communicate with the motorcycle, as well as over the Internet, by normal SMS.
 
+I use FreedomPop SIM, it is free with:
+
+- 200 mb for data
+- 300 SMS
+- 100 minutes for call
+
+[FreedomPop Website](https://es.freedompop.com/es?experience=organic.default "FreedomPop")
+
 Once you have everything configured in the Arduino IDE to use your new Linkit One board, you can already clone this repository on your computer and access the MotoAlarmProject folder and open the <b>MotoAlarmProject.ino</b> file.
 
 You need to download and install two libraries that are used in the project in the Arduino IDE:
@@ -103,25 +112,32 @@ static String userId = "userId";
 
 You can now upload the code to your Linkit One!
 
-### BOX (TEMPORAL, NEW DESIGN IN PROCESS)
+### BOX WITH BATTERY 1000mAh (TEMPORAL, NEW DESIGN IN PROCESS FOR BATTERY 4000mAh DESIGN FOR ME)
 
-If you have a 3D printer or you know someone who has it, here are the .stl files to be able to print a box that I have designed for the project:
+If you have a 3D printer or know someone who has it, here are the .stl files to print a picture that CarmelitoA has designed for the project:
 
 ![MacDown Screenshot](Resources/Box_1.jpg)
 ![MacDown Screenshot](Resources/Box_2.jpg)
-![MacDown Screenshot](Resources/Box_3.jpg)
 
-[STL files in Thingeverse.com](https://www.thingiverse.com/thing:2821391 "STL files")
+[STL files in Thingeverse.com by CarmelitoA](https://www.thingiverse.com/thing:1193005 "STL files")
 
 ### INSTALLING IN YOUR MOTORBIKE
 
-I have changed the 1000mAh battery for a 6000mAh, so it lasts a lot longer without charging.
+I have changed the 1000mAh battery for a 4000mAh, so it lasts a lot longer without charging.
 
 Example:
 
-![MacDown Screenshot](Resources/Battery6600.png)
+![MacDown Screenshot](Resources/Battery4000.jpg)
 
-[Battery in BricoGeek shop](http://tienda.bricogeek.com/baterias-lipo/418-bateria-lipo-6000mah-37v.html)
+[Battery in 'Electrónica Embajadores' shop](https://www.electronicaembajadores.com/es/Productos/Detalle/BA1A3740/baterias-pilas-y-cargadores/baterias-de-polimero-de-litio/bateria-de-polimero-litio-3-7v-4000ma)
+
+![MacDown Screenshot](Resources/Conector.jpg)
+
+[Connector in 'Electrónica Embajadores' shop](https://www.electronicaembajadores.com/es/Productos/Detalle/CTK02HA02/conectores/conectores-poste-polarizado/conector-poste-2-00mm-hembra-aerea-2-contactos)
+
+![MacDown Screenshot](Resources/Terminal.jpg)
+
+[Terminal in 'Electrónica Embajadores' shop](https://www.electronicaembajadores.com/es/Productos/Detalle/CTK02TT/conectores/conectores-poste-polarizado/terminal-para-conector-poste-2-00mm-hembra)
 
 I added a usb charger to the battery in my motorcycle but in positive, that means that when I turn off the motorcycle it has no current, it only charges the powerbank when the motorcycle is on.
 
@@ -135,7 +151,7 @@ This project is free and use CC BY-SA.
 
 ![MacDown Screenshot](https://licensebuttons.net/l/by-sa/3.0/88x31.png)
 
-This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to �copyleft� free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. This is the license used by Wikipedia, and is recommended for materials that would benefit from incorporating content from Wikipedia and similarly licensed projects.
+This license lets others remix, tweak, and build upon your work even for commercial purposes, as long as they credit you and license their new creations under the identical terms. This license is often compared to “copyleft” free and open source software licenses. All new works based on yours will carry the same license, so any derivatives will also allow commercial use. This is the license used by Wikipedia, and is recommended for materials that would benefit from incorporating content from Wikipedia and similarly licensed projects.
 
 [View License Deed](https://creativecommons.org/licenses/by-nd/4.0) | [View Legal Code](https://creativecommons.org/licenses/by-nd/4.0/legalcode)
 
