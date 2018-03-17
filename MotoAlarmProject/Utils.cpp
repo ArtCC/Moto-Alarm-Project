@@ -20,11 +20,18 @@ String textForAlarmSMS = "Hey! I'm moving! Speed: ";
 void configureGPRSConnection() {
   while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
 
-    Serial.println("LGPRS setup error");
+    if (isDebug()) {
+
+      Serial.println("LGPRS setup error");
+    }
+
     delay(100);
   }
 
-  Serial.println("LGPRS setup correct");
+  if (isDebug()) {
+
+    Serial.println("LGPRS setup correct");
+  }
 }
 
 void setStatusToUpdateDataToOffUtil() {
@@ -84,22 +91,21 @@ void startAllServices() {
       previousMillisToken = millis();
     }
 
-    long finalIntervalUpdate = intervalUpdate;
-
-    if (getVelocity() > 9.0) {
-
-      finalIntervalUpdate = alarmIntervalUpdate;
-      setServiceStatus(true);
-
-      if (alarmSMSActive == true) {
-
-        String textString = textForAlarmSMS + getVelocity() + "m/s";
-        sendSMSToPhoneNumber(userPhone, textString);
-        alarmSMSActive = false;
-      }
-    }
-
     if (serviceIsActiveForSendDataToService() == true) {
+
+      long finalIntervalUpdate = intervalUpdate;
+
+      if (getVelocity() > 9.0) {
+
+        finalIntervalUpdate = alarmIntervalUpdate;
+
+        if (alarmSMSActive == true) {
+
+          String textString = textForAlarmSMS + getVelocity() + "m/s";
+          sendSMSToPhoneNumber(userPhone, textString);
+          alarmSMSActive = false;
+        }
+      }
 
       if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
 

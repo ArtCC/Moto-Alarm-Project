@@ -15,6 +15,7 @@ String feelFromSMS = "feel";
 String textForFeelSMS = "I'm fine. Thank you very much! :)";
 String resetFromSMS = "reset";
 String textForResetSMS = "Wait, I'm restarting now...";
+String textForResetSMSDisabled = "Sorry, this functionality is not in use yet...";
 String activateFromSMS = "activate";
 String textForActivateSMS = "Perfect! My location is active :)";
 String desactivateFromSMS = "desactivate";
@@ -141,9 +142,7 @@ void receivedSMS() {
       }
     } else if (message == resetFromSMS) {
 
-      sendSMSToPhoneNumber(userPhone, textForResetSMS);
-      delay(3000);
-
+      sendSMSToPhoneNumber(userPhone, textForResetSMSDisabled);
       resetByCode();
     }
 
