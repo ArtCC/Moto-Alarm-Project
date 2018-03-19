@@ -22,7 +22,6 @@ String time_format = "00:00:00", date_format = "00:00:0000";
 String old_time_and_date_format = "00:00:00,00:00:0000";
 String lat_format = "0.00000", lon_format = "0.00000";
 String old_lat_format = "0.00000", old_lon_format = "0.00000";
-float velocity = 0.00;
 
 // Private util functions
 /**
@@ -135,7 +134,6 @@ int getData(gpsSentenceInfoStruct* info) {
       str = str.substring(comma);
       k_speed = str.substring(0, str.indexOf(',')).toFloat();
       m_speed = k_speed * 0.514;
-      velocity = k_speed * 0.514;
       str = str.substring(str.indexOf(',') + 1);
       track_angle = str.substring(0, str.indexOf(',')).toFloat();
       str = str.substring(str.indexOf(',') + 1);

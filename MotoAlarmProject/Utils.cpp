@@ -5,7 +5,7 @@
 // "Multi-thread" with millis()
 unsigned long intervalToken = 259200000;
 unsigned long intervalUpdate = 120000;
-unsigned long alarmIntervalUpdate = 30000;
+unsigned long alarmIntervalUpdate = 45000;
 unsigned long disabledIntervalUpdate = 900000;
 unsigned long previousMillisToken = 0;
 unsigned long previousMillisUpdate = 0;
@@ -63,8 +63,18 @@ void startAllServices() {
 
     if (response) {
 
+      if (isDebug()) {
+
+        Serial.println("New token ok");
+      }
+
       firstInit = false;
     } else {
+
+      if (isDebug()) {
+
+        Serial.println("New token ko");
+      }
 
       firstInit = true;
     }
@@ -81,9 +91,14 @@ void startAllServices() {
 
         if (isDebug()) {
 
-          Serial.println("Token ok");
+          Serial.println("Refresh token ok");
         }
       } else {
+
+        if (isDebug()) {
+
+          Serial.println("Refresh token ko");
+        }
 
         firstInit = true;
       }

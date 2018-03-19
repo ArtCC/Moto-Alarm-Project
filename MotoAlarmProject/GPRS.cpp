@@ -42,7 +42,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
 
     String sendDataStatus = "\"true\"";
 
-    if (LBattery.level() < 5) {
+    if (LBattery.level() <= 3) {
 
       sendDataStatus = "\"false\"";
     }
@@ -52,6 +52,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
     String dateTime = "\"" + getDateTime() + "\"";
     String bLevel = "\"" + batteryLevel + "\"";
     String bStatus = "\"" + batteryStatus + "\"";
+    String velocity = "\"" + String(getVelocity()) + "\"";
 
     String data = "{\"motorbike_latitude\":" + lat + "," +
                   "\"motorbike_longitude\":" + lon + "," +
@@ -59,6 +60,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
                   "\"activated_motorbike_position\":" + sendDataStatus + "," +
                   "\"battery_motorbike_device\":" + bLevel + "," +
                   "\"battery_motorbike_status_charging\":" + bStatus +
+                  "\"motorbike_velocity\":" + velocity +
                   "}";
 
     if (isDebug()) {
