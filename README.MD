@@ -123,7 +123,7 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 
 ### INSTALLING IN YOUR MOTORBIKE
 
-I have changed the 1000mAh battery for a 4000mAh, so it lasts a lot longer without charging.
+I have changed the 1000mAh battery for a 4000mAh (10cm x 7cm), so it lasts a lot longer without charging.
 
 Example:
 

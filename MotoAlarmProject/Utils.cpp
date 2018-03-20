@@ -134,7 +134,7 @@ void startAllServices() {
 
       long finalIntervalUpdate = intervalUpdate;
 
-      if (getVelocity() > 9.0) {
+      if (getVelocity() > 2.0) {
 
         finalIntervalUpdate = alarmIntervalUpdate;
 
