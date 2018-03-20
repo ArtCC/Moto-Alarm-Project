@@ -134,6 +134,7 @@ void receivedSMS() {
       sendSMSToPhoneNumber(userPhone, textForActivateSMS);
     } else if (message == desactivateFromSMS) {
 
+      setStatusToUpdateDataToOffUtil();
       setServiceStatus(false);
       sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
     } else if (message == feelFromSMS) {
@@ -149,7 +150,7 @@ void receivedSMS() {
       }
     } else if (message == resetFromSMS) {
 
-      sendSMSToPhoneNumber(userPhone, textForResetSMSDisabled);
+      sendSMSToPhoneNumber(userPhone, textForResetSMS);
       resetByCode();
     }
 

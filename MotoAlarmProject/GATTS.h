@@ -31,7 +31,7 @@ class GATTS : public LGATTService {
     boolean sendMessage(const char *str);
 
     // Status for service
-    bool _serviceActivated;
+    bool _serviceActivated = true;
   protected:
     // Prepare the data for profile
     virtual LGATTServiceInfo *onLoadService(int32_t index);

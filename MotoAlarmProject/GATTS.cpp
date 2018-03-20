@@ -152,6 +152,7 @@ boolean GATTS::onWrite(LGATTWriteRequest &data) {
         Serial.println("Desactivate");
       }
 
+      setStatusToUpdateDataToOffUtil();
       _serviceActivated = false;
     } else {
 

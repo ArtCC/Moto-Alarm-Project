@@ -9,6 +9,9 @@ void configureServices();
 // Start all services in loop
 void startAllServices();
 
+// Set service to disabled
+void setStatusToUpdateDataToOffUtil();
+
 // Check if debug is active
 bool isDebug();
 

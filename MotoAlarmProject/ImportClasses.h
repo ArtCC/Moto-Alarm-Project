@@ -19,7 +19,9 @@
 #include <LGPRS.h>
 #include <LGPRSClient.h>
 #include <LGPRSServer.h>
+#include <LTask.h>
 
+#include "vmpwr.h"
 #include "vmbtgatt.h"
 
 #include "PrivateConstants.h"

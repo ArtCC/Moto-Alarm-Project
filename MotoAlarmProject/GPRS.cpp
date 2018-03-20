@@ -59,7 +59,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
                   "\"motorbike_date_last_position\":" + dateTime + "," +
                   "\"activated_motorbike_position\":" + sendDataStatus + "," +
                   "\"battery_motorbike_device\":" + bLevel + "," +
-                  "\"battery_motorbike_status_charging\":" + bStatus +
+                  "\"battery_motorbike_status_charging\":" + bStatus + "," +
                   "\"motorbike_velocity\":" + velocity +
                   "}";
 

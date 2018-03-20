@@ -41,6 +41,30 @@ void setStatusToUpdateDataToOffUtil() {
                              getBatteryChargeStatus());
 }
 
+// Reset Controller
+extern void vm_reboot_normal_start(void);
+
+void vm_reset_utils(void) {
+
+  if (isDebug()) {
+
+    Serial.println("Reset...");
+  }
+
+  delay(500);
+  vm_reboot_normal_start();
+}
+
+boolean vm_reset_wrap_utils(void* userData) {
+  vm_reset_utils();
+
+  return true;
+}
+
+void reset_utils(void) {
+  LTask.remoteCall(vm_reset_wrap_utils, NULL);
+}
+
 // Public functions
 void configureServices() {
   Serial.begin(115200);
@@ -198,4 +222,6 @@ void resetByCode() {
 
     Serial.println("Now we are Resetting Arduino Programmatically");
   }
+
+  reset_utils();
 }
