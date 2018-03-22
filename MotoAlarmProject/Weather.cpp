@@ -93,7 +93,7 @@ bool sendRequestForWeatherForMotorbikeLocation() {
     String units = "&units=metric";
 
     client.print("GET /data/2.5/weather?" + lat + lon + apiKey + units);
-    client.println(" HTTP/1.1");
+    client.println(" HTTP/1.0");
     client.print("Host: ");
     client.println(weatherBaseUrl);
     client.println("Connection: close");

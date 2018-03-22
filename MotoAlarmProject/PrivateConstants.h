@@ -12,6 +12,7 @@ static LGPRSClient client;
 
 // Max response time from server
 const unsigned long HTTP_TIMEOUT = 10000;
+const size_t MAX_CONTENT_SIZE = 512;
 
 // Server
 static char server[] = "motoalarm-project.com";

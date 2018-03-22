@@ -93,7 +93,7 @@ bool sendRequestForToken() {
     }
 
     client.print("POST /wp-json/jwt-auth/v1/token/");
-    client.println(" HTTP/1.1");
+    client.println(" HTTP/1.0");
 
     client.println("Content-Type: application/json; charset=UTF-8");
     client.println("Content-Length: " + thisLength);
@@ -118,7 +118,7 @@ bool sendRequestForToken() {
 // Public functions
 bool getTokenForUser() {
 
-  if (sendRequestForToken() && skipResponseHeaders("15a")) {
+  if (sendRequestForToken() && skipResponseHeaders("\r\n\r\n")) {
 
     clientData clientData;
 
