@@ -112,20 +112,18 @@ static String userId = "userId";
 
 You can now upload the code to your Linkit One!
 
-### BOX WITH BATTERY 1000mAh (TEMPORAL, NEW DESIGN IN PROCESS FOR BATTERY 4000mAh DESIGN FOR ME)
+### BOX FOR LINKIT ONE AND BATTERY WITH 4000mAh
 
-If you have a 3D printer or know someone who has it, here are the .stl files to print a picture that CarmelitoA has designed for the project:
+If you have a 3D printer or know someone who has it, here are the .stl files to print that I designed for the project:
 
 ![MacDown Screenshot](Resources/Box_1.jpg)
 ![MacDown Screenshot](Resources/Box_2.jpg)
 
-[STL files in Thingeverse.com by CarmelitoA](https://www.thingiverse.com/thing:1193005 "STL files")
+[STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2835547 "STL files")
 
 ### INSTALLING IN YOUR MOTORBIKE
 
 I have changed the 1000mAh battery for a 4000mAh (10cm x 7cm), so it lasts a lot longer without charging.
-
-Example:
 
 ![MacDown Screenshot](Resources/Battery4000.jpg)
 
