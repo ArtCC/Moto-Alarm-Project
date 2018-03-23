@@ -119,7 +119,6 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 ![MacDown Screenshot](Resources/Box_1.jpg)
 ![MacDown Screenshot](Resources/Box_2.jpg)
 ![MacDown Screenshot](Resources/Box_3.jpg)
-![MacDown Screenshot](Resources/Box_4.jpg)
 
 [STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2835547 "STL files")
 
