@@ -125,6 +125,14 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 
 [STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2835547 "STL files")
 
+### POWERBANK (OPTIONAL)
+
+In addition, to my box I have added a special 'powerbank'. It is a battery with 3700mAh electronic board for Raspberry Pi, that I will use to power the main battery of the device, which will increase the total capacity to 7800mAh and serves as security and protection when connecting the set to the usb of the motorcycle.
+
+![MacDown Screenshot](Resources/Powerbank.jpg)
+
+[Powerbank in Amazon.es](https://www.amazon.es/gp/product/B06XFPZKZW/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1 "Powerbank")
+
 ### INSTALLING IN YOUR MOTORBIKE
 
 I have changed the 1000mAh battery for a 4000mAh (10cm x 7cm), so it lasts a lot longer without charging.
