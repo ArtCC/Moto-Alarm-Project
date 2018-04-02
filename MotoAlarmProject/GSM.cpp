@@ -11,7 +11,7 @@ String textForStatusErrorSMS = "Sorry, my coordinates on map contain errors...";
 String googleMapsURL = "https://www.google.com/maps/search/?api=1&query=";
 String googleZoom = "&zoom=8";
 String batteryFromSMS = "battery";
-String textForBatterySMS = "Right now I have this battery percentage: ";
+String textForBatterySMS = "Right now, I have this battery percentage: ";
 String feelFromSMS = "feel";
 String textForFeelSMS = "I'm fine. Thank you very much! :)";
 String resetFromSMS = "reset";
@@ -114,44 +114,112 @@ void receivedSMS() {
 
     permissionForSendSMS = true;
 
-    if (message == statusFromSMS) {
+    if (getStatusCorrectConnection()) {
 
-      if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
+      if (message == statusFromSMS) {
 
-        sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
-      } else {
+        if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
-        String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
+          String message = "\"" + textForStatusErrorSMS + "\"";
+          String data = "{\"message_chat\":" + message + "}";
+
+          setPOSTRequest(data);
+        } else {
+
+          String message = "\"" + textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom + "\"";
+          String data = "{\"message_chat\":" + message + "}";
+
+          setPOSTRequest(data);
+        }
+      } else if (message == batteryFromSMS) {
+
+        String message = "\"" + textForBatterySMS + getBatteryLevel() + "%" + "\"";
+        String data = "{\"message_chat\":" + message + "}";
+
+        setPOSTRequest(data);
+      } else if (message == activateFromSMS) {
+
+        String message = "\"" + textForActivateSMS + "\"";
+        String data = "{\"message_chat\":" + message + "}";
+
+        setPOSTRequest(data);
+
+        setServiceStatus(true);
+      } else if (message == desactivateFromSMS) {
+
+        String message = "\"" + textForDesactivateSMS + "\"";
+        String data = "{\"message_chat\":" + message + "}";
+
+        setPOSTRequest(data);
+
+        setStatusToUpdateDataToOffUtil();
+        setServiceStatus(false);
+      } else if (message == feelFromSMS) {
+
+        bool weather = getWeatherForMotorbikeLocation();
+
+        if (weather) {
+
+          String message = "\"" + getFeel() + "\"";
+          String data = "{\"message_chat\":" + message + "}";
+
+          setPOSTRequest(data);
+        } else {
+
+          String message = "\"" + textForFeelSMS + "\"";
+          String data = "{\"message_chat\":" + message + "}";
+
+          setPOSTRequest(data);
+        }
+      } else if (message == resetFromSMS) {
+
+        String data = "{\"message_chat\":" + textForResetSMS + "}";
+
+        setPOSTRequest(data);
+
+        resetByCode();
+      }
+    } else {
+
+      if (message == statusFromSMS) {
+
+        if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
+
+          sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
+        } else {
+
+          String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
+          sendSMSToPhoneNumber(userPhone, textString);
+        }
+      } else if (message == batteryFromSMS) {
+
+        String textString = textForBatterySMS + getBatteryLevel() + "%";
         sendSMSToPhoneNumber(userPhone, textString);
+      } else if (message == activateFromSMS) {
+
+        setServiceStatus(true);
+        sendSMSToPhoneNumber(userPhone, textForActivateSMS);
+      } else if (message == desactivateFromSMS) {
+
+        setStatusToUpdateDataToOffUtil();
+        setServiceStatus(false);
+        sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
+      } else if (message == feelFromSMS) {
+
+        bool weather = getWeatherForMotorbikeLocation();
+
+        if (weather) {
+
+          sendSMSToPhoneNumber(userPhone, getFeel());
+        } else {
+
+          sendSMSToPhoneNumber(userPhone, textForFeelSMS);
+        }
+      } else if (message == resetFromSMS) {
+
+        sendSMSToPhoneNumber(userPhone, textForResetSMS);
+        resetByCode();
       }
-    } else if (message == batteryFromSMS) {
-
-      String textString = textForBatterySMS + getBatteryLevel() + "%";
-      sendSMSToPhoneNumber(userPhone, textString);
-    } else if (message == activateFromSMS) {
-
-      setServiceStatus(true);
-      sendSMSToPhoneNumber(userPhone, textForActivateSMS);
-    } else if (message == desactivateFromSMS) {
-
-      setStatusToUpdateDataToOffUtil();
-      setServiceStatus(false);
-      sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
-    } else if (message == feelFromSMS) {
-
-      bool weather = getWeatherForMotorbikeLocation();
-
-      if (weather) {
-
-        sendSMSToPhoneNumber(userPhone, getFeel());
-      } else {
-
-        sendSMSToPhoneNumber(userPhone, textForFeelSMS);
-      }
-    } else if (message == resetFromSMS) {
-
-      sendSMSToPhoneNumber(userPhone, textForResetSMS);
-      resetByCode();
     }
 
     LSMS.flush();

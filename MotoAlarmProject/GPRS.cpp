@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Private util functions
+// Public util functions
 void setPOSTRequest(String &path) {
 
   if (isDebug()) {
@@ -34,6 +34,29 @@ void setPOSTRequest(String &path) {
   }
 
   client.stop();
+}
+
+bool getStatusCorrectConnection() {
+
+  if (client.connect(server, port)) {
+
+    if (isDebug()) {
+
+      Serial.println("getStatusCorrectConnection: Connection correct");
+    }
+
+    return true;
+  } else {
+
+    if (isDebug()) {
+
+      Serial.println("getStatusCorrectConnection: Connection failed");
+    }
+
+    client.stop();
+
+    return false;
+  }
 }
 
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {
