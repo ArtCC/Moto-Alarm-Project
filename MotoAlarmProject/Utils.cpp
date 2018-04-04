@@ -16,6 +16,9 @@ String textForColdSMS = "I'm very cold... ";
 String textForHotSMS = "I'm very hot... ";
 String textForAlarmSMS = "Hey! I'm moving! Speed: ";
 
+// Control
+long finalIntervalUpdate = intervalUpdate;
+
 // Private functions
 void configureGPRSConnection() {
   while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
@@ -130,21 +133,23 @@ void startAllServices() {
       previousMillisToken = millis();
     }
 
-    if (serviceIsActiveForSendDataToService() == true) {
+    if (getVelocity() >= 0.5 && alarmSMSActive == true) {
 
-      long finalIntervalUpdate = intervalUpdate;
+      finalIntervalUpdate = alarmIntervalUpdate;
 
-      if (getVelocity() > 2.0) {
+      String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
 
-        finalIntervalUpdate = alarmIntervalUpdate;
+      if (isDebug()) {
 
-        if (alarmSMSActive == true) {
-
-          String textString = textForAlarmSMS + getVelocity() + "m/s";
-          sendSMSToPhoneNumber(userPhone, textString);
-          alarmSMSActive = false;
-        }
+        Serial.println("SMS: Alert");
+        Serial.println(textString);
       }
+
+      sendSMSToPhoneNumber(userPhone, textString);
+      alarmSMSActive = false;
+    }
+
+    if (serviceIsActiveForSendDataToService() == true) {
 
       if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
 
