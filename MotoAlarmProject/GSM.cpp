@@ -120,16 +120,11 @@ void receivedSMS() {
 
         if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
-          String message = "\"" + textForStatusErrorSMS + "\"";
-          String data = "{\"message_chat\":" + message + "}";
-
-          setPOSTRequest(data);
+          sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
         } else {
 
-          String message = "\"" + textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom + "\"";
-          String data = "{\"message_chat\":" + message + "}";
-
-          setPOSTRequest(data);
+          String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
+          sendSMSToPhoneNumber(userPhone, textString);
         }
       } else if (message == batteryFromSMS) {
 
