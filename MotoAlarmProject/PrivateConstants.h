@@ -29,7 +29,7 @@ static char* activateText = "on";
 static char* desactivateText = "off";
 
 // Alarm
-static bool alarmSMSActive = false;
+static bool alarmSMSActive = true;
 
 // Show logs, set true
 static bool debug = false;

@@ -38,7 +38,7 @@ void configureGPRSConnection() {
 }
 
 void setStatusToUpdateDataToOffUtil() {
-  alarmSMSActive = false;
+  alarmSMSActive = true;
 
   setStatusToUpdateDataToOff(getBatteryLevel(),
                              getBatteryChargeStatus());
@@ -133,23 +133,26 @@ void startAllServices() {
       previousMillisToken = millis();
     }
 
-    if (getVelocity() >= 0.5 && alarmSMSActive == true) {
-
-      finalIntervalUpdate = alarmIntervalUpdate;
-
-      String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
-
-      if (isDebug()) {
-
-        Serial.println("SMS: Alert");
-        Serial.println(textString);
-      }
-
-      sendSMSToPhoneNumber(userPhone, textString);
-      alarmSMSActive = false;
-    }
-
     if (serviceIsActiveForSendDataToService() == true) {
+
+      if (getVelocity() >= 3.0) {
+
+        finalIntervalUpdate = alarmIntervalUpdate;
+
+        if (alarmSMSActive == true) {
+
+          String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
+
+          if (isDebug()) {
+
+            Serial.println("SMS: Alert");
+            Serial.println(textString);
+          }
+
+          sendSMSToPhoneNumber(userPhone, textString);
+          alarmSMSActive = false;
+        }
+      }
 
       if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
 
