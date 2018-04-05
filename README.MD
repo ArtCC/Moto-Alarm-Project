@@ -6,13 +6,18 @@
 
 [Moto Alarm Project Website](https://motoalarm-project.com "Moto Alarm Project")
 
-#### PROJECT FUNCTIONALITIES:
+#### PROJECT FUNCTIONALITIES (FROM macOS, iOS or Android APPS):
 
-- Activate and deactivate the service via bluetooth or sms from the application
-- Alert by SMS of the change of position of the motorcycle
-- Control of the battery status of the device from the application
-- Motorcycle position
-- Chat with motorcycle for get battery status and other functions
+- You can see the position of your motorcycle at all times.
+- You can see the last update date of your motorcycle's position.
+- If your motorcycle is moving, speed in meters per second.
+- You can activate and deactivate the service via bluetooth.
+- You can see the battery status of the device.
+- You can activate and deactivate the service through sms from the application.
+- If your motorcycle starts to move, you will receive an alert by SMS of the change of position of the motorcycle and the speed.
+- You can ask him to send you an SMS or chat to see the status of the battery.
+- You can ask for the position of the motorcycle and you will receive an SMS.
+- You can also ask how it is and it will send you temperature, humidity and whether it is raining or not;)
 
 ### DOWNLOAD iOS VERSION:
 
@@ -24,6 +29,14 @@
 ![MacDown Screenshot](Resources/4.png)
 ![MacDown Screenshot](Resources/5.png)
 ![MacDown Screenshot](Resources/6.png)
+
+### DOWNLOAD macOS VERSION:
+
+I am developing this version :)
+
+### DOWNLOAD ANDROID VERSION:
+
+I am developing this version :)
 
 ### WHAT IS ARDUINO?
 
