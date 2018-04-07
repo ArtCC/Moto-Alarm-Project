@@ -194,7 +194,7 @@ bool isDebug() {
 }
 
 String getFeel() {
-  String text = getCity() + ": " + getWeatherTitle() + " , " + getTemp() + "C , " + getHumidity() + "%";
+  String text = getCity() + ": " + getWeatherTitle() + ", " + getTemp() + "C, " + getHumidity() + "%H";
 
   int temp = getTemp().toInt();
   int humidity = getHumidity().toInt();
