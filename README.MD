@@ -17,7 +17,7 @@
 - If your motorcycle starts to move, you will receive an alert by SMS of the change of position of the motorcycle and the speed.
 - You can ask him to send you an SMS or chat to see the status of the battery.
 - You can ask for the position of the motorcycle and you will receive an SMS.
-- You can also ask how it is and it will send you temperature, humidity and whether it is raining or not;)
+- You can also ask how it is and it will send you temperature, humidity and whether it is raining or not ;)
 
 ### DOWNLOAD iOS VERSION:
 
