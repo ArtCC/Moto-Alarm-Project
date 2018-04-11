@@ -33,7 +33,7 @@ String desactivateWatchFromSMS = "desactivate.watch";
 // Private functions
 void sendMessage(String &message) {
 
-  if (message == statusFromSMS) {
+  if (message == statusFromSMS || message == statusWatchFromSMS) {
 
     if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
@@ -43,7 +43,7 @@ void sendMessage(String &message) {
       String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
       sendSMSToPhoneNumber(userPhone, textString);
     }
-  } else if (message == batteryFromSMS) {
+  } else if (message == batteryFromSMS || message == batteryWatchFromSMS) {
 
     String textString = textForBatterySMS + getBatteryLevel() + "%";
     sendSMSToPhoneNumber(userPhone, textString);
@@ -51,12 +51,12 @@ void sendMessage(String &message) {
 
     setServiceStatus(true);
     sendSMSToPhoneNumber(userPhone, textForActivateSMS);
-  } else if (message == desactivateFromSMS) {
+  } else if (message == desactivateFromSMS || message == desactivateWatchFromSMS) {
 
     setStatusToUpdateDataToOffUtil();
     setServiceStatus(false);
     sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
-  } else if (message == feelFromSMS) {
+  } else if (message == feelFromSMS || message == feelWatchFromSMS) {
 
     bool weather = getWeatherForMotorbikeLocation();
 
@@ -67,13 +67,11 @@ void sendMessage(String &message) {
 
       sendSMSToPhoneNumber(userPhone, textForFeelSMS);
     }
-  } else if (message == resetFromSMS) {
+  } else if (message == resetFromSMS || message == resetWatchFromSMS) {
 
     sendSMSToPhoneNumber(userPhone, textForResetSMS);
     resetByCode();
   }
-
-  LSMS.flush();
 }
 
 // Public functions
@@ -244,4 +242,6 @@ void receivedSMS() {
       }
     }
   }
+
+  LSMS.flush();
 }
