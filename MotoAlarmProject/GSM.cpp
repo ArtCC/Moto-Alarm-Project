@@ -168,77 +168,80 @@ void receivedSMS() {
 
     permissionForSendSMS = true;
 
-    if (getStatusCorrectConnection()) {
+    if (message == statusWatchFromSMS ||
+        message == batteryWatchFromSMS ||
+        message == activateWatchFromSMS ||
+        message == desactivateWatchFromSMS ||
+        message == feelWatchFromSMS ||
+        message == resetWatchFromSMS) {
 
-      if (message == statusFromSMS) {
+      sendMessage(message);
+    } else {
 
-        if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
+      if (getStatusCorrectConnection()) {
 
-          sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
-        } else {
+        if (message == statusFromSMS) {
 
-          String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-          sendSMSToPhoneNumber(userPhone, textString);
-        }
-      } else if (message == batteryFromSMS) {
+          if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
-        String message = "\"" + textForBatterySMS + getBatteryLevel() + "%" + "\"";
-        String data = "{\"message_chat\":" + message + "}";
+            sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
+          } else {
 
-        setPOSTRequest(data);
-      } else if (message == activateFromSMS) {
+            String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
+            sendSMSToPhoneNumber(userPhone, textString);
+          }
+        } else if (message == batteryFromSMS) {
 
-        String message = "\"" + textForActivateSMS + "\"";
-        String data = "{\"message_chat\":" + message + "}";
-
-        setPOSTRequest(data);
-
-        setServiceStatus(true);
-      } else if (message == desactivateFromSMS) {
-
-        String message = "\"" + textForDesactivateSMS + "\"";
-        String data = "{\"message_chat\":" + message + "}";
-
-        setPOSTRequest(data);
-
-        setStatusToUpdateDataToOffUtil();
-        setServiceStatus(false);
-      } else if (message == feelFromSMS) {
-
-        bool weather = getWeatherForMotorbikeLocation();
-
-        if (weather) {
-
-          String message = "\"" + getFeel() + "\"";
+          String message = "\"" + textForBatterySMS + getBatteryLevel() + "%" + "\"";
           String data = "{\"message_chat\":" + message + "}";
 
           setPOSTRequest(data);
-        } else {
+        } else if (message == activateFromSMS) {
 
-          String message = "\"" + textForFeelSMS + "\"";
+          String message = "\"" + textForActivateSMS + "\"";
           String data = "{\"message_chat\":" + message + "}";
 
           setPOSTRequest(data);
+
+          setServiceStatus(true);
+        } else if (message == desactivateFromSMS) {
+
+          String message = "\"" + textForDesactivateSMS + "\"";
+          String data = "{\"message_chat\":" + message + "}";
+
+          setPOSTRequest(data);
+
+          setStatusToUpdateDataToOffUtil();
+          setServiceStatus(false);
+        } else if (message == feelFromSMS) {
+
+          bool weather = getWeatherForMotorbikeLocation();
+
+          if (weather) {
+
+            String message = "\"" + getFeel() + "\"";
+            String data = "{\"message_chat\":" + message + "}";
+
+            setPOSTRequest(data);
+          } else {
+
+            String message = "\"" + textForFeelSMS + "\"";
+            String data = "{\"message_chat\":" + message + "}";
+
+            setPOSTRequest(data);
+          }
+        } else if (message == resetFromSMS) {
+
+          String data = "{\"message_chat\":" + textForResetSMS + "}";
+
+          setPOSTRequest(data);
+
+          resetByCode();
         }
-      } else if (message == resetFromSMS) {
-
-        String data = "{\"message_chat\":" + textForResetSMS + "}";
-
-        setPOSTRequest(data);
-
-        resetByCode();
-      } else if (message == statusWatchFromSMS ||
-                 message == batteryWatchFromSMS ||
-                 message == activateWatchFromSMS ||
-                 message == desactivateWatchFromSMS ||
-                 message == feelWatchFromSMS ||
-                 message == resetWatchFromSMS) {
+      } else {
 
         sendMessage(message);
       }
-    } else {
-
-      sendMessage(message);
     }
   }
 }
