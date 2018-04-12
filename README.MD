@@ -1,4 +1,4 @@
-## Do it yourself!
+## DO IT YOURSELF!
 
 # Moto Alarm Project (Linkit One version)
 
@@ -6,7 +6,7 @@
 
 [Moto Alarm Project Website](https://motoalarm-project.com "Moto Alarm Project")
 
-#### PROJECT FUNCTIONALITIES (FROM macOS, iOS or Android APPS):
+#### PROJECT FUNCTIONALITIES (From macOS, iOS or Android apps):
 
 - You can see the position of your motorcycle at all times.
 - You can see the last update date of your motorcycle's position.
@@ -125,22 +125,31 @@ static String userId = "userId";
 
 You can now upload the code to your Linkit One!
 
-### BOX FOR LINKIT ONE AND BATTERY WITH 4000mAh
+### BOX FOR LINKIT ONE AND BATTERY WITH 4000mAh (Battery size: 7x100x70mm)
 
 If you have a 3D printer or know someone who has it, here are the .stl files to print that I designed for the project:
 
-![MacDown Screenshot](Resources/Box_1.jpg)
-![MacDown Screenshot](Resources/Box_2.jpg)
-![MacDown Screenshot](Resources/Box_3.jpg)
-![MacDown Screenshot](Resources/Box_4.jpg)
-![MacDown Screenshot](Resources/Box_5.jpg)
-![MacDown Screenshot](Resources/Box_6.jpg)
+![MacDown Screenshot](Resources/Box_4000_1.jpg)
+![MacDown Screenshot](Resources/Box_4000_2.jpg)
+![MacDown Screenshot](Resources/Box_4000_3.jpg)
+![MacDown Screenshot](Resources/Box_4000_4.jpg)
+![MacDown Screenshot](Resources/Box_4000_5.jpg)
+![MacDown Screenshot](Resources/Box_4000_6.jpg)
 
 [STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2835547 "STL files")
 
-### INSTALLING IN YOUR MOTORBIKE
+### BOX FOR LINKIT ONE AND BATTERY WITH 6000mAh (Battery size: 19x54x54mm)
 
-I have changed the 1000mAh battery for a 4000mAh (10cm x 7cm), so it lasts a lot longer without charging.
+If you have a 3D printer or know someone who has it, here are the .stl files to print that I designed for the project:
+
+![MacDown Screenshot](Resources/Box_6000_1.jpg)
+![MacDown Screenshot](Resources/Box_6000_2.jpg)
+![MacDown Screenshot](Resources/Box_6000_3.jpg)
+![MacDown Screenshot](Resources/Box_6000_4.jpg)
+
+[STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2859090 "STL files")
+
+### BATTERY WITH 4000mAh (EXAMPLE)
 
 ![MacDown Screenshot](Resources/Battery4000.jpg)
 
@@ -154,11 +163,21 @@ I have changed the 1000mAh battery for a 4000mAh (10cm x 7cm), so it lasts a lot
 
 [Terminal in 'Electrónica Embajadores' shop](https://www.electronicaembajadores.com/es/Productos/Detalle/CTK02TT/conectores/conectores-poste-polarizado/terminal-para-conector-poste-2-00mm-hembra)
 
+### BATTERY WITH 6000mAh (EXAMPLE)
+
+![MacDown Screenshot](Resources/Battery6000.jpg)
+
+[Battery in 'BricoGeek' shop](http://tienda.bricogeek.com/baterias-lipo/418-bateria-lipo-6000mah-37v.html)
+
+### INSTALLING IN YOUR MOTORBIKE
+
+I have changed the original battery with 1000mAh for a battery with 6000mAh, so it lasts a lot longer without charging.
+
 I added a usb charger to the battery in my motorcycle but in positive, that means that when I turn off the motorcycle it has no current, it only charges the powerbank when the motorcycle is on.
 
 ### DO YOU CAN'T THE DEVICE? ASK FOR MY HELP!
 
-Do not worry, write me to my email and I can build it for you at the price of materials and shipping :)
+Don't worry, write me to my email and I can build it for you at the price of materials and shipping :)
 
 ### LICENSE
 
