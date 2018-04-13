@@ -4,9 +4,9 @@
 // Variables
 // "Multi-thread" with millis()
 unsigned long intervalToken = 259200000;
-unsigned long intervalUpdate = 120000;
-unsigned long alarmIntervalUpdate = 45000;
-unsigned long disabledIntervalUpdate = 900000;
+unsigned long intervalUpdate = 1800000;
+unsigned long alarmIntervalUpdate = 30000;
+unsigned long disabledIntervalUpdate = 3600000;
 unsigned long previousMillisToken = 0;
 unsigned long previousMillisUpdate = 0;
 
