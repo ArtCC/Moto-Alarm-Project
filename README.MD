@@ -145,6 +145,8 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 ![MacDown Screenshot](Resources/Box_6000_1.jpg)
 ![MacDown Screenshot](Resources/Box_6000_2.jpg)
 ![MacDown Screenshot](Resources/Box_6000_3.jpg)
+![MacDown Screenshot](Resources/Box_6000_6.jpg)
+![MacDown Screenshot](Resources/Box_6000_5.jpg)
 ![MacDown Screenshot](Resources/Box_6000_4.jpg)
 
 [STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2859090 "STL files")
