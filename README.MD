@@ -19,6 +19,11 @@
 - You can ask for the position of the motorcycle and you will receive an SMS.
 - You can also ask how it is and it will send you temperature, humidity and whether it is raining or not ;)
 
+#### UPDATE TIMES:
+
+- With the service deactivated, battery status is sent every <b>60 minutes</b>.
+- With the service activated, all data is sent every <b>30 minutes</b>, but if the motorcycle detects movement, it is sent every <b>30 seconds</b>.
+
 ### DOWNLOAD iOS VERSION:
 
 [Moto Alarm Project iOS version](https://itunes.apple.com/us/app/moto-alarm-project/id1313229312?l=es&ls=1&mt=8 "Moto Alarm Project iOS version")
