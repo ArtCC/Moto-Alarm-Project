@@ -28,12 +28,12 @@
 
 [Moto Alarm Project iOS version](https://itunes.apple.com/us/app/moto-alarm-project/id1313229312?l=es&ls=1&mt=8 "Moto Alarm Project iOS version")
 
-![MacDown Screenshot](Resources/1.png)
-![MacDown Screenshot](Resources/2.png)
-![MacDown Screenshot](Resources/3.png)
-![MacDown Screenshot](Resources/4.png)
-![MacDown Screenshot](Resources/5.png)
-![MacDown Screenshot](Resources/6.png)
+![MacDown Screenshot](Resources/iPhone_1.png)
+![MacDown Screenshot](Resources/iPhone_2.png)
+![MacDown Screenshot](Resources/iPhone_3.png)
+![MacDown Screenshot](Resources/iPhone_4.png)
+![MacDown Screenshot](Resources/iPhone_5.png)
+![MacDown Screenshot](Resources/iPhone_6.png)
 
 ### DOWNLOAD macOS VERSION:
 
