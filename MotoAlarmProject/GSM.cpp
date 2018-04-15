@@ -29,6 +29,7 @@ String feelWatchFromSMS = "feel.watch";
 String resetWatchFromSMS = "reset.watch";
 String activateWatchFromSMS = "activate.watch";
 String desactivateWatchFromSMS = "desactivate.watch";
+String deviceUpdateTimeWatchFromSMS = "update.time.watch";
 
 // Private functions
 void sendMessage(String &message) {
@@ -174,6 +175,17 @@ void receivedSMS() {
         message == resetWatchFromSMS) {
 
       sendMessage(message);
+    } else if (message == deviceUpdateTimeWatchFromSMS) {
+
+      bool resultForGetDeviceUpdateTime = getDeviceUpdateTime();
+
+      if (resultForGetDeviceUpdateTime) {
+
+        if (isDebug()) {
+
+          Serial.println("Get new device update time correct");
+        }
+      }
     } else {
 
       if (getStatusCorrectConnection()) {

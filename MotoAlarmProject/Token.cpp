@@ -66,7 +66,7 @@ bool readReponseContent(struct clientData* clientData) {
 }
 
 // Print the data extracted from the JSON
-void printclientData(const struct clientData* clientData) {
+void printClientData(const struct clientData* clientData) {
   Serial.println("Response:");
   Serial.print("Token = ");
   Serial.println(clientData->token);
@@ -129,7 +129,7 @@ bool getTokenForUser() {
 
       if (isDebug()) {
 
-        printclientData(&clientData);
+        printClientData(&clientData);
         Serial.println("Head + user token:");
         Serial.println(getUserToken());
       }

@@ -4,7 +4,6 @@
 // Variables
 // "Multi-thread" with millis()
 unsigned long intervalToken = 259200000;
-unsigned long intervalUpdate = 1800000;
 unsigned long alarmIntervalUpdate = 30000;
 unsigned long disabledIntervalUpdate = 3600000;
 unsigned long previousMillisToken = 0;
@@ -17,7 +16,7 @@ String textForHotSMS = "I'm very hot... ";
 String textForAlarmSMS = "Hey! I'm moving! Speed: ";
 
 // Control
-long finalIntervalUpdate = intervalUpdate;
+long finalIntervalUpdate = getValueForDeviceUpdateTime();
 
 // Private functions
 void configureGPRSConnection() {
