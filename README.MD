@@ -23,6 +23,7 @@
 
 - With the service deactivated, battery status is sent every <b>60 minutes</b>.
 - With the service activated, all data is sent every <b>30 minutes</b>, but if the motorcycle detects movement, it is sent every <b>30 seconds</b>.
+- From the mobile application you can change the default update time and adapt it to your needs.
 
 ### DOWNLOAD iOS VERSION:
 
