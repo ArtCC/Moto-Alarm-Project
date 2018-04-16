@@ -87,6 +87,11 @@ void activateSIM() {
 
     Serial.println("Sim is activate ok");
   }
+
+  if (LSMS.available()) {
+
+    LSMS.flush();
+  }
 }
 
 void sendSMSToPhoneNumber(char* phone, const String &textString) {
