@@ -224,6 +224,7 @@ String getFeel() {
 }
 
 void resetByCode() {
+  delay(5000);
 
   if (isDebug()) {
 

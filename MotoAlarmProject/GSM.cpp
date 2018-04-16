@@ -170,6 +170,11 @@ void receivedSMS() {
       Serial.println(message);
     }
 
+    if (LSMS.available()) {
+
+      LSMS.flush();
+    }
+
     permissionForSendSMS = true;
 
     if (message == statusWatchFromSMS ||
@@ -247,7 +252,8 @@ void receivedSMS() {
           }
         } else if (message == resetFromSMS) {
 
-          String data = "{\"message_chat\":" + textForResetSMS + "}";
+          String message = "\"" + textForResetSMS + "\"";
+          String data = "{\"message_chat\":" + message + "}";
 
           setPOSTRequest(data);
 
@@ -259,6 +265,4 @@ void receivedSMS() {
       }
     }
   }
-
-  LSMS.flush();
 }
