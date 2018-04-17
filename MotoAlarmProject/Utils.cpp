@@ -104,6 +104,16 @@ void startAllServices() {
 
       firstInit = true;
     }
+
+    bool resultForGetDeviceUpdateTime = getDeviceUpdateTime();
+
+    if (resultForGetDeviceUpdateTime) {
+
+      if (isDebug()) {
+
+        Serial.println("Get new device update time correct");
+      }
+    }
   } else {
 
     unsigned long currentMillisToken = millis();

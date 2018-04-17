@@ -2,7 +2,7 @@
 #include "ImportClasses.h"
 
 // Variables
-String updateTime = "1800000";
+String updateTime;
 
 // The type of data that we want to extract from the page
 struct userData {
