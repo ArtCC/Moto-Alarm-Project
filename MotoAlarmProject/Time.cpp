@@ -117,6 +117,11 @@ bool getDeviceUpdateTime() {
       }
 
       return true;
+    } else {
+
+      updateTime = "1800000";
+
+      return true;
     }
   }
 

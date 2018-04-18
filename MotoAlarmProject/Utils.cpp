@@ -15,9 +15,6 @@ String textForColdSMS = "I'm very cold... ";
 String textForHotSMS = "I'm very hot... ";
 String textForAlarmSMS = "Hey! I'm moving! Speed: ";
 
-// Control
-long finalIntervalUpdate = getValueForDeviceUpdateTime();
-
 // Private functions
 void configureGPRSConnection() {
   while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
@@ -143,6 +140,8 @@ void startAllServices() {
     }
 
     if (serviceIsActiveForSendDataToService() == true) {
+
+      long finalIntervalUpdate = getValueForDeviceUpdateTime();
 
       if (getVelocity() >= 3.0) {
 
