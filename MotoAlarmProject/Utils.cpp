@@ -33,13 +33,6 @@ void configureGPRSConnection() {
   }
 }
 
-void setStatusToUpdateDataToOffUtil() {
-  alarmSMSActive = true;
-
-  setStatusToUpdateDataToOff(getBatteryLevel(),
-                             getBatteryChargeStatus());
-}
-
 // Reset Controller
 extern void vm_reboot_normal_start(void);
 
@@ -64,6 +57,38 @@ void reset_utils(void) {
   LTask.remoteCall(vm_reset_wrap_utils, NULL);
 }
 
+void configureForFirstInit() {
+  bool response = getTokenForUser();
+
+  if (response) {
+
+    if (isDebug()) {
+
+      Serial.println("New token ok");
+    }
+
+    firstInit = false;
+  } else {
+
+    if (isDebug()) {
+
+      Serial.println("New token ko");
+    }
+
+    firstInit = true;
+  }
+
+  bool resultForGetDeviceUpdateTime = getDeviceUpdateTime();
+
+  if (resultForGetDeviceUpdateTime) {
+
+    if (isDebug()) {
+
+      Serial.println("Get new device update time correct");
+    }
+  }
+}
+
 // Public functions
 void configureServices() {
   Serial.begin(115200);
@@ -72,45 +97,41 @@ void configureServices() {
   activateBluetoothModule();
   activateSIM();
   activateGPS();
-  beginModuleForUpdate();
+}
+
+void setStatusToUpdateDataToOnUtil() {
+  bool gpsResult = activateGPSData();
+
+  if (gpsResult) {
+
+    // Update user data
+    setUpdateDataUserToServer(
+      getLatitude(),
+      getLongitude(),
+      getBatteryLevel(),
+      getBatteryChargeStatus()
+    );
+  } else {
+
+    // Not update user data
+    setStatusToUpdateDataToOffUtil();
+  }
+}
+
+void setStatusToUpdateDataToOffUtil() {
+  alarmSMSActive = true;
+
+  setStatusToUpdateDataToOff(getBatteryLevel(),
+                             getBatteryChargeStatus());
 }
 
 void startAllServices() {
   subscribeToEventsBluetoothModule();
   receivedSMS();
-  checkIfExistUpdateInServer();
 
   if (firstInit) {
 
-    bool response = getTokenForUser();
-
-    if (response) {
-
-      if (isDebug()) {
-
-        Serial.println("New token ok");
-      }
-
-      firstInit = false;
-    } else {
-
-      if (isDebug()) {
-
-        Serial.println("New token ko");
-      }
-
-      firstInit = true;
-    }
-
-    bool resultForGetDeviceUpdateTime = getDeviceUpdateTime();
-
-    if (resultForGetDeviceUpdateTime) {
-
-      if (isDebug()) {
-
-        Serial.println("Get new device update time correct");
-      }
-    }
+    configureForFirstInit();
   } else {
 
     unsigned long currentMillisToken = millis();

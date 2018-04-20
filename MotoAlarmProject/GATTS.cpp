@@ -144,6 +144,7 @@ boolean GATTS::onWrite(LGATTWriteRequest &data) {
         Serial.println("Activate");
       }
 
+      setStatusToUpdateDataToOnUtil();
       _serviceActivated = true;
     } else if (strstr(result, desactivateText) != NULL) {
 

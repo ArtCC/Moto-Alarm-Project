@@ -9,6 +9,9 @@ void configureServices();
 // Start all services in loop
 void startAllServices();
 
+// Set service to enabled
+void setStatusToUpdateDataToOnUtil();
+
 // Set service to disabled
 void setStatusToUpdateDataToOffUtil();
 

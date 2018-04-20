@@ -50,6 +50,7 @@ void sendMessage(String &message) {
     sendSMSToPhoneNumber(userPhone, textString);
   } else if (message == activateFromSMS) {
 
+    setStatusToUpdateDataToOnUtil();
     setServiceStatus(true);
     sendSMSToPhoneNumber(userPhone, textForActivateSMS);
   } else if (message == desactivateFromSMS || message == desactivateWatchFromSMS) {
@@ -223,6 +224,7 @@ void receivedSMS() {
 
           setPOSTRequest(data);
 
+          setStatusToUpdateDataToOnUtil();
           setServiceStatus(true);
         } else if (message == desactivateFromSMS) {
 

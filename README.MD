@@ -94,8 +94,6 @@ You need to download and install two libraries that are used in the project in t
 
 [elapsedMillis in GitHub](https://github.com/pfeerick/elapsedMillis "elapsedMillis")
 
-[OTAUpdate in GitHub](https://github.com/minbiocabanon/OTAUpdate "OTAUpdate")
-
 The only class in which you need to add your data is in the <b>PublicConstants.h</b> class.
 
 ![MacDown Screenshot](Resources/ArduinoIDE.png)
