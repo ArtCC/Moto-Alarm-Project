@@ -48,7 +48,7 @@ void sendMessage(String &message) {
 
     String textString = textForBatterySMS + getBatteryLevel() + "%";
     sendSMSToPhoneNumber(userPhone, textString);
-  } else if (message == activateFromSMS) {
+  } else if (message == activateFromSMS || message == activateWatchFromSMS) {
 
     setStatusToUpdateDataToOnUtil();
     setServiceStatus(true);
