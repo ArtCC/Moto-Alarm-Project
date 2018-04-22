@@ -181,6 +181,14 @@ I have changed the original battery with 1000mAh for a battery with 6000mAh, so 
 
 I added a usb charger to the battery in my motorcycle but in positive, that means that when I turn off the motorcycle it has no current, it only charges the powerbank when the motorcycle is on.
 
+### BATTERY BAG FOR SECURITY
+
+If you do not like the batteries like me, you can use a bag of fire protection for batteries.
+
+![MacDown Screenshot](Resources/Battery_bag.jpg)
+
+[Battery bag in 'Aliexpress' shop](https://es.aliexpress.com/store/product/Lipo-Safe-Bag-Battery-Charging-Protector-Fireproof-Fiber-Pouch-Bag-Explosion-proof-Case-Storage-Box-for/2409111_32782212024.html)
+
 ### DO YOU CAN'T THE DEVICE? ASK FOR MY HELP!
 
 Don't worry, write me to my email and I can build it for you at the price of materials and shipping :)
