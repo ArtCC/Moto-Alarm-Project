@@ -60,14 +60,17 @@ void sendMessage(String &message) {
     sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
   } else if (message == feelFromSMS || message == feelWatchFromSMS) {
 
-    bool weather = getWeatherForMotorbikeLocation();
+    if (getStatusCorrectConnection()) {
 
-    if (weather) {
+      bool weather = getWeatherForMotorbikeLocation();
 
-      sendSMSToPhoneNumber(userPhone, getFeel());
-    } else {
+      if (weather) {
 
-      sendSMSToPhoneNumber(userPhone, textForFeelSMS);
+        sendSMSToPhoneNumber(userPhone, getFeel());
+      } else {
+
+        sendSMSToPhoneNumber(userPhone, textForFeelSMS);
+      }
     }
   } else if (message == resetFromSMS || message == resetWatchFromSMS) {
 
@@ -237,20 +240,23 @@ void receivedSMS() {
           setServiceStatus(false);
         } else if (message == feelFromSMS) {
 
-          bool weather = getWeatherForMotorbikeLocation();
+          if (getStatusCorrectConnection()) {
 
-          if (weather) {
+            bool weather = getWeatherForMotorbikeLocation();
 
-            String message = "\"" + getFeel() + "\"";
-            String data = "{\"message_chat\":" + message + "}";
+            if (weather) {
 
-            setPOSTRequest(data);
-          } else {
+              String message = "\"" + getFeel() + "\"";
+              String data = "{\"message_chat\":" + message + "}";
 
-            String message = "\"" + textForFeelSMS + "\"";
-            String data = "{\"message_chat\":" + message + "}";
+              setPOSTRequest(data);
+            } else {
 
-            setPOSTRequest(data);
+              String message = "\"" + textForFeelSMS + "\"";
+              String data = "{\"message_chat\":" + message + "}";
+
+              setPOSTRequest(data);
+            }
           }
         } else if (message == resetFromSMS) {
 

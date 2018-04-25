@@ -40,11 +40,6 @@ bool getStatusCorrectConnection() {
 
   if (client.connect(server, port)) {
 
-    if (isDebug()) {
-
-      Serial.println("getStatusCorrectConnection: Connection correct");
-    }
-
     return true;
   } else {
 

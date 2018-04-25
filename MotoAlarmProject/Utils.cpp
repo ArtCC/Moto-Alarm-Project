@@ -131,7 +131,10 @@ void startAllServices() {
 
   if (firstInit) {
 
-    configureForFirstInit();
+    if (getStatusCorrectConnection()) {
+
+      configureForFirstInit();
+    }
   } else {
 
     unsigned long currentMillisToken = millis();
@@ -139,22 +142,25 @@ void startAllServices() {
 
     if ((unsigned long)(currentMillisToken - previousMillisToken) >= intervalToken) {
 
-      bool response = getTokenForUser();
+      if (getStatusCorrectConnection()) {
 
-      if (response) {
+        bool response = getTokenForUser();
 
-        if (isDebug()) {
+        if (response) {
 
-          Serial.println("Refresh token ok");
+          if (isDebug()) {
+
+            Serial.println("Refresh token ok");
+          }
+        } else {
+
+          if (isDebug()) {
+
+            Serial.println("Refresh token ko");
+          }
+
+          firstInit = true;
         }
-      } else {
-
-        if (isDebug()) {
-
-          Serial.println("Refresh token ko");
-        }
-
-        firstInit = true;
       }
 
       previousMillisToken = millis();
@@ -162,54 +168,60 @@ void startAllServices() {
 
     if (serviceIsActiveForSendDataToService() == true) {
 
-      long finalIntervalUpdate = getValueForDeviceUpdateTime();
+      if (getStatusCorrectConnection()) {
 
-      if (getVelocity() >= 3.0) {
+        long finalIntervalUpdate = getValueForDeviceUpdateTime();
 
-        finalIntervalUpdate = alarmIntervalUpdate;
+        if (getVelocity() >= 3.0) {
 
-        if (alarmSMSActive == true) {
+          finalIntervalUpdate = alarmIntervalUpdate;
 
-          String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
+          if (alarmSMSActive == true) {
 
-          if (isDebug()) {
+            String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
 
-            Serial.println("SMS: Alert");
-            Serial.println(textString);
+            if (isDebug()) {
+
+              Serial.println("SMS: Alert");
+              Serial.println(textString);
+            }
+
+            sendSMSToPhoneNumber(userPhone, textString);
+            alarmSMSActive = false;
+          }
+        }
+
+        if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
+
+          bool gpsResult = activateGPSData();
+
+          if (gpsResult) {
+
+            // Update user data
+            setUpdateDataUserToServer(
+              getLatitude(),
+              getLongitude(),
+              getBatteryLevel(),
+              getBatteryChargeStatus()
+            );
+          } else {
+
+            // Not update user data
+            setStatusToUpdateDataToOffUtil();
           }
 
-          sendSMSToPhoneNumber(userPhone, textString);
-          alarmSMSActive = false;
+          previousMillisUpdate = millis();
         }
-      }
-
-      if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
-
-        bool gpsResult = activateGPSData();
-
-        if (gpsResult) {
-
-          // Update user data
-          setUpdateDataUserToServer(
-            getLatitude(),
-            getLongitude(),
-            getBatteryLevel(),
-            getBatteryChargeStatus()
-          );
-        } else {
-
-          // Not update user data
-          setStatusToUpdateDataToOffUtil();
-        }
-
-        previousMillisUpdate = millis();
       }
     } else if (serviceIsActiveForSendDataToService() == false) {
 
       if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= disabledIntervalUpdate) {
 
-        // Not update user data
-        setStatusToUpdateDataToOffUtil();
+        if (getStatusCorrectConnection()) {
+
+          // Not update user data
+          setStatusToUpdateDataToOffUtil();
+        }
 
         previousMillisUpdate = millis();
       }
