@@ -87,6 +87,8 @@ void configureForFirstInit() {
       Serial.println("Get new device update time correct");
     }
   }
+
+  setStatusToUpdateDataToOnUtil();
 }
 
 // Public functions
@@ -168,50 +170,43 @@ void startAllServices() {
 
     if (serviceIsActiveForSendDataToService() == true) {
 
-      if (getStatusCorrectConnection()) {
+      long finalIntervalUpdate = getValueForDeviceUpdateTime();
 
-        long finalIntervalUpdate = getValueForDeviceUpdateTime();
+      if (getVelocity() >= 3.0) {
 
-        if (getVelocity() >= 3.0) {
+        finalIntervalUpdate = alarmIntervalUpdate;
 
-          finalIntervalUpdate = alarmIntervalUpdate;
+        if (alarmSMSActive == true) {
 
-          if (alarmSMSActive == true) {
+          String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
 
-            String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
+          if (isDebug()) {
 
-            if (isDebug()) {
-
-              Serial.println("SMS: Alert");
-              Serial.println(textString);
-            }
-
-            sendSMSToPhoneNumber(userPhone, textString);
-            alarmSMSActive = false;
-          }
-        }
-
-        if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
-
-          bool gpsResult = activateGPSData();
-
-          if (gpsResult) {
-
-            // Update user data
-            setUpdateDataUserToServer(
-              getLatitude(),
-              getLongitude(),
-              getBatteryLevel(),
-              getBatteryChargeStatus()
-            );
-          } else {
-
-            // Not update user data
-            setStatusToUpdateDataToOffUtil();
+            Serial.println("SMS: Alert");
+            Serial.println(textString);
           }
 
-          previousMillisUpdate = millis();
+          sendSMSToPhoneNumber(userPhone, textString);
+          alarmSMSActive = false;
         }
+      }
+
+      if (isDebug()) {
+
+        Serial.println("Time for data user new update:");
+        Serial.println(currentMillisUpdate);
+        Serial.println(previousMillisUpdate);
+        Serial.println(finalIntervalUpdate);
+      }
+
+      if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
+
+        if (getStatusCorrectConnection()) {
+
+          setStatusToUpdateDataToOnUtil();
+        }
+
+        previousMillisUpdate = millis();
       }
     } else if (serviceIsActiveForSendDataToService() == false) {
 
