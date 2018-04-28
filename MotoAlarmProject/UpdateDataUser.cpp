@@ -36,24 +36,6 @@ void setPOSTRequest(String &path) {
   client.stop();
 }
 
-bool getStatusCorrectConnection() {
-
-  if (client.connect(server, port)) {
-
-    return true;
-  } else {
-
-    if (isDebug()) {
-
-      Serial.println("getStatusCorrectConnection: Connection failed");
-    }
-
-    client.stop();
-
-    return false;
-  }
-}
-
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {
 
   if (client.connect(server, port)) {

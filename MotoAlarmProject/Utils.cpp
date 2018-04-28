@@ -9,30 +9,7 @@ unsigned long disabledIntervalUpdate = 3600000;
 unsigned long previousMillisToken = 0;
 unsigned long previousMillisUpdate = 0;
 
-// SMS
-String textForWetSMS = "I'm very wet... ";
-String textForColdSMS = "I'm very cold... ";
-String textForHotSMS = "I'm very hot... ";
-String textForAlarmSMS = "Hey! I'm moving! Speed: ";
-
 // Private functions
-void configureGPRSConnection() {
-  while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
-
-    if (isDebug()) {
-
-      Serial.println("LGPRS setup error");
-    }
-
-    delay(100);
-  }
-
-  if (isDebug()) {
-
-    Serial.println("LGPRS setup correct");
-  }
-}
-
 // Reset Controller
 extern void vm_reboot_normal_start(void);
 
@@ -55,6 +32,24 @@ boolean vm_reset_wrap_utils(void* userData) {
 
 void reset_utils(void) {
   LTask.remoteCall(vm_reset_wrap_utils, NULL);
+}
+
+// Config
+void configureGPRSConnection() {
+  while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
+
+    if (isDebug()) {
+
+      Serial.println("LGPRS setup error");
+    }
+
+    delay(100);
+  }
+
+  if (isDebug()) {
+
+    Serial.println("LGPRS setup correct");
+  }
 }
 
 void configureForFirstInit() {

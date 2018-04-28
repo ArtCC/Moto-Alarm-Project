@@ -6,21 +6,13 @@ bool permissionForSendSMS = true;
 
 // SMS text
 String statusFromSMS = "status";
-String textForStatusSMS = "My coordinates on map: ";
-String textForStatusErrorSMS = "Sorry, my coordinates on map contain errors...";
+String batteryFromSMS = "battery";
+String feelFromSMS = "feel";
+String resetFromSMS = "reset";
+String activateFromSMS = "activate";
+String desactivateFromSMS = "desactivate";
 String googleMapsURL = "https://www.google.com/maps/search/?api=1&query=";
 String googleZoom = "&zoom=8";
-String batteryFromSMS = "battery";
-String textForBatterySMS = "Right now, I have this battery percentage: ";
-String feelFromSMS = "feel";
-String textForFeelSMS = "I'm fine. Thank you very much! :)";
-String resetFromSMS = "reset";
-String textForResetSMS = "Wait, I'm restarting now...";
-String textForResetSMSDisabled = "Sorry, this functionality is not in use yet...";
-String activateFromSMS = "activate";
-String textForActivateSMS = "Perfect! My location is active :)";
-String desactivateFromSMS = "desactivate";
-String textForDesactivateSMS = "Oops... Now my location is disabled :(";
 
 // SMS text from Apple Watch
 String statusWatchFromSMS = "status.watch";
