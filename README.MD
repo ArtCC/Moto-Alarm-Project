@@ -129,19 +129,6 @@ static String userId = "userId";
 
 You can now upload the code to your Linkit One!
 
-### BOX FOR LINKIT ONE AND BATTERY WITH 4000mAh (Battery size: 7x100x70mm)
-
-If you have a 3D printer or know someone who has it, here are the .stl files to print that I designed for the project:
-
-![MacDown Screenshot](Resources/Box_4000_1.jpg)
-![MacDown Screenshot](Resources/Box_4000_2.jpg)
-![MacDown Screenshot](Resources/Box_4000_3.jpg)
-![MacDown Screenshot](Resources/Box_4000_4.jpg)
-![MacDown Screenshot](Resources/Box_4000_5.jpg)
-![MacDown Screenshot](Resources/Box_4000_6.jpg)
-
-[STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2835547 "STL files")
-
 ### BOX FOR LINKIT ONE AND BATTERY WITH 6000mAh (Battery size: 19x54x54mm)
 
 If you have a 3D printer or know someone who has it, here are the .stl files to print that I designed for the project:
@@ -149,25 +136,10 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 ![MacDown Screenshot](Resources/Box_6000_1.jpg)
 ![MacDown Screenshot](Resources/Box_6000_2.jpg)
 ![MacDown Screenshot](Resources/Box_6000_3.jpg)
-![MacDown Screenshot](Resources/Box_6000_6.jpg)
-![MacDown Screenshot](Resources/Box_6000_5.jpg)
 ![MacDown Screenshot](Resources/Box_6000_4.jpg)
+![MacDown Screenshot](Resources/Box_6000_5.jpg)
 
 [STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2859090 "STL files")
-
-### BATTERY WITH 4000mAh (EXAMPLE)
-
-![MacDown Screenshot](Resources/Battery4000.jpg)
-
-[Battery in 'Electrónica Embajadores' shop](https://www.electronicaembajadores.com/es/Productos/Detalle/BA1A3740/baterias-pilas-y-cargadores/baterias-de-polimero-de-litio/bateria-de-polimero-litio-3-7v-4000ma)
-
-![MacDown Screenshot](Resources/Conector.jpg)
-
-[Connector in 'Electrónica Embajadores' shop](https://www.electronicaembajadores.com/es/Productos/Detalle/CTK02HA02/conectores/conectores-poste-polarizado/conector-poste-2-00mm-hembra-aerea-2-contactos)
-
-![MacDown Screenshot](Resources/Terminal.jpg)
-
-[Terminal in 'Electrónica Embajadores' shop](https://www.electronicaembajadores.com/es/Productos/Detalle/CTK02TT/conectores/conectores-poste-polarizado/terminal-para-conector-poste-2-00mm-hembra)
 
 ### BATTERY WITH 6000mAh (EXAMPLE)
 
