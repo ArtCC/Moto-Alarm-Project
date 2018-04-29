@@ -183,6 +183,24 @@ If you do not like the batteries like me, you can use a bag of fire protection f
 
 Don't worry, write me to my email and I can build it for you at the price of materials and shipping :)
 
+### LEGAL CONDITIONS
+
+General regulation of data protection and terms of use:
+
+- This application needs a user registration through his email and a password.
+
+- All the data that can be requested in the user's profile, such as: name, surname, address, telephone, etc., are optional and therefore, are not needed for the normal use of the application.
+
+- This application is used to, by means of a device that the user constructs and places on his motorcycle, to locate it at any time by sending his location to his user account.
+
+- The last coordinates of the motorcycle are stored in the server and no history of them is saved.
+
+- The user has at his disposal a button in the settings of the application to delete his account and all the data associated with it.
+
+- This application does not use analytics and does not transfer user data to third parties, nor does it exploit usage data for its benefit.
+
+- The developer of this project is not responsible under any circumstances, that the position of the vehicle is not registered correctly.
+
 ### LICENSE
 
 This project is free and use CC BY-SA.
