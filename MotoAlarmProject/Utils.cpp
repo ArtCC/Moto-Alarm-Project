@@ -34,6 +34,37 @@ void reset_utils(void) {
   LTask.remoteCall(vm_reset_wrap_utils, NULL);
 }
 
+// Update token
+void updateToken() {
+  unsigned long currentMillisToken = millis();
+
+  if ((unsigned long)(currentMillisToken - previousMillisToken) >= intervalToken) {
+
+    if (getStatusCorrectConnection()) {
+
+      bool response = getTokenForUser();
+
+      if (response) {
+
+        if (isDebug()) {
+
+          Serial.println("Refresh token ok");
+        }
+      } else {
+
+        if (isDebug()) {
+
+          Serial.println("Refresh token ko");
+        }
+
+        firstInit = true;
+      }
+    }
+
+    previousMillisToken = millis();
+  }
+}
+
 // Config
 void configureGPRSConnection() {
   while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
@@ -134,34 +165,9 @@ void startAllServices() {
     }
   } else {
 
-    unsigned long currentMillisToken = millis();
+    updateToken();
+
     unsigned long currentMillisUpdate = millis();
-
-    if ((unsigned long)(currentMillisToken - previousMillisToken) >= intervalToken) {
-
-      if (getStatusCorrectConnection()) {
-
-        bool response = getTokenForUser();
-
-        if (response) {
-
-          if (isDebug()) {
-
-            Serial.println("Refresh token ok");
-          }
-        } else {
-
-          if (isDebug()) {
-
-            Serial.println("Refresh token ko");
-          }
-
-          firstInit = true;
-        }
-      }
-
-      previousMillisToken = millis();
-    }
 
     if (serviceIsActiveForSendDataToService() == true) {
 
