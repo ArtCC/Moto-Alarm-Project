@@ -6,7 +6,7 @@
 
 [Moto Alarm Project Website](https://motoalarm-project.com "Moto Alarm Project")
 
-#### PROJECT FUNCTIONALITIES (From macOS, iOS or Android apps):
+#### PROJECT FUNCTIONALITIES (For iOS or Android apps):
 
 - You can see the position of your motorcycle at all times.
 - You can see the last update date of your motorcycle's position.
@@ -19,11 +19,18 @@
 - You can ask for the position of the motorcycle and you will receive an SMS.
 - You can also ask how it is and it will send you temperature, humidity and whether it is raining or not ;)
 
-#### UPDATE TIMES:
+#### PROJECT FUNCTIONALITIES (For macOS app):
 
-- With the service deactivated, battery status is sent every <b>60 minutes</b>.
-- With the service activated, all data is sent every <b>30 minutes</b>, but if the motorcycle detects movement, it is sent every <b>30 seconds</b>.
-- From the mobile application you can change the default update time and adapt it to your needs.
+- You can see the position of your motorcycle at all times.
+- You can see the last update date of your motorcycle's position.
+- If your motorcycle is moving, speed in meters per second.
+- You can see the battery status of the device.
+
+#### UPDATE TIMES (For iOS and Android apps):
+
+- With the service deactivated, the status of the battery is sent every <b>24 hours</b>.
+- With the service activated, all data is sent every <b>12 hours</b>, but if the motorcycle with MPU650 module detects movement, it is sent every <b>30 seconds</b>.
+- From the mobile application, you can change the default update time and adapt it to your needs, but the MPU6050 sensor will activate the services if necessary and save battery ;)
 
 ### DOWNLOAD iOS VERSION:
 
@@ -38,11 +45,11 @@
 
 ### DOWNLOAD macOS VERSION:
 
-I am developing this version :)
+I'm developing this version :)
 
 ### DOWNLOAD ANDROID VERSION:
 
-I am developing this version :)
+I'm developing this version :)
 
 ### WHAT IS ARDUINO?
 
@@ -74,6 +81,28 @@ In order to use this board with the Arduino IDE, you need to follow some steps:
 
 [Linkit One Guide Website](https://docs.labs.mediatek.com/resource/linkit-one/en "SeedStudio")
 
+### MPU6050
+
+MPU6050 sensor module is an integrated 6-axis Motion tracking device.
+
+It has a 3-axis Gyroscope, 3-axis Accelerometer, Digital Motion Processor and a Temperature sensor, all in a single IC.
+
+It can accept inputs from other sensors like 3-axis magnetometer or pressure sensor using its Auxiliary I2C bus.
+
+If external 3-axis magnetometer is connected, it can provide complete 9-axis Motion Fusion output.
+
+A microcontroller can communicate with this module using I2C communication protocol. Various parameters can be found by reading values from addresses of certain registers using I2C communication.
+
+Gyroscope and accelerometer reading along X, Y and Z axes are available in 2’s complement form. Temperature reading is also available in signed integer form.
+
+Gyroscope readings are in degrees per second (dps) unit; Accelerometer readings are in g unit; and Temperature reading is in degrees Celsius.
+
+This module is used to send movement alert by SMS and not consume battery sending data if they are not necessary to the server.
+
+![MacDown Screenshot](Resources/MPU6050.jpg)
+
+[MPU6050 in 'Amazon' shop](https://www.amazon.es/SODIAL-MPU-6050-giroscopio-Acelerometro-Arduino/dp/B00K67X810/ref=sr_1_4?ie=UTF8&qid=1525460814&sr=8-4&keywords=mpu6050 "MPU6050")
+
 ### INSTRUCTIONS
 
 You have to add a SIM card in your Linkit One with the PIN code deactivated in order to use the GPRS connection, in addition, I use a card with SMS to be able to communicate with the motorcycle, as well as over the Internet, by normal SMS.
@@ -93,6 +122,8 @@ You need to download and install two libraries that are used in the project in t
 [ArduinoJson in GitHub](https://github.com/bblanchon/ArduinoJson "ArduinoJson")
 
 [elapsedMillis in GitHub](https://github.com/pfeerick/elapsedMillis "elapsedMillis")
+
+[MPU6050 in GitHub](https://github.com/jarzebski/Arduino-MPU6050 "MPU6050")
 
 The only class in which you need to add your data is in the <b>PublicConstants.h</b> class.
 
@@ -159,7 +190,7 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 
 [STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2859090 "STL files")
 
-### BATTERY WITH 6000mAh (EXAMPLE)
+### BATTERY WITH 6000mAh
 
 ![MacDown Screenshot](Resources/Battery6000.jpg)
 
@@ -171,7 +202,7 @@ I have changed the original battery with 1000mAh for a battery with 6000mAh, so 
 
 I added a usb charger to the battery in my motorcycle but in positive, that means that when I turn off the motorcycle it has no current, it only charges the powerbank when the motorcycle is on.
 
-### BATTERY BAG FOR SECURITY
+### BATTERY BAG FOR SECURITY (OPTIONAL)
 
 If you do not like the batteries like me, you can use a bag of fire protection for batteries.
 
