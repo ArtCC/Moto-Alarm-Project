@@ -3,9 +3,9 @@
 
 // Variables
 // "Multi-thread" with millis()
-unsigned long intervalToken = 259200000;
+unsigned long intervalToken = 172800000;
 unsigned long alarmIntervalUpdate = 30000;
-unsigned long disabledIntervalUpdate = 3600000;
+unsigned long disabledIntervalUpdate = 86400000;
 unsigned long previousMillisToken = 0;
 unsigned long previousMillisUpdate = 0;
 
@@ -198,6 +198,7 @@ void startAllServices() {
         Serial.println(currentMillisUpdate);
         Serial.println(previousMillisUpdate);
         Serial.println(finalIntervalUpdate);
+        Serial.println("");
       }
 
       if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
@@ -231,7 +232,7 @@ bool isDebug() {
 }
 
 String getFeel() {
-  String text = getCity() + ": " + getWeatherTitle() + ", " + getTemp() + "C, " + getHumidity() + "%H";
+  String text = getCity() + ": " + getWeatherTitle() + ", " + getTemp() + "*C, " + getHumidity() + "%H";
 
   int temp = getTemp().toInt();
   int humidity = getHumidity().toInt();

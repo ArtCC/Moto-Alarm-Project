@@ -6,7 +6,9 @@
 #include <LGPS.h>
 #include <LBattery.h>
 #include <elapsedMillis.h>
+#include <Wire.h>
 
+#include <MPU6050.h>
 #include <ArduinoJson.h>
 #include <LBT.h>
 #include <LBTServer.h>
