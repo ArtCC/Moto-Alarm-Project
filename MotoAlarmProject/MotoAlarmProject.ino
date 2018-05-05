@@ -18,12 +18,6 @@
 // Instance for MPU6050 module
 MPU6050 mpu;
 
-// Control for MPU6050 and get first value
-bool initMPU6050 = false;
-
-// Accelerometer and gyroscope
-int firstRoll;
-
 // Functions
 void setup() {
   configureMPU6050Module();
@@ -32,7 +26,7 @@ void setup() {
 
 void loop() {
   startMPU6050Module();
-  startAllServices();
+  //startAllServices();
 }
 
 // Private functions
@@ -59,52 +53,14 @@ void startMPU6050Module() {
   // Read normalized values
   Vector normAccel = mpu.readNormalizeAccel();
 
-  // Calculate roll meditions
+  // Calculate pitch, roll, temperature meditions and send to process
+  int pitch = -(atan2(normAccel.XAxis, sqrt(normAccel.YAxis * normAccel.YAxis + normAccel.ZAxis * normAccel.ZAxis)) * 180.0) / M_PI;
   int roll = (atan2(normAccel.YAxis, normAccel.ZAxis) * 180.0) / M_PI;
-
-  // Temperature
   float temp = mpu.readTemperature();
 
-  if (!initMPU6050) {
+  processValuesFromMPU6050(pitch,
+                           roll,
+                           temp);
 
-    if (isDebug()) {
-
-      Serial.println("Get first parameters for MPU6050");
-    }
-
-    firstRoll = roll;
-    initMPU6050 = true;
-  }
-
-  if (isDebug()) {
-
-    Serial.print("First roll: ");
-    Serial.print(firstRoll);
-    Serial.println("");
-
-    Serial.println("");
-    Serial.print("Actual roll: ");
-    Serial.print(roll);
-    Serial.println("");
-
-    Serial.print("Temp: ");
-    Serial.print(temp);
-    Serial.print(" *C");
-    Serial.println("");
-  }
-
-  if (firstRoll == roll) {
-
-    Serial.println("Not alert");
-  } else {
-
-    Serial.println("Alert");
-  }
-
-  Serial.println("");
-
-  delay(100);
-}
-
-void stopMPU6050Module() {
+  delay(500);
 }

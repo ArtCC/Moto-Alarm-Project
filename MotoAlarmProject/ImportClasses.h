@@ -25,6 +25,7 @@
 #include "PrivateConstants.h"
 #include "PublicConstants.h"
 #include "Connection.h"
+#include "MPU6050Utils.h"
 #include "Utils.h"
 #include "Token.h"
 #include "GSM.h"
