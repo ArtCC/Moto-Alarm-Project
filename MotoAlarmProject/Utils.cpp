@@ -153,7 +153,7 @@ void setStatusToUpdateDataToOffUtil() {
                              getBatteryChargeStatus());
 }
 
-void startAllServices() {
+void startSubscribeServices() {
   subscribeToEventsBluetoothModule();
   receivedSMS();
 

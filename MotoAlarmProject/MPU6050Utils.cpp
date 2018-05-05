@@ -3,7 +3,7 @@
 
 // Properties
 // Control for MPU6050 and get first value
-bool initMPU6050 = false;
+bool setNewValuesFromMPU6050 = true;
 
 // Accelerometer and gyroscope
 int firstPitch;
@@ -14,7 +14,7 @@ int differenceRoll;
 // Public functions
 void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
-  if (!initMPU6050) {
+  if (setNewValuesFromMPU6050) {
 
     if (isDebug()) {
 
@@ -23,7 +23,7 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
     firstPitch = pitch;
     firstRoll = roll;
-    initMPU6050 = true;
+    setNewValuesFromMPU6050 = false;
   }
 
   if (firstPitch == pitch) {
@@ -49,6 +49,8 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
   }
 
   if (differencePitch > 10 || differenceRoll > 10) {
+
+    setSaveValuesFromMPU6050(true);
 
     if (isDebug()) {
 
@@ -76,4 +78,8 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
     Serial.println(differenceRoll);
     Serial.println();
   }
+}
+
+void setSaveValuesFromMPU6050(bool newValue) {
+  setNewValuesFromMPU6050 = newValue;
 }

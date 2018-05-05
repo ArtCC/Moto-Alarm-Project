@@ -20,13 +20,13 @@ MPU6050 mpu;
 
 // Functions
 void setup() {
-  configureMPU6050Module();
   configureServices();
+  configureMPU6050Module();
 }
 
 void loop() {
+  startSubscribeServices();
   startMPU6050Module();
-  //startAllServices();
 }
 
 // Private functions

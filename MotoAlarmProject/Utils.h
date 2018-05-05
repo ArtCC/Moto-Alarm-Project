@@ -6,14 +6,14 @@
 // Configure all services in init setup
 void configureServices();
 
-// Start all services in loop
-void startAllServices();
-
 // Set service to enabled
 void setStatusToUpdateDataToOnUtil();
 
 // Set service to disabled
 void setStatusToUpdateDataToOffUtil();
+
+// Subscribe to services
+void startSubscribeServices();
 
 // Check if debug is active
 bool isDebug();
