@@ -26,7 +26,11 @@ void setup() {
 
 void loop() {
   startSubscribeServices();
-  startMPU6050Module();
+
+  if (serviceIsActiveForSendDataToService() == true) {
+
+    startMPU6050Module();
+  }
 }
 
 // Private functions

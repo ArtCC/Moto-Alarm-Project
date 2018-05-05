@@ -4,36 +4,48 @@
 // Public util functions
 void setPOSTRequest(String &path) {
 
-  if (isDebug()) {
+  if (client.connect(server, port)) {
 
-    Serial.println("Success");
-    Serial.print("Connect to: ");
-    Serial.println(server);
-    Serial.println("Connected");
-    Serial.println("Path:");
-    Serial.println(path);
+    if (isDebug()) {
+
+      Serial.println("Success");
+      Serial.print("Connect to: ");
+      Serial.println(server);
+      Serial.println("Connected");
+      Serial.println("Path:");
+      Serial.println(path);
+    }
+
+    String thisLength = String(path.length());
+
+    client.print("POST /wp-json/wp/v2/users/" + userId);
+    client.println(" HTTP/1.1");
+    client.println("Content-Type: application/json; charset=UTF-8");
+    client.println("Content-Length: " + thisLength);
+    client.print("Host: ");
+    client.println(server);
+    client.println("Authorization: " + getUserToken());
+    client.print("\n" + path);
+    client.print(char(26));
+    client.println("Connection: close");
+    client.println();
+
+    if (isDebug()) {
+
+      while (client.connected()) {
+
+        if ( client.available()) {
+
+          char str = client.read();
+          Serial.print(str);
+        }
+      }
+
+      Serial.println("Disconnecting");
+    }
+
+    client.stop();
   }
-
-  String thisLength = String(path.length());
-
-  client.print("POST /wp-json/wp/v2/users/" + userId);
-  client.println(" HTTP/1.1");
-  client.println("Content-Type: application/json; charset=UTF-8");
-  client.println("Content-Length: " + thisLength);
-  client.print("Host: ");
-  client.println(server);
-  client.println("Authorization: " + getUserToken());
-  client.print("\n" + path);
-  client.print(char(26));
-  client.println("Connection: close");
-  client.println();
-
-  if (isDebug()) {
-
-    Serial.println("Disconnecting");
-  }
-
-  client.stop();
 }
 
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {

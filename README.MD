@@ -99,6 +99,10 @@ Gyroscope readings are in degrees per second (dps) unit; Accelerometer readings 
 
 This module is used to send movement alert by SMS and not consume battery sending data if they are not necessary to the server.
 
+<b>Connection to Linkit One:</b>
+
+[Tutorial for connection MPU6050 to Linkit One](http://www.instructables.com/id/Interfacing-MPU6050-with-Linkit-One/ "MPU6050 in Linkit One")
+
 ![MacDown Screenshot](Resources/MPU6050.jpg)
 
 [MPU6050 in 'Amazon' shop](https://www.amazon.es/SODIAL-MPU-6050-giroscopio-Acelerometro-Arduino/dp/B00K67X810/ref=sr_1_4?ie=UTF8&qid=1525460814&sr=8-4&keywords=mpu6050 "MPU6050")

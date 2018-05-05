@@ -6,6 +6,9 @@
 // Configure all services in init setup
 void configureServices();
 
+// Alarm is active, send data to server
+void sendUserDataToServerForAlarmIsActive();
+
 // Set service to enabled
 void setStatusToUpdateDataToOnUtil();
 

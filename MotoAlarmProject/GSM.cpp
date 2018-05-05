@@ -138,14 +138,6 @@ void receivedSMS() {
 
     LSMS.remoteNumber(bufer, 20);
 
-    if (isDebug()) {
-
-      Serial.println("SMS received:");
-      Serial.print("From phone number: ");
-      Serial.println(bufer);
-      Serial.print("Description: ");
-    }
-
     while (true) {
 
       c = LSMS.read();
@@ -161,6 +153,10 @@ void receivedSMS() {
 
     if (isDebug()) {
 
+      Serial.println("SMS received:");
+      Serial.print("From phone number: ");
+      Serial.println(bufer);
+      Serial.print("Description: ");
       Serial.println();
       Serial.println("Message:");
       Serial.println(message);

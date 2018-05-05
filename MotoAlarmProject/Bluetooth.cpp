@@ -86,6 +86,7 @@ bool serviceIsActiveForSendDataToService() {
 
 void setServiceStatus(const bool &newStatus) {
   uart._serviceActivated = newStatus;
+  setSaveValuesFromMPU6050(newStatus);
 }
 
 void sendInfoWithBluetoothModule(char* text) {

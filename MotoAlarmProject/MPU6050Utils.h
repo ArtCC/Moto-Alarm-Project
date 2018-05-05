@@ -7,4 +7,4 @@
 void processValuesFromMPU6050(int &pitch, int &roll, float &temperature);
 
 // Set new values from MPU6050
-void setSaveValuesFromMPU6050(bool newValue);
+void setSaveValuesFromMPU6050(const bool &newValue);

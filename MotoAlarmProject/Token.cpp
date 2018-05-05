@@ -33,7 +33,16 @@ void disconnect() {
 
   if (isDebug()) {
 
-    Serial.println("Disconnect");
+    while (client.connected()) {
+
+      if ( client.available()) {
+
+        char str = client.read();
+        Serial.print(str);
+      }
+    }
+
+    Serial.println("Disconnecting");
   }
 
   client.stop();
@@ -130,8 +139,6 @@ bool getTokenForUser() {
       if (isDebug()) {
 
         printClientData(&clientData);
-        Serial.println("Head + user token:");
-        Serial.println(getUserToken());
       }
 
       return true;

@@ -33,7 +33,16 @@ void disconnectForTime() {
 
   if (isDebug()) {
 
-    Serial.println("Disconnect");
+    while (client.connected()) {
+
+      if ( client.available()) {
+
+        char str = client.read();
+        Serial.print(str);
+      }
+    }
+
+    Serial.println("Disconnecting");
   }
 
   client.stop();

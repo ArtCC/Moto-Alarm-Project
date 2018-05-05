@@ -4,10 +4,11 @@
 // Variables
 // "Multi-thread" with millis()
 unsigned long intervalToken = 172800000;
-unsigned long alarmIntervalUpdate = 30000;
+unsigned long alarmIntervalUpdate = 60000;
 unsigned long disabledIntervalUpdate = 86400000;
 unsigned long previousMillisToken = 0;
 unsigned long previousMillisUpdate = 0;
+unsigned long previousMillisUpdateForAlarm = 0;
 
 // Private functions
 // Reset Controller
@@ -42,9 +43,7 @@ void updateToken() {
 
     if (getStatusCorrectConnection()) {
 
-      bool response = getTokenForUser();
-
-      if (response) {
+      if (getTokenForUser()) {
 
         if (isDebug()) {
 
@@ -84,9 +83,8 @@ void configureGPRSConnection() {
 }
 
 void configureForFirstInit() {
-  bool response = getTokenForUser();
 
-  if (response) {
+  if (getTokenForUser()) {
 
     if (isDebug()) {
 
@@ -104,9 +102,7 @@ void configureForFirstInit() {
     firstInit = true;
   }
 
-  bool resultForGetDeviceUpdateTime = getDeviceUpdateTime();
-
-  if (resultForGetDeviceUpdateTime) {
+  if (getDeviceUpdateTime()) {
 
     if (isDebug()) {
 
@@ -127,10 +123,23 @@ void configureServices() {
   activateGPS();
 }
 
-void setStatusToUpdateDataToOnUtil() {
-  bool gpsResult = activateGPSData();
+void sendUserDataToServerForAlarmIsActive() {
+  unsigned long currentMillisUpdate = millis();
 
-  if (gpsResult) {
+  if ((unsigned long)(currentMillisUpdate - previousMillisUpdateForAlarm) >= alarmIntervalUpdate) {
+
+    if (getStatusCorrectConnection()) {
+
+      setStatusToUpdateDataToOnUtil();
+    }
+
+    previousMillisUpdateForAlarm = millis();
+  }
+}
+
+void setStatusToUpdateDataToOnUtil() {
+
+  if (activateGPSData()) {
 
     // Update user data
     setUpdateDataUserToServer(
@@ -171,37 +180,16 @@ void startSubscribeServices() {
 
     if (serviceIsActiveForSendDataToService() == true) {
 
-      long finalIntervalUpdate = getValueForDeviceUpdateTime();
-
-      if (getVelocity() >= 3.0) {
-
-        finalIntervalUpdate = alarmIntervalUpdate;
-
-        if (alarmSMSActive == true) {
-
-          String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
-
-          if (isDebug()) {
-
-            Serial.println("SMS: Alert");
-            Serial.println(textString);
-          }
-
-          sendSMSToPhoneNumber(userPhone, textString);
-          alarmSMSActive = false;
-        }
-      }
-
       if (isDebug()) {
 
         Serial.println("Time for data user new update:");
         Serial.println(currentMillisUpdate);
         Serial.println(previousMillisUpdate);
-        Serial.println(finalIntervalUpdate);
+        Serial.println(getValueForDeviceUpdateTime());
         Serial.println("");
       }
 
-      if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= finalIntervalUpdate) {
+      if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= getValueForDeviceUpdateTime()) {
 
         if (getStatusCorrectConnection()) {
 

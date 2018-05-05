@@ -146,6 +146,7 @@ boolean GATTS::onWrite(LGATTWriteRequest &data) {
 
       setStatusToUpdateDataToOnUtil();
       _serviceActivated = true;
+      setSaveValuesFromMPU6050(true);
     } else if (strstr(result, desactivateText) != NULL) {
 
       if (isDebug()) {
@@ -155,6 +156,7 @@ boolean GATTS::onWrite(LGATTWriteRequest &data) {
 
       setStatusToUpdateDataToOffUtil();
       _serviceActivated = false;
+      setSaveValuesFromMPU6050(false);
     } else {
 
       if (isDebug()) {
