@@ -92,7 +92,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
   }
 }
 
-void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batteryStatus) {
+void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batteryStatus, const bool &gpsError) {
 
   if (client.connect(server, port)) {
 
@@ -100,9 +100,19 @@ void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batter
     String bLevel = "\"" + batteryLevel + "\"";
     String bStatus = "\"" + batteryStatus + "\"";
 
+    String gpsErrorValue = "false";
+
+    if (gpsError == true) {
+
+      gpsErrorValue = "true";
+    }
+
+    String gpsStatus = "\"" + gpsErrorValue + "\"";
+
     String data = "{\"activated_motorbike_position\":" + sendDataStatus + "," +
                   "\"battery_motorbike_device\":" + bLevel + "," +
-                  "\"battery_motorbike_status_charging\":" + bStatus +
+                  "\"battery_motorbike_status_charging\":" + bStatus + "," +
+                  "\"gps_error\":" + gpsStatus +
                   "}";
 
     if (isDebug()) {

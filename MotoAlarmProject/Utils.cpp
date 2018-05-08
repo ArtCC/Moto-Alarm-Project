@@ -151,15 +151,16 @@ void setStatusToUpdateDataToOnUtil() {
   } else {
 
     // Not update user data
-    setStatusToUpdateDataToOffUtil();
+    setStatusToUpdateDataToOffUtil(true);
   }
 }
 
-void setStatusToUpdateDataToOffUtil() {
+void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
   alarmSMSActive = true;
 
   setStatusToUpdateDataToOff(getBatteryLevel(),
-                             getBatteryChargeStatus());
+                             getBatteryChargeStatus(),
+                             gpsError);
 }
 
 void startSubscribeServices() {
@@ -205,7 +206,7 @@ void startSubscribeServices() {
         if (getStatusCorrectConnection()) {
 
           // Not update user data
-          setStatusToUpdateDataToOffUtil();
+          setStatusToUpdateDataToOffUtil(false);
         }
 
         previousMillisUpdate = millis();

@@ -47,7 +47,7 @@ void sendMessage(String &message) {
     sendSMSToPhoneNumber(userPhone, textForActivateSMS);
   } else if (message == desactivateFromSMS || message == desactivateWatchFromSMS) {
 
-    setStatusToUpdateDataToOffUtil();
+    setStatusToUpdateDataToOffUtil(false);
     setServiceStatus(false);
     sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
   } else if (message == feelFromSMS || message == feelWatchFromSMS) {
@@ -216,7 +216,7 @@ void receivedSMS() {
 
           setPOSTRequest(data);
 
-          setStatusToUpdateDataToOffUtil();
+          setStatusToUpdateDataToOffUtil(false);
           setServiceStatus(false);
         } else if (message == feelFromSMS) {
 

@@ -13,7 +13,7 @@ void sendUserDataToServerForAlarmIsActive();
 void setStatusToUpdateDataToOnUtil();
 
 // Set service to disabled
-void setStatusToUpdateDataToOffUtil();
+void setStatusToUpdateDataToOffUtil(const bool &gpsError);
 
 // Subscribe to services
 void startSubscribeServices();

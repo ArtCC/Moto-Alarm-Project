@@ -154,7 +154,7 @@ boolean GATTS::onWrite(LGATTWriteRequest &data) {
         Serial.println("Desactivate");
       }
 
-      setStatusToUpdateDataToOffUtil();
+      setStatusToUpdateDataToOffUtil(false);
       _serviceActivated = false;
       setSaveValuesFromMPU6050(false);
     } else {
