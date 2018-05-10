@@ -43,23 +43,20 @@ void updateToken() {
 
   if ((unsigned long)(currentMillisToken - previousMillisToken) >= intervalToken) {
 
-    if (getStatusCorrectConnection()) {
+    if (getTokenForUser()) {
 
-      if (getTokenForUser()) {
+      if (isDebug()) {
 
-        if (isDebug()) {
-
-          Serial.println("Refresh token ok");
-        }
-      } else {
-
-        if (isDebug()) {
-
-          Serial.println("Refresh token ko");
-        }
-
-        firstInit = true;
+        Serial.println("Refresh token ok");
       }
+    } else {
+
+      if (isDebug()) {
+
+        Serial.println("Refresh token ko");
+      }
+
+      firstInit = true;
     }
 
     previousMillisToken = millis();
@@ -130,10 +127,7 @@ void sendUserDataToServerForAlarmIsActive() {
 
   if ((unsigned long)(currentMillisUpdate - previousMillisUpdateForAlarm) >= alarmIntervalUpdate) {
 
-    if (getStatusCorrectConnection()) {
-
-      setStatusToUpdateDataToOnUtil();
-    }
+    setStatusToUpdateDataToOnUtil();
 
     previousMillisUpdateForAlarm = millis();
   }
@@ -175,10 +169,7 @@ void startSubscribeServices() {
 
   if (firstInit) {
 
-    if (getStatusCorrectConnection()) {
-
-      configureForFirstInit();
-    }
+    configureForFirstInit();
   } else {
 
     updateToken();
@@ -200,10 +191,7 @@ void startSubscribeServices() {
             Serial.println("");
           }
 
-          if (getStatusCorrectConnection()) {
-
-            setStatusToUpdateDataToOnUtil();
-          }
+          setStatusToUpdateDataToOnUtil();
 
           previousMillisUpdate = millis();
         }
@@ -216,10 +204,7 @@ void startSubscribeServices() {
             Serial.println("GPS error! Reload!");
           }
 
-          if (getStatusCorrectConnection()) {
-
-            setStatusToUpdateDataToOnUtil();
-          }
+          setStatusToUpdateDataToOnUtil();
 
           previousMillisForError = millis();
         }
@@ -228,11 +213,8 @@ void startSubscribeServices() {
 
       if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= disabledIntervalUpdate) {
 
-        if (getStatusCorrectConnection()) {
-
-          // Not update user data
-          setStatusToUpdateDataToOffUtil(false);
-        }
+        // Not update user data
+        setStatusToUpdateDataToOffUtil(false);
 
         previousMillisUpdate = millis();
       }
