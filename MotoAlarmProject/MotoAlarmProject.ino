@@ -18,6 +18,10 @@
 // Instance for MPU6050 module
 MPU6050 mpu;
 
+// "Multi-thread" with millis()
+unsigned long intervalUpdateForMPU6050 = 10000;
+unsigned long previousMillisForMPU6050 = 0;
+
 // Functions
 void setup() {
   configureServices();
@@ -27,7 +31,7 @@ void setup() {
 void loop() {
   startSubscribeServices();
 
-  if (serviceIsActiveForSendDataToService() == true) {
+  if (serviceIsActiveForSendDataToService()) {
 
     startMPU6050Module();
   }
@@ -54,17 +58,22 @@ void configureMPU6050Module() {
 }
 
 void startMPU6050Module() {
-  // Read normalized values
-  Vector normAccel = mpu.readNormalizeAccel();
+  unsigned long currentMillisUpdate = millis();
 
-  // Calculate pitch, roll, temperature meditions and send to process
-  int pitch = -(atan2(normAccel.XAxis, sqrt(normAccel.YAxis * normAccel.YAxis + normAccel.ZAxis * normAccel.ZAxis)) * 180.0) / M_PI;
-  int roll = (atan2(normAccel.YAxis, normAccel.ZAxis) * 180.0) / M_PI;
-  float temp = mpu.readTemperature();
+  if ((unsigned long)(currentMillisUpdate - previousMillisForMPU6050) >= intervalUpdateForMPU6050) {
 
-  processValuesFromMPU6050(pitch,
-                           roll,
-                           temp);
+    // Read normalized values
+    Vector normAccel = mpu.readNormalizeAccel();
 
-  delay(500);
+    // Calculate pitch, roll, temperature meditions and send to process
+    int pitch = -(atan2(normAccel.XAxis, sqrt(normAccel.YAxis * normAccel.YAxis + normAccel.ZAxis * normAccel.ZAxis)) * 180.0) / M_PI;
+    int roll = (atan2(normAccel.YAxis, normAccel.ZAxis) * 180.0) / M_PI;
+    float temp = mpu.readTemperature();
+
+    processValuesFromMPU6050(pitch,
+                             roll,
+                             temp);
+
+    previousMillisForMPU6050 = millis();
+  }
 }

@@ -60,7 +60,7 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
     }
   }
 
-  if (sendDataToServerForAlarmIsActive == true) {
+  if (sendDataToServerForAlarmIsActive) {
 
     sendUserDataToServerForAlarmIsActive();
   }

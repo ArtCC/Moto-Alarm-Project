@@ -6,9 +6,11 @@
 unsigned long intervalToken = 172800000;
 unsigned long alarmIntervalUpdate = 60000;
 unsigned long disabledIntervalUpdate = 86400000;
+unsigned long intervalUpdateForError = 120000;
 unsigned long previousMillisToken = 0;
 unsigned long previousMillisUpdate = 0;
 unsigned long previousMillisUpdateForAlarm = 0;
+unsigned long previousMillisForError = 0;
 
 // Private functions
 // Reset Controller
@@ -141,6 +143,8 @@ void setStatusToUpdateDataToOnUtil() {
 
   if (activateGPSData()) {
 
+    gpsOK = true;
+
     // Update user data
     setUpdateDataUserToServer(
       getLatitude(),
@@ -149,6 +153,8 @@ void setStatusToUpdateDataToOnUtil() {
       getBatteryChargeStatus()
     );
   } else {
+
+    gpsOK = false;
 
     // Not update user data
     setStatusToUpdateDataToOffUtil(true);
@@ -179,27 +185,46 @@ void startSubscribeServices() {
 
     unsigned long currentMillisUpdate = millis();
 
-    if (serviceIsActiveForSendDataToService() == true) {
+    if (serviceIsActiveForSendDataToService()) {
 
-      if (isDebug()) {
+      if (gpsOK) {
 
-        Serial.println("Time for data user new update:");
-        Serial.println(currentMillisUpdate);
-        Serial.println(previousMillisUpdate);
-        Serial.println(getValueForDeviceUpdateTime());
-        Serial.println("");
-      }
+        if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= getValueForDeviceUpdateTime()) {
 
-      if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= getValueForDeviceUpdateTime()) {
+          if (isDebug()) {
 
-        if (getStatusCorrectConnection()) {
+            Serial.println("Time for data user new update:");
+            Serial.println(currentMillisUpdate);
+            Serial.println(previousMillisUpdate);
+            Serial.println(getValueForDeviceUpdateTime());
+            Serial.println("");
+          }
 
-          setStatusToUpdateDataToOnUtil();
+          if (getStatusCorrectConnection()) {
+
+            setStatusToUpdateDataToOnUtil();
+          }
+
+          previousMillisUpdate = millis();
         }
+      } else {
 
-        previousMillisUpdate = millis();
+        if ((unsigned long)(currentMillisUpdate - previousMillisForError) >= intervalUpdateForError) {
+
+          if (isDebug()) {
+
+            Serial.println("GPS error! Reload!");
+          }
+
+          if (getStatusCorrectConnection()) {
+
+            setStatusToUpdateDataToOnUtil();
+          }
+
+          previousMillisForError = millis();
+        }
       }
-    } else if (serviceIsActiveForSendDataToService() == false) {
+    } else if (!serviceIsActiveForSendDataToService()) {
 
       if ((unsigned long)(currentMillisUpdate - previousMillisUpdate) >= disabledIntervalUpdate) {
 

@@ -6,6 +6,7 @@
 
 // First init
 static bool firstInit = true;
+static bool gpsOK = false;
 
 // Instance for all request
 static LGPRSClient client;
