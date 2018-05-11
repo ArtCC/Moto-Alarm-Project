@@ -19,7 +19,7 @@
 MPU6050 mpu;
 
 // "Multi-thread" with millis()
-unsigned long intervalUpdateForMPU6050 = 10000;
+unsigned long intervalUpdateForMPU6050 = 5000;
 unsigned long previousMillisForMPU6050 = 0;
 
 // Functions
@@ -33,7 +33,13 @@ void loop() {
 
   if (serviceIsActiveForSendDataToService()) {
 
-    startMPU6050Module();
+    if (!getIfAlarmIsActive()) {
+
+      startMPU6050Module();
+    } else {
+
+      sendUserDataToServerForAlarmIsActive();
+    }
   }
 }
 

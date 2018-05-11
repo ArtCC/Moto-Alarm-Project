@@ -60,11 +60,6 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
     }
   }
 
-  if (sendDataToServerForAlarmIsActive) {
-
-    sendUserDataToServerForAlarmIsActive();
-  }
-
   if (isDebug()) {
 
     Serial.print("First pitch: ");
@@ -90,3 +85,9 @@ void setSaveValuesFromMPU6050(const bool &newValue) {
   setNewValuesFromMPU6050 = newValue;
   sendDataToServerForAlarmIsActive = false;
 }
+
+bool getIfAlarmIsActive() {
+
+  return sendDataToServerForAlarmIsActive;
+}
+
