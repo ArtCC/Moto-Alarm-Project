@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Variables
+// Properties
 gpsSentenceInfoStruct info; // Needed to get GPS data
 
 double latitude = 0.000000;

@@ -29,6 +29,11 @@ void setup() {
 }
 
 void loop() {
+  startServices();
+}
+
+// Private functions
+void startServices() {
   startSubscribeServices();
 
   if (serviceIsActiveForSendDataToService()) {
@@ -43,7 +48,6 @@ void loop() {
   }
 }
 
-// Private functions
 // MPU6050 config
 void configureMPU6050Module() {
 

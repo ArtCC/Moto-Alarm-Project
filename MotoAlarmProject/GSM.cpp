@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Variables
+// Properties
 bool permissionForSendSMS = true;
 
 // SMS text

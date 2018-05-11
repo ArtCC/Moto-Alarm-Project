@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Variables
+// Properties
 // "Multi-thread" with millis()
 unsigned long intervalToken = 172800000;
 unsigned long alarmIntervalUpdate = 60000;

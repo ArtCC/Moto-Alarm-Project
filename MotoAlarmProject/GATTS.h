@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "LGATTServer.h"
 
-// Variables
+// Properties
 #ifndef __GATT_UART_H__
 #define __GATT_UART_H__
 

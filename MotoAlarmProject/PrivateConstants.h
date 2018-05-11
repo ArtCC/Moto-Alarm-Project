@@ -4,6 +4,7 @@
    NOT DELETED ANY CONSTANT
 */
 
+// Properties
 // First init
 static bool firstInit = true;
 static bool gpsOK = false;

@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Variables
+// Properties
 char weatherBaseUrl[] = "api.openweathermap.org";
 String openWeatherAPIKey = "7361a32159627d3d34db82854a569bf7";
 String weatherTitleString = "";

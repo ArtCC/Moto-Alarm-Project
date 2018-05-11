@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Variables
+// Properties
 String updateTime;
 
 // The type of data that we want to extract from the page

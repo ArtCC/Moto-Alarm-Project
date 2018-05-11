@@ -1,7 +1,7 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Variables
+// Properties
 #ifdef APP_LOG
 #undef APP_LOG
 #define APP_LOG(...) Serial.printf(__VA_ARGS__); \
