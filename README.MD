@@ -6,6 +6,8 @@
 
 [Moto Alarm Project Website](https://motoalarm-project.com "Moto Alarm Project")
 
+![MacDown Screenshot](Resources/Box.jpg)
+
 #### PROJECT FUNCTIONALITIES (For iOS or Android apps):
 
 - You can see the position of your motorcycle at all times.
