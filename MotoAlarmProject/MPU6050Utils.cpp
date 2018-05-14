@@ -51,6 +51,16 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
   if (differencePitch > 10 || differenceRoll > 10) {
 
+    String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
+
+    if (isDebug()) {
+
+      Serial.println("SMS: Alert");
+      Serial.println(textString);
+    }
+
+    sendSMSToPhoneNumber(userPhone, textString);
+
     sendDataToServerForAlarmIsActive = true;
 
     if (isDebug()) {
