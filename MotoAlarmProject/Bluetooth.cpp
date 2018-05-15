@@ -18,7 +18,7 @@ void activateBluetoothModule() {
     APP_LOG("BLE starts");
   }
 
-  const char *deviceName = deviceNameForBluetooth;
+  const char *deviceName = DEVICE_NAME;
   bool success = LBTServer.begin((uint8_t*) deviceName);
 
   if (success) {

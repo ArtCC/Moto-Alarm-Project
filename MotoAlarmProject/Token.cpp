@@ -89,7 +89,7 @@ void printClientData(const struct clientData* clientData) {
 
 bool sendRequestForToken() {
 
-  if (client.connect(server, port)) {
+  if (client.connect(MAP_SERVER, port)) {
 
     String data = "{\"username\":" + userMail + "," + "\"password\":" + userPassword + "," + "\"exp\":" + "\"5\"" + "}";
     String thisLength = String(data.length());
@@ -98,7 +98,7 @@ bool sendRequestForToken() {
 
       Serial.println("Connected for get token");
       Serial.print("Connect to: ");
-      Serial.println(server);
+      Serial.println(MAP_SERVER);
     }
 
     client.print("POST /wp-json/jwt-auth/v1/token/");
@@ -107,7 +107,7 @@ bool sendRequestForToken() {
     client.println("Content-Type: application/json; charset=UTF-8");
     client.println("Content-Length: " + thisLength);
     client.print("Host: ");
-    client.println(server);
+    client.println(MAP_SERVER);
     client.print("\n" + data);
     client.print(char(26));
     client.println("Connection: close");

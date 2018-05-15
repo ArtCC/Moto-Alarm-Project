@@ -3,6 +3,12 @@
    All utils functions
 */
 
+// Config GPRS
+void configureGPRSConnection();
+
+// Config WiFi
+void configureWiFi();
+
 // Configure all services in init setup
 void configureServices();
 
@@ -26,3 +32,9 @@ String getFeel();
 
 // Reset app by code
 void resetByCode();
+
+// Get status for WiFi config
+bool getConfigWiFiIsOK();
+
+// get status for GPRS config
+bool getConfigGPRSIsOK();

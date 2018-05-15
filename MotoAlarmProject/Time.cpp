@@ -80,19 +80,19 @@ void printUserData(const struct userData* userData) {
 
 bool sendRequestForTime() {
 
-  if (client.connect(server, port)) {
+  if (client.connect(MAP_SERVER, port)) {
 
     if (isDebug()) {
 
       Serial.println("Connected for get device update time");
       Serial.print("Connect to: ");
-      Serial.println(server);
+      Serial.println(MAP_SERVER);
     }
 
     client.print("GET /wp-json/wp/v2/users/" + userId);
     client.println(" HTTP/1.0");
     client.print("Host: ");
-    client.println(server);
+    client.println(MAP_SERVER);
     client.println("Authorization: " + getUserToken());
     client.println("Connection: close");
     client.println();

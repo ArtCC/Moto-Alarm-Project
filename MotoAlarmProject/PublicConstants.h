@@ -4,12 +4,19 @@
 */
 
 // Device name
-static char deviceNameForBluetooth[] = "MotoAlarmProject";
+#define DEVICE_NAME "MotoAlarmProject"
 
 // APN config
-static char apnName[] = "apnName";
-static char apnUser[] = "";
-static char apnPassword[] = "";
+#define APN_NAME "apnName"
+#define APN_USER ""
+#define APN_PASSWORD ""
+
+// WiFi config
+#define WIFI_AP "SSID"
+#define WIFI_PASSWORD "WIFI_PASSWORD"
+
+// WiFi active or not
+static bool wifiIsActive = false;
 
 // User
 static char* userPhone = "+34600000000";

@@ -12,6 +12,9 @@ unsigned long previousMillisUpdate = 0;
 unsigned long previousMillisUpdateForAlarm = 0;
 unsigned long previousMillisForError = 0;
 
+bool wifiOK = false;
+bool gprsOK = false;
+
 // Private functions
 // Reset Controller
 extern void vm_reboot_normal_start(void);
@@ -63,24 +66,6 @@ void updateToken() {
   }
 }
 
-// Config
-void configureGPRSConnection() {
-  while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
-
-    if (isDebug()) {
-
-      Serial.println("LGPRS setup error");
-    }
-
-    delay(100);
-  }
-
-  if (isDebug()) {
-
-    Serial.println("LGPRS setup correct");
-  }
-}
-
 void configureForFirstInit() {
 
   if (getTokenForUser()) {
@@ -113,13 +98,63 @@ void configureForFirstInit() {
 }
 
 // Public functions
+// Config
+void configureGPRSConnection() {
+  while (!LGPRS.attachGPRS(APN_NAME, APN_USER, APN_PASSWORD)) {
+
+    if (isDebug()) {
+
+      Serial.println("LGPRS setup error");
+    }
+
+    delay(200);
+
+    gprsOK = false;
+  }
+
+  if (isDebug()) {
+
+    Serial.println("LGPRS setup correct");
+  }
+
+  gprsOK = true;
+}
+
+void configureWiFi() {
+  LWiFi.begin();
+
+  Serial.println("Connecting to WiFi...");
+
+  while (0 == LWiFi.connect(WIFI_AP, LWiFiLoginInfo(WIFI_AUTH, WIFI_PASSWORD))) {
+
+    Serial.println("Error connecting to WiFi...");
+
+    delay(200);
+
+    wifiOK = false;
+  }
+
+  Serial.println("Connect to WiFi OK!");
+
+  wifiOK = true;
+}
+
 void configureServices() {
   Serial.begin(115200);
 
-  configureGPRSConnection();
   activateBluetoothModule();
   activateSIM();
   activateGPS();
+
+  if (wifiIsActive) {
+
+    configureWiFi();
+  } else {
+
+    configureGPRSConnection();
+  }
+
+  configureOTAUpdate();
 }
 
 void sendUserDataToServerForAlarmIsActive() {
@@ -220,6 +255,8 @@ void startSubscribeServices() {
       }
     }
   }
+
+  updateDevice();
 }
 
 bool isDebug() {
@@ -267,4 +304,14 @@ void resetByCode() {
   }
 
   reset_utils();
+}
+
+bool getConfigWiFiIsOK() {
+
+  return wifiOK;
+}
+
+bool getConfigGPRSIsOK() {
+
+  return gprsOK;
 }

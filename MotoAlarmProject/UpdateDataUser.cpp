@@ -4,13 +4,13 @@
 // Public util functions
 void setPOSTRequest(String &path) {
 
-  if (client.connect(server, port)) {
+  if (client.connect(MAP_SERVER, port)) {
 
     if (isDebug()) {
 
       Serial.println("Success");
       Serial.print("Connect to: ");
-      Serial.println(server);
+      Serial.println(MAP_SERVER);
       Serial.println("Connected");
       Serial.println("Path:");
       Serial.println(path);
@@ -23,7 +23,7 @@ void setPOSTRequest(String &path) {
     client.println("Content-Type: application/json; charset=UTF-8");
     client.println("Content-Length: " + thisLength);
     client.print("Host: ");
-    client.println(server);
+    client.println(MAP_SERVER);
     client.println("Authorization: " + getUserToken());
     client.print("\n" + path);
     client.print(char(26));
@@ -50,7 +50,7 @@ void setPOSTRequest(String &path) {
 
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {
 
-  if (client.connect(server, port)) {
+  if (client.connect(MAP_SERVER, port)) {
 
     String sendDataStatus = "\"true\"";
 
@@ -94,7 +94,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
 
 void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batteryStatus, const bool &gpsError) {
 
-  if (client.connect(server, port)) {
+  if (client.connect(MAP_SERVER, port)) {
 
     String sendDataStatus = "\"false\"";
     String bLevel = "\"" + batteryLevel + "\"";

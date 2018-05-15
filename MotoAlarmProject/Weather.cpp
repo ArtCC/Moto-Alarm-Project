@@ -2,7 +2,7 @@
 #include "ImportClasses.h"
 
 // Properties
-char weatherBaseUrl[] = "api.openweathermap.org";
+#define WEATHER_BASE_URL "api.openweathermap.org"
 String openWeatherAPIKey = "7361a32159627d3d34db82854a569bf7";
 String weatherTitleString = "";
 String cityString = "";
@@ -98,13 +98,13 @@ void printclientDataForWeather(const struct weatherClientData* weatherClientData
 
 bool sendRequestForWeatherForMotorbikeLocation() {
 
-  if (client.connect(weatherBaseUrl, port)) {
+  if (client.connect(WEATHER_BASE_URL, port)) {
 
     if (isDebug()) {
 
       Serial.println("Connected for get weather");
       Serial.print("Connect to: ");
-      Serial.println(weatherBaseUrl);
+      Serial.println(WEATHER_BASE_URL);
     }
 
     String lat = "lat=" + getLatitude();
@@ -115,7 +115,7 @@ bool sendRequestForWeatherForMotorbikeLocation() {
     client.print("GET /data/2.5/weather?" + lat + lon + apiKey + units);
     client.println(" HTTP/1.0");
     client.print("Host: ");
-    client.println(weatherBaseUrl);
+    client.println(WEATHER_BASE_URL);
     client.println("Connection: close");
     client.println();
 
