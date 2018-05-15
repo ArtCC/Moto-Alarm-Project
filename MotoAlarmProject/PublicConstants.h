@@ -18,6 +18,12 @@
 // WiFi active or not
 static bool wifiIsActive = false;
 
+// Device update
+static bool deviceUpdateEnabled = false;
+#define MAP_SERVER_UPDATE "MAP_SERVER_UPDATE"
+#define MAP_FOLDER_UPDATE "MAP_FOLDER_UPDATE"
+#define MAP_PORT_UPDATE "MAP_PORT_UPDATE"
+
 // User
 static char* userPhone = "+34600000000";
 static String userMail = "\"mail@mail.com\"";

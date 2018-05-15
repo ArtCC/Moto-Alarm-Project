@@ -18,8 +18,6 @@ const size_t MAX_CONTENT_SIZE = 512;
 
 // Server
 #define MAP_SERVER "motoalarm-project.com"
-#define MAP_FOLDER_UPDATE "update"
-#define MAP_PORT "80"
 static int port = 80;
 
 // Token

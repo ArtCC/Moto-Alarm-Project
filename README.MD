@@ -131,6 +131,8 @@ You need to download and install two libraries that are used in the project in t
 
 [MPU6050 in GitHub](https://github.com/jarzebski/Arduino-MPU6050 "MPU6050")
 
+[OTAUpdate in GitHub](https://github.com/ArtCC/OTAUpdate "OTAUpdate")
+
 The only class in which you need to add your data is in the <b>PublicConstants.h</b> class.
 
 ![MacDown Screenshot](Resources/ArduinoIDE.png)
@@ -141,16 +143,27 @@ Your configuration data is in this class, but you only need to add the following
 
 ```
 // Device name
-static char deviceNameForBluetooth[] = "MotoAlarmProject";
+#define DEVICE_NAME = "MotoAlarmProject";
 ```
 
 - To configure internet access from your Linkit One with your SIM card, you must add your operator's configuration. In my case, the APN property is orangeworld and the username and password are empty.
 
 ```
 // APN
-static char apnName[] = "apnName";
-static char apnUser[] = "";
-static char apnPassword[] = "";
+#define APN_NAME = "apnName";
+#define APN_USER = "";
+#define APN_PASSWORD = "";
+```
+
+- If you want to use WiFi connection instead of GPRS you can configure it here, but if you then park the motorcycle out of reach of that WiFi, the device will not have connection.
+
+```
+// WiFi config
+#define WIFI_AP "SSID"
+#define WIFI_PASSWORD "WIFI_PASSWORD"
+
+// WiFi active or not
+static bool wifiIsActive = false;
 ```
 
 - To receive SMS from your Linkit One, add your phone number in userPhone property.
@@ -207,6 +220,20 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 I have changed the original battery with 1000mAh for a battery with 6000mAh, so it lasts a lot longer without charging.
 
 I added a usb charger to the battery in my motorcycle but in positive, that means that when I turn off the motorcycle it has no current, it only charges the powerbank when the motorcycle is on.
+
+### UPDATE FIRMWARE DEVICE FROM SERVER
+
+If you want to be able to update the device from server you have to mount the internal memory of your Linkit One and create an empty folder with the name 'OTA'.
+
+The configuration parameters can be added in the following constants:
+
+```
+// Device update
+static bool deviceUpdateEnabled = false;
+#define MAP_SERVER_UPDATE "MAP_SERVER_UPDATE"
+#define MAP_FOLDER_UPDATE "MAP_FOLDER_UPDATE"
+#define MAP_PORT_UPDATE "MAP_PORT_UPDATE"
+```
 
 ### BATTERY BAG FOR SECURITY (OPTIONAL)
 
