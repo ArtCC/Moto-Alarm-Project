@@ -34,7 +34,7 @@ void setPOSTRequest(String &path) {
 
       while (client.connected()) {
 
-        if ( client.available()) {
+        if (client.available()) {
 
           char str = client.read();
           Serial.print(str);
