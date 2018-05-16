@@ -65,17 +65,29 @@ void checkConnectionStatus(const bool &wifi, const bool &gprs) {
 }
 
 void startServices() {
-  startSubscribeServices();
 
-  if (serviceIsActiveForSendDataToService()) {
+  if (getStatusCorrectConnection()) {
 
-    if (!getIfAlarmIsActive()) {
+    startSubscribeServices();
 
-      startMPU6050Module();
-    } else {
+    if (serviceIsActiveForSendDataToService()) {
 
-      sendUserDataToServerForAlarmIsActive();
+      if (!getIfAlarmIsActive()) {
+
+        startMPU6050Module();
+      } else {
+
+        sendUserDataToServerForAlarmIsActive();
+      }
     }
+  } else {
+
+    if (isDebug()) {
+
+      Serial.println("Connection error!");
+    }
+
+    delay(60000);
   }
 }
 

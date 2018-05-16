@@ -6,11 +6,6 @@ bool getStatusCorrectConnection() {
 
   if (client.connect(PING_TO_SERVER, port)) {
 
-    if (isDebug()) {
-
-      Serial.println("getStatusCorrectConnection: Correct connection");
-    }
-
     return true;
   } else {
 

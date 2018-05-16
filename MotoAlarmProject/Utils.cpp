@@ -12,8 +12,11 @@ unsigned long previousMillisUpdate = 0;
 unsigned long previousMillisUpdateForAlarm = 0;
 unsigned long previousMillisForError = 0;
 
+bool firstInit = true;
+bool alarmSMSActive = true;
 bool wifiOK = false;
 bool gprsOK = false;
+bool gpsOK = false;
 
 // Private functions
 // Reset Controller
@@ -100,6 +103,13 @@ void configureForFirstInit() {
 // Public functions
 // Config
 void configureGPRSConnection() {
+
+  if (isDebug()) {
+
+    Serial.println("APN name: ");
+    Serial.println(APN_NAME);
+  }
+
   while (!LGPRS.attachGPRS(APN_NAME, APN_USER, APN_PASSWORD)) {
 
     if (isDebug()) {

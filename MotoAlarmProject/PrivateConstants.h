@@ -5,10 +5,6 @@
 */
 
 // Properties
-// First init
-static bool firstInit = true;
-static bool gpsOK = false;
-
 // "Multi-thread" with millis() for update MPU6050 status
 static unsigned long intervalUpdateForMPU6050 = 2500;
 static unsigned long previousMillisForMPU6050 = 0;
@@ -42,9 +38,6 @@ static LWiFiClient clientWifi;
 
 // Test
 #define PING_TO_SERVER "start.duckduckgo.com"
-
-// Alarm
-static bool alarmSMSActive = true;
 
 // Show logs, set true
 static bool debug = false;
