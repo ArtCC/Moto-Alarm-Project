@@ -9,6 +9,14 @@
 static bool firstInit = true;
 static bool gpsOK = false;
 
+// "Multi-thread" with millis() for update MPU6050 status
+static unsigned long intervalUpdateForMPU6050 = 2500;
+static unsigned long previousMillisForMPU6050 = 0;
+
+// "Multi-thread" with millis() for check connection status
+static unsigned long intervalUpdateForConnectionCheck = 60000;
+static unsigned long previousMillisForConnectionCheck = 0;
+
 // Instance for all request
 static LGPRSClient client;
 

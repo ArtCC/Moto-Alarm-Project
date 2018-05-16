@@ -17,10 +17,6 @@
 // Instance for MPU6050 module
 MPU6050 mpu;
 
-// "Multi-thread" with millis()
-unsigned long intervalUpdateForMPU6050 = 5000;
-unsigned long previousMillisForMPU6050 = 0;
-
 // Functions
 void setup() {
   configureServices();
@@ -36,7 +32,7 @@ void loop() {
       startServices();
     } else {
 
-      configureWiFi();
+      checkConnectionStatus(true, false);
     }
   } else {
 
@@ -45,12 +41,29 @@ void loop() {
       startServices();
     } else {
 
-      configureGPRSConnection();
+      checkConnectionStatus(false, true);
     }
   }
 }
 
 // Private functions
+void checkConnectionStatus(const bool &wifi, const bool &gprs) {
+  unsigned long currentMillisUpdate = millis();
+
+  if ((unsigned long)(currentMillisUpdate - previousMillisForConnectionCheck) >= intervalUpdateForConnectionCheck) {
+
+    if (wifi) {
+
+      configureWiFi();
+    } else if (gprs) {
+
+      configureGPRSConnection();
+    }
+
+    previousMillisForConnectionCheck = millis();
+  }
+}
+
 void startServices() {
   startSubscribeServices();
 
