@@ -65,6 +65,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
     String bLevel = "\"" + batteryLevel + "\"";
     String bStatus = "\"" + batteryStatus + "\"";
     String velocity = "\"" + String(getVelocity()) + "\"";
+    String gpsStatus = "\"false\"";
 
     String data = "{\"motorbike_latitude\":" + lat + "," +
                   "\"motorbike_longitude\":" + lon + "," +
@@ -72,7 +73,8 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
                   "\"activated_motorbike_position\":" + sendDataStatus + "," +
                   "\"battery_motorbike_device\":" + bLevel + "," +
                   "\"battery_motorbike_status_charging\":" + bStatus + "," +
-                  "\"motorbike_velocity\":" + velocity +
+                  "\"motorbike_velocity\":" + velocity + "," +
+                  "\"gps_error\":" + gpsStatus +
                   "}";
 
     if (isDebug()) {

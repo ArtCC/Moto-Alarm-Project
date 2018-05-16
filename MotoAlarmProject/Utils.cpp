@@ -94,7 +94,7 @@ void configureForFirstInit() {
     }
   }
 
-  setStatusToUpdateDataToOffUtil(false);
+  setStatusToUpdateDataToOnUtil();
 }
 
 // Public functions
