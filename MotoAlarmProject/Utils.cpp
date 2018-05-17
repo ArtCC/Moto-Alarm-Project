@@ -13,7 +13,6 @@ unsigned long previousMillisUpdateForAlarm = 0;
 unsigned long previousMillisForError = 0;
 
 bool firstInit = true;
-bool alarmSMSActive = true;
 bool wifiOK = false;
 bool gprsOK = false;
 bool gpsOK = false;
@@ -201,8 +200,6 @@ void setStatusToUpdateDataToOnUtil() {
 }
 
 void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
-  alarmSMSActive = true;
-
   setStatusToUpdateDataToOff(getBatteryLevel(),
                              getBatteryChargeStatus(),
                              gpsError);
