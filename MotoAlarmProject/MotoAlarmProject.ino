@@ -88,7 +88,7 @@ void startServices() {
       Serial.println("Connection error!");
     }
 
-    delay(60000);
+    delay(3000);
   }
 }
 
