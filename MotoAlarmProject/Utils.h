@@ -24,6 +24,9 @@ void setStatusToUpdateDataToOffUtil(const bool &gpsError);
 // Subscribe to services
 void startSubscribeServices();
 
+// Start services for detection and send request
+void startAllServices();
+
 // Check if debug is active
 bool isDebug();
 

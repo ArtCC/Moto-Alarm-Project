@@ -211,6 +211,9 @@ void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
 void startSubscribeServices() {
   subscribeToEventsBluetoothModule();
   receivedSMS();
+}
+
+void startAllServices() {
 
   if (firstInit) {
 

@@ -51,15 +51,21 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
   if (differencePitch > 10 || differenceRoll > 10) {
 
-    String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
+    if (activateGPSData()) {
 
-    if (isDebug()) {
+      String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
 
-      Serial.println("SMS: Alert");
-      Serial.println(textString);
+      if (isDebug()) {
+
+        Serial.println("SMS: Alert");
+        Serial.println(textString);
+      }
+
+      sendSMSToPhoneNumber(userPhone, textString);
+    } else {
+
+      sendSMSToPhoneNumber(userPhone, textForAlarmSMSWithoutLocation);
     }
-
-    sendSMSToPhoneNumber(userPhone, textString);
 
     sendDataToServerForAlarmIsActive = true;
 

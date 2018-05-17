@@ -43,3 +43,4 @@ static String textForWetSMS = "I'm very wet... ";
 static String textForColdSMS = "I'm very cold... ";
 static String textForHotSMS = "I'm very hot... ";
 static String textForAlarmSMS = "Hey! I'm moving! Speed: ";
+static String textForAlarmSMSWithoutLocation = "Hey! I'm moving!";

@@ -65,10 +65,11 @@ void checkConnectionStatus(const bool &wifi, const bool &gprs) {
 }
 
 void startServices() {
+  startSubscribeServices();
 
   if (getStatusCorrectConnection()) {
 
-    startSubscribeServices();
+    startAllServices();
 
     if (serviceIsActiveForSendDataToService()) {
 
