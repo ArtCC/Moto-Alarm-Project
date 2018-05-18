@@ -32,7 +32,6 @@
 // Custom classes
 #include "PublicConstants.h"
 #include "PrivateConstants.h"
-#include "Connection.h"
 #include "UpdateDevice.h"
 #include "MPU6050Utils.h"
 #include "Utils.h"

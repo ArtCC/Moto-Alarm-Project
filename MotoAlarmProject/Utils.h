@@ -3,6 +3,9 @@
    All utils functions
 */
 
+// Function for request get token and get update device time fro server
+void configureForFirstInit();
+
 // Config GPRS
 void configureGPRSConnection();
 

@@ -35,7 +35,7 @@ void disconnect() {
 
     while (client.connected()) {
 
-      if ( client.available()) {
+      if (client.available()) {
 
         char str = client.read();
         Serial.print(str);
@@ -125,7 +125,7 @@ bool sendRequestForToken() {
 }
 
 // Public functions
-bool getTokenForUser() {
+bool requestForGetUserToken() {
 
   if (sendRequestForToken() && skipResponseHeaders("\r\n\r\n")) {
 
@@ -143,6 +143,17 @@ bool getTokenForUser() {
 
       return true;
     }
+  }
+
+  return false;
+}
+
+bool checkIfUserTokenExist() {
+  unsigned int userTokenLength = userToken.length();
+
+  if (userTokenLength > 1) {
+
+    return true;
   }
 
   return false;

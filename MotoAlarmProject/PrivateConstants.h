@@ -36,8 +36,5 @@ static String userToken = "";
 static LWiFiClient clientWifi;
 #define WIFI_AUTH LWIFI_WPA
 
-// Test
-#define PING_TO_SERVER "start.duckduckgo.com"
-
 // Show logs, set true
 static bool debug = false;

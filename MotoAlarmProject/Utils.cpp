@@ -48,7 +48,7 @@ void updateToken() {
 
   if ((unsigned long)(currentMillisToken - previousMillisToken) >= intervalToken) {
 
-    if (getTokenForUser()) {
+    if (requestForGetUserToken()) {
 
       if (isDebug()) {
 
@@ -68,9 +68,10 @@ void updateToken() {
   }
 }
 
+// Public functions
 void configureForFirstInit() {
 
-  if (getTokenForUser()) {
+  if (requestForGetUserToken()) {
 
     if (isDebug()) {
 
@@ -78,6 +79,16 @@ void configureForFirstInit() {
     }
 
     firstInit = false;
+
+    if (getDeviceUpdateTime()) {
+
+      if (isDebug()) {
+
+        Serial.println("Get new device update time correct");
+      }
+    }
+
+    setStatusToUpdateDataToOffUtil(false);
   } else {
 
     if (isDebug()) {
@@ -87,19 +98,8 @@ void configureForFirstInit() {
 
     firstInit = true;
   }
-
-  if (getDeviceUpdateTime()) {
-
-    if (isDebug()) {
-
-      Serial.println("Get new device update time correct");
-    }
-  }
-
-  setStatusToUpdateDataToOffUtil(false);
 }
 
-// Public functions
 // Config
 void configureGPRSConnection() {
 
@@ -132,18 +132,27 @@ void configureGPRSConnection() {
 void configureWiFi() {
   LWiFi.begin();
 
-  Serial.println("Connecting to WiFi...");
+  if (isDebug()) {
+
+    Serial.println("Connecting to WiFi...");
+  }
 
   while (0 == LWiFi.connect(WIFI_AP, LWiFiLoginInfo(WIFI_AUTH, WIFI_PASSWORD))) {
 
-    Serial.println("Error connecting to WiFi...");
+    if (isDebug()) {
+
+      Serial.println("Error connecting to WiFi...");
+    }
 
     delay(200);
 
     wifiOK = false;
   }
 
-  Serial.println("Connect to WiFi OK!");
+  if (isDebug()) {
+
+    Serial.println("Connect to WiFi OK!");
+  }
 
   wifiOK = true;
 }

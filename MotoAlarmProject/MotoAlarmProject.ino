@@ -67,7 +67,7 @@ void checkConnectionStatus(const bool &wifi, const bool &gprs) {
 void startServices() {
   startSubscribeServices();
 
-  if (getStatusCorrectConnection()) {
+  if (client.connect(MAP_SERVER, port)) {
 
     startAllServices();
 
@@ -85,10 +85,8 @@ void startServices() {
 
     if (isDebug()) {
 
-      Serial.println("Connection error!");
+      Serial.println("Client not available. Error in connection!");
     }
-
-    delay(3000);
   }
 }
 
