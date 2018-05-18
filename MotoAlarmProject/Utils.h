@@ -38,9 +38,3 @@ String getFeel();
 
 // Reset app by code
 void resetByCode();
-
-// Get status for WiFi config
-bool getConfigWiFiIsOK();
-
-// get status for GPRS config
-bool getConfigGPRSIsOK();

@@ -24,46 +24,10 @@ void setup() {
 }
 
 void loop() {
-
-  if (wifiIsActive) {
-
-    if (getConfigWiFiIsOK()) {
-
-      startServices();
-    } else {
-
-      checkConnectionStatus(true, false);
-    }
-  } else {
-
-    if (getConfigGPRSIsOK()) {
-
-      startServices();
-    } else {
-
-      checkConnectionStatus(false, true);
-    }
-  }
+  startServices();
 }
 
 // Private functions
-void checkConnectionStatus(const bool &wifi, const bool &gprs) {
-  unsigned long currentMillisUpdate = millis();
-
-  if ((unsigned long)(currentMillisUpdate - previousMillisForConnectionCheck) >= intervalUpdateForConnectionCheck) {
-
-    if (wifi) {
-
-      configureWiFi();
-    } else if (gprs) {
-
-      configureGPRSConnection();
-    }
-
-    previousMillisForConnectionCheck = millis();
-  }
-}
-
 void startServices() {
   startSubscribeServices();
 
@@ -83,9 +47,12 @@ void startServices() {
     }
   } else {
 
-    if (isDebug()) {
+    if (wifiIsActive) {
 
-      Serial.println("Client not available. Error in connection!");
+      checkConnectionStatus(true, false);
+    } else {
+
+      checkConnectionStatus(false, true);
     }
   }
 }
@@ -127,5 +94,22 @@ void startMPU6050Module() {
                              temp);
 
     previousMillisForMPU6050 = millis();
+  }
+}
+
+void checkConnectionStatus(const bool &wifi, const bool &gprs) {
+  unsigned long currentMillisUpdate = millis();
+
+  if ((unsigned long)(currentMillisUpdate - previousMillisForConnectionCheck) >= intervalUpdateForConnectionCheck) {
+
+    if (wifi) {
+
+      configureWiFi();
+    } else if (gprs) {
+
+      configureGPRSConnection();
+    }
+
+    previousMillisForConnectionCheck = millis();
   }
 }

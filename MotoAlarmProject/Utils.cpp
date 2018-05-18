@@ -13,8 +13,6 @@ unsigned long previousMillisUpdateForAlarm = 0;
 unsigned long previousMillisForError = 0;
 
 bool firstInit = true;
-bool wifiOK = false;
-bool gprsOK = false;
 bool gpsOK = false;
 
 // Private functions
@@ -117,16 +115,12 @@ void configureGPRSConnection() {
     }
 
     delay(200);
-
-    gprsOK = false;
   }
 
   if (isDebug()) {
 
     Serial.println("LGPRS setup correct");
   }
-
-  gprsOK = true;
 }
 
 void configureWiFi() {
@@ -137,7 +131,7 @@ void configureWiFi() {
     Serial.println("Connecting to WiFi...");
   }
 
-  while (0 == LWiFi.connect(WIFI_AP, LWiFiLoginInfo(WIFI_AUTH, WIFI_PASSWORD))) {
+  while (!LWiFi.connect(WIFI_AP, LWiFiLoginInfo(WIFI_AUTH, WIFI_PASSWORD))) {
 
     if (isDebug()) {
 
@@ -145,16 +139,12 @@ void configureWiFi() {
     }
 
     delay(200);
-
-    wifiOK = false;
   }
 
   if (isDebug()) {
 
     Serial.println("Connect to WiFi OK!");
   }
-
-  wifiOK = true;
 }
 
 void configureServices() {
@@ -323,14 +313,4 @@ void resetByCode() {
   }
 
   reset_utils();
-}
-
-bool getConfigWiFiIsOK() {
-
-  return wifiOK;
-}
-
-bool getConfigGPRSIsOK() {
-
-  return gprsOK;
 }

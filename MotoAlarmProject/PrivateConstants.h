@@ -10,7 +10,7 @@ static unsigned long intervalUpdateForMPU6050 = 2500;
 static unsigned long previousMillisForMPU6050 = 0;
 
 // "Multi-thread" with millis() for check connection status
-static unsigned long intervalUpdateForConnectionCheck = 60000;
+static unsigned long intervalUpdateForConnectionCheck = 30000;
 static unsigned long previousMillisForConnectionCheck = 0;
 
 // Instance for all request
