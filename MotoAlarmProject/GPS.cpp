@@ -46,21 +46,21 @@ float convert(String str, boolean dir) {
 */
 int getData(gpsSentenceInfoStruct* info) {
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.println("Collecting GPS data");
   }
 
   LGPS.getData(info);
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.println((char*)info->GPGGA);
   }
 
   if (info->GPGGA[0] == '$') {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.print("Parsing GGA data...");
     }
@@ -102,14 +102,14 @@ int getData(gpsSentenceInfoStruct* info) {
     str = str.substring(str.indexOf(',') + 3);
     geoid = str.substring(0, str.indexOf(',')).toFloat();
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Done");
     }
 
     if (info->GPRMC[0] == '$') {
 
-      if (isDebug()) {
+      if (debug) {
 
         Serial.print("Parsing RMC data...");
       }
@@ -147,7 +147,7 @@ int getData(gpsSentenceInfoStruct* info) {
       date_format += "-";
       date_format += day;
 
-      if (isDebug()) {
+      if (debug) {
 
         Serial.println("Done");
       }
@@ -156,7 +156,7 @@ int getData(gpsSentenceInfoStruct* info) {
     }
   } else {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("No GGA data");
     }
@@ -170,7 +170,7 @@ int getData(gpsSentenceInfoStruct* info) {
 void activateGPS() {
   LGPS.powerOn();
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.println("GPS started");
   }
@@ -205,7 +205,7 @@ bool activateGPSData() {
     str += ",";
     str += sat_num;
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println(str);
     }
@@ -213,7 +213,7 @@ bool activateGPSData() {
     return true;
   } else {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Less then 4 satelites");
     }

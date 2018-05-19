@@ -2,8 +2,6 @@
 #include "ImportClasses.h"
 
 // Properties
-bool permissionForSendSMS = true;
-
 // SMS text
 String statusFromSMS = "status";
 String batteryFromSMS = "battery";
@@ -42,13 +40,11 @@ void sendMessage(String &message) {
     sendSMSToPhoneNumber(userPhone, textString);
   } else if (message == activateFromSMS || message == activateWatchFromSMS) {
 
-    setStatusToUpdateDataToOnUtil();
-    setServiceStatus(true);
+    serviceActive = true;
     sendSMSToPhoneNumber(userPhone, textForActivateSMS);
   } else if (message == desactivateFromSMS || message == desactivateWatchFromSMS) {
 
-    setStatusToUpdateDataToOffUtil(false);
-    setServiceStatus(false);
+    serviceActive = false;
     sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
   } else if (message == feelFromSMS || message == feelWatchFromSMS) {
 
@@ -76,7 +72,7 @@ void activateSIM() {
     delay(100);
   }
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.println("Sim is activate ok");
   }
@@ -88,41 +84,35 @@ void activateSIM() {
 }
 
 void sendSMSToPhoneNumber(char* phone, const String &textString) {
+  char toChar[100];
+  textString.toCharArray(toChar, 100);
+  char* text = toChar;
 
-  if (permissionForSendSMS) {
+  LSMS.beginSMS(phone);
+  LSMS.print(text);
 
-    permissionForSendSMS = false;
+  if (debug) {
 
-    char toChar[100];
-    textString.toCharArray(toChar, 100);
-    char* text = toChar;
+    Serial.println("Sending sms with status...");
+  }
 
-    LSMS.beginSMS(phone);
-    LSMS.print(text);
+  if (LSMS.endSMS()) {
 
-    if (isDebug()) {
+    if (debug) {
 
-      Serial.println("Sending sms with status...");
+      Serial.println("SMS send ok");
     }
+  } else {
 
-    if (LSMS.endSMS()) {
+    if (debug) {
 
-      if (isDebug()) {
-
-        Serial.println("SMS send ok");
-      }
-    } else {
-
-      if (isDebug()) {
-
-        Serial.println("SMS send KO");
-      }
+      Serial.println("SMS send KO");
     }
+  }
 
-    if (LSMS.available()) {
+  if (LSMS.available()) {
 
-      LSMS.flush();
-    }
+    LSMS.flush();
   }
 }
 
@@ -148,7 +138,7 @@ void receivedSMS() {
       message += String((char)c);
     }
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("SMS received:");
       Serial.print("From phone number: ");
@@ -163,8 +153,6 @@ void receivedSMS() {
 
       LSMS.flush();
     }
-
-    permissionForSendSMS = true;
 
     if (message == statusWatchFromSMS ||
         message == batteryWatchFromSMS ||
@@ -202,8 +190,7 @@ void receivedSMS() {
 
         setPOSTRequest(data);
 
-        setStatusToUpdateDataToOnUtil();
-        setServiceStatus(true);
+        serviceActive = true;
       } else if (message == desactivateFromSMS) {
 
         String message = "\"" + textForDesactivateSMS + "\"";
@@ -211,8 +198,7 @@ void receivedSMS() {
 
         setPOSTRequest(data);
 
-        setStatusToUpdateDataToOffUtil(false);
-        setServiceStatus(false);
+        serviceActive = false;
       } else if (message == feelFromSMS) {
 
         bool weather = getWeatherForMotorbikeLocation();

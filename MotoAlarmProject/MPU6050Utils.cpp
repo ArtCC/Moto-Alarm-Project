@@ -17,7 +17,7 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
   if (setNewValuesFromMPU6050) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Get first parameters for MPU6050");
     }
@@ -55,7 +55,7 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
       String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
 
-      if (isDebug()) {
+      if (debug) {
 
         Serial.println("SMS: Alert");
         Serial.println(textString);
@@ -69,14 +69,14 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
     sendDataToServerForAlarmIsActive = true;
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Alert!");
       Serial.println();
     }
   }
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.print("First pitch: ");
     Serial.println(firstPitch);

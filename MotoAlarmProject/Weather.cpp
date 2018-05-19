@@ -26,7 +26,7 @@ bool skipResponseHeadersForWeather(char endOfHeaders[]) {
 
   if (!ok) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("No response or invalid response!");
     }
@@ -40,7 +40,7 @@ bool skipResponseHeadersForWeather(char endOfHeaders[]) {
 // Close the connection with the HTTP server
 void disconnectForWeather() {
 
-  if (isDebug()) {
+  if (debug) {
 
     while (client.connected()) {
 
@@ -66,7 +66,7 @@ bool readReponseContent(struct weatherClientData* weatherClientData) {
 
   if (!root.success()) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("JSON parsing failed!");
     }
@@ -100,7 +100,7 @@ bool sendRequestForWeatherForMotorbikeLocation() {
 
   if (client.connect(WEATHER_BASE_URL, port)) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Connected for get weather");
       Serial.print("Connect to: ");
@@ -119,7 +119,7 @@ bool sendRequestForWeatherForMotorbikeLocation() {
     client.println("Connection: close");
     client.println();
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Disconnecting");
     }
@@ -127,7 +127,7 @@ bool sendRequestForWeatherForMotorbikeLocation() {
     return true;
   }
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.println("getWeatherForMotorbikeLocation: Connection failed");
   }
@@ -151,7 +151,7 @@ bool getWeatherForMotorbikeLocation() {
 
       disconnectForWeather();
 
-      if (isDebug()) {
+      if (debug) {
 
         printclientDataForWeather(&weatherClientData);
       }

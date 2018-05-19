@@ -17,46 +17,16 @@
 // Instance for MPU6050 module
 MPU6050 mpu;
 
-// Functions
 void setup() {
   configureServices();
   configureMPU6050Module();
 }
 
 void loop() {
-  startServices();
+  startSubscribeServices();
 }
 
 // Private functions
-void startServices() {
-  startSubscribeServices();
-
-  if (client.connect(MAP_SERVER, port)) {
-
-    startAllServices();
-
-    if (serviceIsActiveForSendDataToService()) {
-
-      if (!getIfAlarmIsActive()) {
-
-        startMPU6050Module();
-      } else {
-
-        sendUserDataToServerForAlarmIsActive();
-      }
-    }
-  } else {
-
-    if (wifiIsActive) {
-
-      checkConnectionStatus(true, false);
-    } else {
-
-      checkConnectionStatus(false, true);
-    }
-  }
-}
-
 // MPU6050 config
 void configureMPU6050Module() {
 
@@ -94,22 +64,5 @@ void startMPU6050Module() {
                              temp);
 
     previousMillisForMPU6050 = millis();
-  }
-}
-
-void checkConnectionStatus(const bool &wifi, const bool &gprs) {
-  unsigned long currentMillisUpdate = millis();
-
-  if ((unsigned long)(currentMillisUpdate - previousMillisForConnectionCheck) >= intervalUpdateForConnectionCheck) {
-
-    if (wifi) {
-
-      configureWiFi();
-    } else if (gprs) {
-
-      configureGPRSConnection();
-    }
-
-    previousMillisForConnectionCheck = millis();
   }
 }

@@ -3,6 +3,7 @@
 
 // Properties
 String updateTime;
+String timeDefault = "43200000";
 
 // The type of data that we want to extract from the page
 struct userData {
@@ -17,7 +18,7 @@ bool skipResponseHeadersForTime(char endOfHeaders[]) {
 
   if (!ok) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("No response or invalid response!");
     }
@@ -31,7 +32,7 @@ bool skipResponseHeadersForTime(char endOfHeaders[]) {
 // Close the connection with the HTTP server
 void disconnectForTime() {
 
-  if (isDebug()) {
+  if (debug) {
 
     while (client.connected()) {
 
@@ -57,7 +58,7 @@ bool readReponseContentForTime(struct userData* userData) {
 
   if (!root.success()) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("JSON parsing failed!");
     }
@@ -82,7 +83,7 @@ bool sendRequestForTime() {
 
   if (client.connect(MAP_SERVER, port)) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Connected for get device update time");
       Serial.print("Connect to: ");
@@ -100,7 +101,7 @@ bool sendRequestForTime() {
     return true;
   }
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.println("sendRequestForTime: Connection failed");
   }
@@ -120,7 +121,7 @@ bool getDeviceUpdateTime() {
       updateTime = userData.deviceUpdateTime;
       disconnectForTime();
 
-      if (isDebug()) {
+      if (debug) {
 
         printUserData(&userData);
       }
@@ -128,7 +129,7 @@ bool getDeviceUpdateTime() {
       return true;
     } else {
 
-      updateTime = "43200000";
+      updateTime = timeDefault;
 
       return true;
     }
@@ -138,7 +139,6 @@ bool getDeviceUpdateTime() {
 }
 
 long getValueForDeviceUpdateTime() {
-  long updateTimeInLong = updateTime.toInt();
 
-  return updateTimeInLong;
+  return updateTime.toInt();
 }

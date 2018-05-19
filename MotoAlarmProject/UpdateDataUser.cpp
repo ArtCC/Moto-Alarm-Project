@@ -6,7 +6,7 @@ void setPOSTRequest(String &path) {
 
   if (client.connect(MAP_SERVER, port)) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Success");
       Serial.print("Connect to: ");
@@ -30,7 +30,7 @@ void setPOSTRequest(String &path) {
     client.println("Connection: close");
     client.println();
 
-    if (isDebug()) {
+    if (debug) {
 
       while (client.connected()) {
 
@@ -47,7 +47,7 @@ void setPOSTRequest(String &path) {
     client.stop();
   } else {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("setPOSTRequest: Connection failed");
     }
@@ -85,7 +85,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
                   "\"gps_error\":" + gpsStatus +
                   "}";
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Updating user data in server...");
     }
@@ -93,7 +93,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
     setPOSTRequest(data);
   } else {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("setUpdateDataUserToServer: Connection failed");
     }
@@ -125,7 +125,7 @@ void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batter
                   "\"gps_error\":" + gpsStatus +
                   "}";
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Not send gps info to server...");
     }
@@ -133,7 +133,7 @@ void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batter
     setPOSTRequest(data);
   } else {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("setStatusToUpdateDataToOff : Connection failed");
     }
