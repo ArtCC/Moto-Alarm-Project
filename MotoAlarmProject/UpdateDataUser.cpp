@@ -4,26 +4,30 @@
 // Public util functions
 void setPOSTRequest(String &path) {
 
-  if (client.connect(MAP_SERVER, port)) {
+  if (client.connect(mapServer, port)) {
 
     if (debug) {
 
       Serial.println("Success");
       Serial.print("Connect to: ");
-      Serial.println(MAP_SERVER);
+      Serial.println(mapServer);
       Serial.println("Connected");
       Serial.println("Path:");
       Serial.println(path);
+      Serial.println("Token:");
+      Serial.println(getUserToken());
+      Serial.println("User id:");
+      Serial.println(getUserId());
     }
 
     String thisLength = String(path.length());
 
-    client.print("POST /wp-json/wp/v2/users/" + userId);
+    client.print("POST /wp-json/wp/v2/users/" + getUserId());
     client.println(" HTTP/1.1");
     client.println("Content-Type: application/json; charset=UTF-8");
     client.println("Content-Length: " + thisLength);
     client.print("Host: ");
-    client.println(MAP_SERVER);
+    client.println(mapServer);
     client.println("Authorization: " + getUserToken());
     client.print("\n" + path);
     client.print(char(26));
@@ -58,7 +62,7 @@ void setPOSTRequest(String &path) {
 
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {
 
-  if (client.connect(MAP_SERVER, port)) {
+  if (client.connect(mapServer, port)) {
 
     String sendDataStatus = "\"true\"";
 
@@ -104,7 +108,7 @@ void setUpdateDataUserToServer(const String &latitude, const String &longitude, 
 
 void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batteryStatus, const bool &gpsError) {
 
-  if (client.connect(MAP_SERVER, port)) {
+  if (client.connect(mapServer, port)) {
 
     String sendDataStatus = "\"false\"";
     String bLevel = "\"" + batteryLevel + "\"";

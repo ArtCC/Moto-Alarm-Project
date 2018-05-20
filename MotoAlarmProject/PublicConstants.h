@@ -7,9 +7,6 @@
 static char *bluetoothDeviceName = "MotoAlarmProject";
 
 // APN config
-#define APN_NAME "apnName"
+#define APN_NAME "internetmas"
 #define APN_USER ""
 #define APN_PASSWORD ""
-
-// User
-static char *userPhone = "";

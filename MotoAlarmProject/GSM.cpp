@@ -28,38 +28,44 @@ void sendMessage(String &message) {
 
     if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
-      sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
+      sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
     } else {
 
       String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-      sendSMSToPhoneNumber(userPhone, textString);
+      sendSMSToPhoneNumber(getUserPhone(), textString);
     }
   } else if (message == batteryFromSMS || message == batteryWatchFromSMS) {
 
     String textString = textForBatterySMS + getBatteryLevel() + "%";
-    sendSMSToPhoneNumber(userPhone, textString);
+    sendSMSToPhoneNumber(getUserPhone(), textString);
   } else if (message == activateFromSMS || message == activateWatchFromSMS) {
 
-    serviceActive = true;
-    sendSMSToPhoneNumber(userPhone, textForActivateSMS);
+    setServiceStatus(true);
+    sendSMSToPhoneNumber(getUserPhone(), textForActivateSMS);
+
+    // Send user data to server
+    setStatusToUpdateDataToOnUtil();
   } else if (message == desactivateFromSMS || message == desactivateWatchFromSMS) {
 
-    serviceActive = false;
-    sendSMSToPhoneNumber(userPhone, textForDesactivateSMS);
+    setServiceStatus(false);
+    sendSMSToPhoneNumber(getUserPhone(), textForDesactivateSMS);
+
+    // Not update user data but send disable service
+    setStatusToUpdateDataToOffUtil(false);
   } else if (message == feelFromSMS || message == feelWatchFromSMS) {
 
     bool weather = getWeatherForMotorbikeLocation();
 
     if (weather) {
 
-      sendSMSToPhoneNumber(userPhone, getFeel());
+      sendSMSToPhoneNumber(getUserPhone(), getFeel());
     } else {
 
-      sendSMSToPhoneNumber(userPhone, textForFeelSMS);
+      sendSMSToPhoneNumber(getUserPhone(), textForFeelSMS);
     }
   } else if (message == resetFromSMS || message == resetWatchFromSMS) {
 
-    sendSMSToPhoneNumber(userPhone, textForResetSMS);
+    sendSMSToPhoneNumber(getUserPhone(), textForResetSMS);
     resetByCode();
   }
 }
@@ -75,39 +81,6 @@ void activateSIM() {
   if (debug) {
 
     Serial.println("Sim is activate ok");
-  }
-
-  if (LSMS.available()) {
-
-    LSMS.flush();
-  }
-}
-
-void sendSMSToPhoneNumber(char* phone, const String &textString) {
-  char toChar[100];
-  textString.toCharArray(toChar, 100);
-  char* text = toChar;
-
-  LSMS.beginSMS(phone);
-  LSMS.print(text);
-
-  if (debug) {
-
-    Serial.println("Sending sms with status...");
-  }
-
-  if (LSMS.endSMS()) {
-
-    if (debug) {
-
-      Serial.println("SMS send ok");
-    }
-  } else {
-
-    if (debug) {
-
-      Serial.println("SMS send KO");
-    }
   }
 
   if (LSMS.available()) {
@@ -171,11 +144,11 @@ void receivedSMS() {
 
         if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
-          sendSMSToPhoneNumber(userPhone, textForStatusErrorSMS);
+          sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
         } else {
 
           String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-          sendSMSToPhoneNumber(userPhone, textString);
+          sendSMSToPhoneNumber(getUserPhone(), textString);
         }
       } else if (message == batteryFromSMS) {
 
@@ -190,7 +163,10 @@ void receivedSMS() {
 
         setPOSTRequest(data);
 
-        serviceActive = true;
+        setServiceStatus(true);
+
+        // Send user data to server
+        setStatusToUpdateDataToOnUtil();
       } else if (message == desactivateFromSMS) {
 
         String message = "\"" + textForDesactivateSMS + "\"";
@@ -198,7 +174,10 @@ void receivedSMS() {
 
         setPOSTRequest(data);
 
-        serviceActive = false;
+        setServiceStatus(false);
+
+        // Not update user data but send disable service
+        setStatusToUpdateDataToOffUtil(false);
       } else if (message == feelFromSMS) {
 
         bool weather = getWeatherForMotorbikeLocation();
@@ -226,5 +205,49 @@ void receivedSMS() {
         resetByCode();
       }
     }
+  }
+}
+
+void sendSMSToPhoneNumber(const String &phone, const String &textString) {
+  char convertPhone[15];
+  phone.toCharArray(convertPhone, 15);
+  char *finalPhone = convertPhone;
+
+  Serial.println("");
+  Serial.println("Phone:");
+  Serial.println(phone);
+  Serial.println("Final phone:");
+  Serial.println(finalPhone);
+  Serial.println("");
+
+  char toChar[100];
+  textString.toCharArray(toChar, 100);
+  char *text = toChar;
+
+  LSMS.beginSMS(finalPhone);
+  LSMS.print(text);
+
+  if (debug) {
+
+    Serial.println("Sending sms with status...");
+  }
+
+  if (LSMS.endSMS()) {
+
+    if (debug) {
+
+      Serial.println("SMS send ok");
+    }
+  } else {
+
+    if (debug) {
+
+      Serial.println("SMS send KO");
+    }
+  }
+
+  if (LSMS.available()) {
+
+    LSMS.flush();
   }
 }

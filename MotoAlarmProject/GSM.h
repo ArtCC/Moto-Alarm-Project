@@ -6,8 +6,8 @@
 // Activate GSM module and SIM
 void activateSIM();
 
-// Send SMS to phone number
-void sendSMSToPhoneNumber(char* phone, const String &textString);
-
 // Callback for received SMS from external service
 void receivedSMS();
+
+// Send SMS to phone number
+void sendSMSToPhoneNumber(const String &phone, const String &textString);

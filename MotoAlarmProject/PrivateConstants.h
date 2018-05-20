@@ -6,12 +6,8 @@
 
 // Properties
 // "Multi-thread" with millis() for update MPU6050 status
-static unsigned long intervalUpdateForMPU6050 = 2500;
+static unsigned long intervalUpdateForMPU6050 = 1000;
 static unsigned long previousMillisForMPU6050 = 0;
-
-// "Multi-thread" with millis() for check connection status
-static unsigned long intervalUpdateForConnectionCheck = 30000;
-static unsigned long previousMillisForConnectionCheck = 0;
 
 // Instance for all request
 static LGPRSClient client;
@@ -24,9 +20,6 @@ const size_t MAX_CONTENT_SIZE = 512;
 static char *mapServer = "motoalarm-project.com";
 static int port = 80;
 
-// Token
-static String userToken = "Bearer ";
-
 // Bluetooth
 static String serviceOn = "on";
 static String serviceOff = "off";
@@ -34,7 +27,7 @@ static bool serviceActive;
 
 // Device update
 static bool deviceUpdateEnabled = false;
-#define MAP_SERVER_UPDATE "motoalarm-project.com"
+#define mapServer_UPDATE "motoalarm-project.com"
 #define MAP_FOLDER_UPDATE "update"
 #define MAP_PORT_UPDATE "80"
 

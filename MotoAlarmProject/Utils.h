@@ -1,40 +1,10 @@
 /*
    Utils class
-   All utils functions
+   All functions for utils
 */
 
-// Function for request get token and get update device time fro server
-void configureForFirstInit();
+// Check if String is empty or not
+bool stringIsEmpty(String &string);
 
-// Config GPRS
-void configureGPRSConnection();
-
-// Config WiFi
-void configureWiFi();
-
-// Configure all services in init setup
-void configureServices();
-
-// Alarm is active, send data to server
-void sendUserDataToServerForAlarmIsActive();
-
-// Set service to enabled
-void setStatusToUpdateDataToOnUtil();
-
-// Set service to disabled
-void setStatusToUpdateDataToOffUtil(const bool &gpsError);
-
-// Subscribe to services
-void startSubscribeServices();
-
-// Start services for detection and send request
-void startAllServices();
-
-// Check if debug is active
-bool isDebug();
-
-// With weather, compose sms for motorbike feel
-String getFeel();
-
-// Reset app by code
-void resetByCode();
+// Check if String contain other String
+bool checkIfStringContainOtherString(String &string, String &search);

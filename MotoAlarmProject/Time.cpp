@@ -3,7 +3,7 @@
 
 // Properties
 String updateTime;
-String timeDefault = "43200000";
+String timeDefault = "120000";
 
 // The type of data that we want to extract from the page
 struct userData {
@@ -81,19 +81,19 @@ void printUserData(const struct userData* userData) {
 
 bool sendRequestForTime() {
 
-  if (client.connect(MAP_SERVER, port)) {
+  if (client.connect(mapServer, port)) {
 
     if (debug) {
 
       Serial.println("Connected for get device update time");
       Serial.print("Connect to: ");
-      Serial.println(MAP_SERVER);
+      Serial.println(mapServer);
     }
 
-    client.print("GET /wp-json/wp/v2/users/" + userId);
+    client.print("GET /wp-json/wp/v2/users/" + getUserId());
     client.println(" HTTP/1.0");
     client.print("Host: ");
-    client.println(MAP_SERVER);
+    client.println(mapServer);
     client.println("Authorization: " + getUserToken());
     client.println("Connection: close");
     client.println();

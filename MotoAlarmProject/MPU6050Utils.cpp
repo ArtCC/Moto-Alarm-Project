@@ -4,7 +4,7 @@
 // Properties
 // Control for MPU6050 and get first value
 bool setNewValuesFromMPU6050 = true;
-bool sendDataToServerForAlarmIsActive = false;
+bool sendDataToServerForAlarmIsActive;
 
 // Accelerometer and gyroscope
 int firstPitch;
@@ -13,6 +13,16 @@ int differencePitch;
 int differenceRoll;
 
 // Public functions
+bool getIfAlarmIsActive() {
+
+  return sendDataToServerForAlarmIsActive;
+}
+
+void setSaveValuesFromMPU6050(const bool &newValue) {
+  setNewValuesFromMPU6050 = newValue;
+  sendDataToServerForAlarmIsActive = false;
+}
+
 void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
   if (setNewValuesFromMPU6050) {
@@ -61,10 +71,10 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
         Serial.println(textString);
       }
 
-      sendSMSToPhoneNumber(userPhone, textString);
+      sendSMSToPhoneNumber(getUserPhone(), textString);
     } else {
 
-      sendSMSToPhoneNumber(userPhone, textForAlarmSMSWithoutLocation);
+      sendSMSToPhoneNumber(getUserPhone(), textForAlarmSMSWithoutLocation);
     }
 
     sendDataToServerForAlarmIsActive = true;
@@ -96,14 +106,3 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
     Serial.println();
   }
 }
-
-void setSaveValuesFromMPU6050(const bool &newValue) {
-  setNewValuesFromMPU6050 = newValue;
-  sendDataToServerForAlarmIsActive = false;
-}
-
-bool getIfAlarmIsActive() {
-
-  return sendDataToServerForAlarmIsActive;
-}
-

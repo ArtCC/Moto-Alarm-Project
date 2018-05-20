@@ -5,6 +5,8 @@
 // Properties
 GATTService serv;
 
+String temporalUserToken = "Bearer ";
+
 // Functions
 void activateBluetoothModule() {
 
@@ -32,23 +34,64 @@ void activateBluetoothModule() {
 }
 
 void receivedNewMessageFromBluetooth(String &message) {
+  String userIdPrefix = "usrId:";
+  String userPhonePrefix = "phone:";
+  String tokenPrefix = "token:";
 
-  if (message == serviceOff) {
+  if (checkIfStringContainOtherString(message, userIdPrefix)) {
 
-    serviceActive = false;
-    userToken = "";
-  } else {
+    String finalMessage = message;
+    finalMessage.replace(userIdPrefix, "");
 
-    serviceActive = true;
-    userToken.concat(message);
-  }
+    setUserId(finalMessage);
 
-  if (debug) {
+    Serial.println(finalMessage);
+  } else if (checkIfStringContainOtherString(message, userPhonePrefix)) {
 
-    Serial.println("Status for service: ");
-    Serial.println((serviceActive) ? "On" : "Off");
-    Serial.println("User token");
-    Serial.println(userToken);
+    String finalMessage = message;
+    finalMessage.replace(userPhonePrefix, "");
+
+    setUserPhone(finalMessage);
+
+    Serial.println(finalMessage);
+  } else if (checkIfStringContainOtherString(message, tokenPrefix)) {
+
+    String finalMessage = message;
+    finalMessage.replace(tokenPrefix, "");
+
+    temporalUserToken.concat(finalMessage);
+
+    setUserToken(temporalUserToken);
+
+    if (debug) {
+
+      Serial.println("User token");
+      Serial.println(temporalUserToken);
+    }
+  } else if (checkIfStringContainOtherString(message, serviceOn)) {
+
+    setServiceStatus(true);
+
+    if (debug) {
+
+      Serial.println("Status for service: ");
+      Serial.println((getServiceStatus()) ? "On" : "Off");
+    }
+
+    // Send user data to server
+    setStatusToUpdateDataToOnUtil();
+  } else if (checkIfStringContainOtherString(message, serviceOff)) {
+
+    setServiceStatus(false);
+
+    if (debug) {
+
+      Serial.println("Status for service: ");
+      Serial.println((getServiceStatus()) ? "On" : "Off");
+    }
+
+    // Not update user data but send disable service
+    setStatusToUpdateDataToOffUtil(false);
   }
 }
 

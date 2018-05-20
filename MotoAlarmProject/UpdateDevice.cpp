@@ -8,13 +8,13 @@ unsigned long previousMillisForOTAUpdate = 0;
 
 // Public functions
 void configureOTAUpdate() {
-  OTAUpdate.begin(MAP_SERVER_UPDATE, MAP_PORT_UPDATE, MAP_FOLDER_UPDATE);
+  OTAUpdate.begin(mapServer_UPDATE, MAP_PORT_UPDATE, MAP_FOLDER_UPDATE);
 }
 
 void updateDevice() {
-  unsigned long currentMillisUpdate = millis();
+  unsigned long currentMillisUpdateForOTAUpdate = millis();
 
-  if ((unsigned long)(currentMillisUpdate - previousMillisForOTAUpdate) >= intervalUpdateForOTAUpdate) {
+  if ((unsigned long)(currentMillisUpdateForOTAUpdate - previousMillisForOTAUpdate) >= intervalUpdateForOTAUpdate) {
 
     while (true) {
 

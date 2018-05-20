@@ -17,6 +17,7 @@
 // Instance for MPU6050 module
 MPU6050 mpu;
 
+// Public functions
 void setup() {
   configureServices();
   configureMPU6050Module();
@@ -24,20 +25,34 @@ void setup() {
 
 void loop() {
   startSubscribeServices();
+
+  if (getServiceStatus()) {
+
+    if (getIfAlarmIsActive()) {
+
+      startAllServices();
+    } else {
+
+      startMPU6050Module();
+    }
+  } else {
+
+    stopServices();
+  }
 }
 
 // Private functions
 // MPU6050 config
 void configureMPU6050Module() {
 
-  if (isDebug()) {
+  if (debug) {
 
     Serial.println("Initialize MPU6050");
   }
 
   while (!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G)) {
 
-    if (isDebug()) {
+    if (debug) {
 
       Serial.println("Could not find a valid MPU6050 sensor, check wiring!");
     }
@@ -47,9 +62,9 @@ void configureMPU6050Module() {
 }
 
 void startMPU6050Module() {
-  unsigned long currentMillisUpdate = millis();
+  unsigned long currentMillisUpdateForMPU6050 = millis();
 
-  if ((unsigned long)(currentMillisUpdate - previousMillisForMPU6050) >= intervalUpdateForMPU6050) {
+  if ((unsigned long)(currentMillisUpdateForMPU6050 - previousMillisForMPU6050) >= intervalUpdateForMPU6050) {
 
     // Read normalized values
     Vector normAccel = mpu.readNormalizeAccel();
