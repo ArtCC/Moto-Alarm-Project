@@ -44,16 +44,12 @@ void receivedNewMessageFromBluetooth(String &message) {
     finalMessage.replace(userIdPrefix, "");
 
     setUserId(finalMessage);
-
-    Serial.println(finalMessage);
   } else if (checkIfStringContainOtherString(message, userPhonePrefix)) {
 
     String finalMessage = message;
     finalMessage.replace(userPhonePrefix, "");
 
     setUserPhone(finalMessage);
-
-    Serial.println(finalMessage);
   } else if (checkIfStringContainOtherString(message, tokenPrefix)) {
 
     String finalMessage = message;
@@ -77,9 +73,6 @@ void receivedNewMessageFromBluetooth(String &message) {
       Serial.println("Status for service: ");
       Serial.println((getServiceStatus()) ? "On" : "Off");
     }
-
-    // Send user data to server
-    setStatusToUpdateDataToOnUtil();
   } else if (checkIfStringContainOtherString(message, serviceOff)) {
 
     setServiceStatus(false);

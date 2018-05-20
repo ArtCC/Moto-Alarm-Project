@@ -1,19 +1,18 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Token
-String userToken = "";
-
-// User
-String userPhone = "";
-String userId = "";
-
 // Properties
 // "Multi-thread" with millis()
 unsigned long previousMillisForSendData = 0;
 unsigned long disabledIntervalUpdate = 86400000;
 unsigned long disabledPreviousMillisUpdate = 0;
 
+// User
+String userPhone = "";
+String userId = "";
+String userToken = "";
+
+// Others
 bool firstInit = true;
 
 // Private functions
@@ -77,8 +76,6 @@ void configureForFirstInit() {
       }
 
       firstInit = false;
-
-      setStatusToUpdateDataToOffUtil(false);
     } else {
 
       if (debug) {

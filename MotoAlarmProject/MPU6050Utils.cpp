@@ -59,7 +59,7 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
     differenceRoll = roll - firstRoll;
   }
 
-  if (differencePitch > 10 || differenceRoll > 10) {
+  if (differencePitch > 20 || differenceRoll > 20) {
 
     if (activateGPSData()) {
 

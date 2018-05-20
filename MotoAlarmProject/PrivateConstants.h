@@ -26,7 +26,7 @@ static String serviceOff = "off";
 static bool serviceActive;
 
 // Device update
-static bool deviceUpdateEnabled = false;
+static bool deviceUpdateEnabled = true;
 #define mapServer_UPDATE "motoalarm-project.com"
 #define MAP_FOLDER_UPDATE "update"
 #define MAP_PORT_UPDATE "80"

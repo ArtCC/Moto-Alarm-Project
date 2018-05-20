@@ -213,13 +213,6 @@ void sendSMSToPhoneNumber(const String &phone, const String &textString) {
   phone.toCharArray(convertPhone, 15);
   char *finalPhone = convertPhone;
 
-  Serial.println("");
-  Serial.println("Phone:");
-  Serial.println(phone);
-  Serial.println("Final phone:");
-  Serial.println(finalPhone);
-  Serial.println("");
-
   char toChar[100];
   textString.toCharArray(toChar, 100);
   char *text = toChar;

@@ -211,15 +211,14 @@ bool activateGPSData() {
     }
 
     return true;
-  } else {
-
-    if (debug) {
-
-      Serial.println("Less then 4 satelites");
-    }
-
-    return false;
   }
+
+  if (debug) {
+
+    Serial.println("Less then 4 satelites");
+  }
+
+  return false;
 }
 
 String getLatitude() {

@@ -61,87 +61,63 @@ void setPOSTRequest(String &path) {
 }
 
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {
+  String sendDataStatus = "\"true\"";
 
-  if (client.connect(mapServer, port)) {
+  if (LBattery.level() <= 3) {
 
-    String sendDataStatus = "\"true\"";
-
-    if (LBattery.level() <= 3) {
-
-      sendDataStatus = "\"false\"";
-    }
-
-    String lat = "\"" + latitude + "\"";
-    String lon = "\"" + longitude + "\"";
-    String dateTime = "\"" + getDateTime() + "\"";
-    String bLevel = "\"" + batteryLevel + "\"";
-    String bStatus = "\"" + batteryStatus + "\"";
-    String velocity = "\"" + String(getVelocity()) + "\"";
-    String gpsStatus = "\"false\"";
-
-    String data = "{\"motorbike_latitude\":" + lat + "," +
-                  "\"motorbike_longitude\":" + lon + "," +
-                  "\"motorbike_date_last_position\":" + dateTime + "," +
-                  "\"activated_motorbike_position\":" + sendDataStatus + "," +
-                  "\"battery_motorbike_device\":" + bLevel + "," +
-                  "\"battery_motorbike_status_charging\":" + bStatus + "," +
-                  "\"motorbike_velocity\":" + velocity + "," +
-                  "\"gps_error\":" + gpsStatus +
-                  "}";
-
-    if (debug) {
-
-      Serial.println("Updating user data in server...");
-    }
-
-    setPOSTRequest(data);
-  } else {
-
-    if (debug) {
-
-      Serial.println("setUpdateDataUserToServer: Connection failed");
-    }
-
-    client.stop();
+    sendDataStatus = "\"false\"";
   }
+
+  String lat = "\"" + latitude + "\"";
+  String lon = "\"" + longitude + "\"";
+  String dateTime = "\"" + getDateTime() + "\"";
+  String bLevel = "\"" + batteryLevel + "\"";
+  String bStatus = "\"" + batteryStatus + "\"";
+  String velocity = "\"" + String(getVelocity()) + "\"";
+  String gpsStatus = "\"false\"";
+
+  String data = "{\"motorbike_latitude\":" + lat + "," +
+                "\"motorbike_longitude\":" + lon + "," +
+                "\"motorbike_date_last_position\":" + dateTime + "," +
+                "\"activated_motorbike_position\":" + sendDataStatus + "," +
+                "\"battery_motorbike_device\":" + bLevel + "," +
+                "\"battery_motorbike_status_charging\":" + bStatus + "," +
+                "\"motorbike_velocity\":" + velocity + "," +
+                "\"gps_error\":" + gpsStatus +
+                "}";
+
+  if (debug) {
+
+    Serial.println("Updating user data in server...");
+  }
+
+  setPOSTRequest(data);
 }
 
 void setStatusToUpdateDataToOff(const String &batteryLevel, const String &batteryStatus, const bool &gpsError) {
+  String sendDataStatus = "\"false\"";
+  String bLevel = "\"" + batteryLevel + "\"";
+  String bStatus = "\"" + batteryStatus + "\"";
 
-  if (client.connect(mapServer, port)) {
+  String gpsErrorValue = "false";
 
-    String sendDataStatus = "\"false\"";
-    String bLevel = "\"" + batteryLevel + "\"";
-    String bStatus = "\"" + batteryStatus + "\"";
+  if (gpsError == true) {
 
-    String gpsErrorValue = "false";
-
-    if (gpsError == true) {
-
-      gpsErrorValue = "true";
-    }
-
-    String gpsStatus = "\"" + gpsErrorValue + "\"";
-
-    String data = "{\"activated_motorbike_position\":" + sendDataStatus + "," +
-                  "\"battery_motorbike_device\":" + bLevel + "," +
-                  "\"battery_motorbike_status_charging\":" + bStatus + "," +
-                  "\"gps_error\":" + gpsStatus +
-                  "}";
-
-    if (debug) {
-
-      Serial.println("Not send gps info to server...");
-    }
-
-    setPOSTRequest(data);
-  } else {
-
-    if (debug) {
-
-      Serial.println("setStatusToUpdateDataToOff : Connection failed");
-    }
-
-    client.stop();
+    gpsErrorValue = "true";
   }
+
+  String gpsStatus = "\"" + gpsErrorValue + "\"";
+
+  String data = "{\"activated_motorbike_position\":" + sendDataStatus + "," +
+                "\"battery_motorbike_device\":" + bLevel + "," +
+                "\"battery_motorbike_status_charging\":" + bStatus + "," +
+                "\"gps_error\":" + gpsStatus +
+                "}";
+
+  if (debug) {
+
+    Serial.println("Not send gps info to server...");
+  }
+
+  setPOSTRequest(data);
 }

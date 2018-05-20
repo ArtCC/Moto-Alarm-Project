@@ -106,6 +106,8 @@ bool sendRequestForTime() {
     Serial.println("sendRequestForTime: Connection failed");
   }
 
+  client.stop();
+
   return false;
 }
 
