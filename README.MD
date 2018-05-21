@@ -4,11 +4,11 @@
 
 ##### LOCATE YOUR MOTORCYCLE 24 HOURS A DAY AND 365 DAYS A YEAR
 
-[Moto Alarm Project Website](https://motoalarm-project.com "Moto Alarm Project")
+[Moto Alarm Project website](https://motoalarm-project.com "Moto Alarm Project")
 
 ![MacDown Screenshot](Resources/Box.jpg)
 
-#### PROJECT FUNCTIONALITIES (For iOS or Android apps):
+#### PROJECT FUNCTIONALITIES (For iOS and Android apps):
 
 - You can see the position of your motorcycle at all times.
 - You can see the last update date of your motorcycle's position.
@@ -31,8 +31,8 @@
 #### UPDATE TIMES (For iOS and Android apps):
 
 - With the service deactivated, the status of the battery is sent every <b>24 hours</b>.
-- With the service activated, all data is sent every <b>12 hours</b>, but if the motorcycle with MPU650 module detects movement, it is sent every <b>30 seconds</b>.
-- From the mobile application, you can change the default update time and adapt it to your needs, but the MPU6050 sensor will activate the services if necessary and save battery ;)
+- With the service activated, if the motorcycle with MPU650 module detects movement, it is sent every <b>2 minutes</b>.
+- From the mobile application, you can change the default update time (2 minutes) and adapt it to your needs, but the MPU6050 sensor will activate the services if necessary and save battery ;)
 
 ### DOWNLOAD iOS VERSION:
 
@@ -59,11 +59,11 @@ Arduino is an open-source electronics platform based on easy-to-use hardware and
 
 This is the manufacturer's website:
 
-[Arduino Website](https://www.arduino.cc "Arduino")
+[Arduino website](https://www.arduino.cc "Arduino")
 
 To program for Arduino, you need to download the Integrated development environment (IDE):
 
-[Arduino Sofware Website](https://www.arduino.cc/en/Main/Software "Arduino Software")
+[Arduino software website](https://www.arduino.cc/en/Main/Software "Arduino Software")
 
 ### LINKIT ONE BOARD
 
@@ -77,11 +77,11 @@ The LinkIt ONE development board is an open source, high-performance board for p
 
 This is the manufacturer's website:
 
-[SeedStudio Website](https://www.seeedstudio.com "SeedStudio")
+[SeedStudio website](https://www.seeedstudio.com "SeedStudio")
 
 In order to use this board with the Arduino IDE, you need to follow some steps:
 
-[Linkit One Guide Website](https://docs.labs.mediatek.com/resource/linkit-one/en "SeedStudio")
+[Linkit One Guide website](https://docs.labs.mediatek.com/resource/linkit-one/en "SeedStudio")
 
 ### MPU6050
 
@@ -119,7 +119,7 @@ I use FreedomPop SIM, it is free with:
 - 300 SMS
 - 100 minutes for call
 
-[FreedomPop Website](https://es.freedompop.com/es?experience=organic.default "FreedomPop")
+[FreedomPop website](https://es.freedompop.com/es?experience=organic.default "FreedomPop")
 
 Once you have everything configured in the Arduino IDE to use your new Linkit One board, you can already clone this repository on your computer and access the MotoAlarmProject folder and open the <b>MotoAlarmProject.ino</b> file.
 
@@ -146,7 +146,7 @@ Your configuration data is in this class, but you only need to add the following
 #define DEVICE_NAME = "MotoAlarmProject";
 ```
 
-- To configure internet access from your Linkit One with your SIM card, you must add your operator's configuration. In my case, the APN property is orangeworld and the username and password are empty.
+- To configure internet access from your Linkit One with your SIM card, you must add your operator's configuration. In my case, the APN property is 'internetmas' and the username and password are empty.
 
 ```
 // APN
@@ -155,45 +155,7 @@ Your configuration data is in this class, but you only need to add the following
 #define APN_PASSWORD = "";
 ```
 
-- If you want to use WiFi connection instead of GPRS you can configure it here, but if you then park the motorcycle out of reach of that WiFi, the device will not have connection.
-
-```
-// WiFi config
-#define WIFI_AP "SSID"
-#define WIFI_PASSWORD "WIFI_PASSWORD"
-
-// WiFi active or not
-static bool wifiIsActive = false;
-```
-
-- To receive SMS from your Linkit One, add your phone number in userPhone property.
-- Once you download the app for iOS (iPhone and iPad) and register as a user, you must put your registration email and your password in the userMail and userPassword properties respectively, so that your Linkit One can get a session token and do requests sending the data to the server. Also, look at your user id in the application profile and put it in the userId property.
-
-```
-// User
-static char* userPhone = "+34600000000";
-static String userMail = "\"mail@mail.com\"";
-static String userPassword = "\"userPassword\"";
-static String userId = "userId";
-```
-
-- You can also translate the texts for the SMS sent by your motorcycle to the language of your choice.
-
-```
-// Text for SMS and request POST
-static String textForStatusSMS = "My coordinates on map: ";
-static String textForStatusErrorSMS = "Sorry, my coordinates on map contain errors...";
-static String textForBatterySMS = "Right now, I have this battery percentage: ";
-static String textForFeelSMS = "I'm fine. Thank you very much! :)";
-static String textForResetSMS = "Wait, I'm restarting now...";
-static String textForResetSMSDisabled = "Sorry, this functionality is not in use yet...";
-static String textForActivateSMS = "Perfect! My location is active :)";
-static String textForDesactivateSMS = "Oops... Now my location is disabled :(";
-static String textForWetSMS = "I'm very wet... ";
-static String textForColdSMS = "I'm very cold... ";
-static String textForHotSMS = "I'm very hot... ";
-static String textForAlarmSMS = "Hey! I'm moving! Speed: ";
-```
+- For your Linkit One to send you SMS you have to add your phone in your profile in the iOS or Android application and it will be sent by bluetooth when you activate the service.
 
 You can now upload the code to your Linkit One!
 
@@ -221,28 +183,6 @@ I have changed the original battery with 1000mAh for a battery with 6000mAh, so 
 
 I added a usb charger to the battery in my motorcycle but in positive, that means that when I turn off the motorcycle it has no current, it only charges the powerbank when the motorcycle is on.
 
-### UPDATE FIRMWARE DEVICE FROM SERVER
-
-If you want to be able to update the device from server you have to mount the internal memory of your Linkit One and create an empty folder with the name 'OTA'.
-
-The configuration parameters can be added in the following constants:
-
-```
-// Device update
-static bool deviceUpdateEnabled = false;
-#define MAP_SERVER_UPDATE "MAP_SERVER_UPDATE"
-#define MAP_FOLDER_UPDATE "MAP_FOLDER_UPDATE"
-#define MAP_PORT_UPDATE "MAP_PORT_UPDATE"
-```
-
-### BATTERY BAG FOR SECURITY (OPTIONAL)
-
-If you do not like the batteries like me, you can use a bag of fire protection for batteries.
-
-![MacDown Screenshot](Resources/Battery_bag.jpg)
-
-[Battery bag in 'Aliexpress' shop](https://es.aliexpress.com/store/product/Lipo-Safe-Bag-Battery-Charging-Protector-Fireproof-Fiber-Pouch-Bag-Explosion-proof-Case-Storage-Box-for/2409111_32782212024.html)
-
 ### DO YOU CAN'T THE DEVICE? ASK FOR MY HELP!
 
 Don't worry, write me to my email and I can build it for you at the price of materials and shipping :)
@@ -252,17 +192,11 @@ Don't worry, write me to my email and I can build it for you at the price of mat
 General regulation of data protection and terms of use:
 
 - This application needs a user registration through his email and a password.
-
 - All the data that can be requested in the user's profile, such as: name, surname, address, telephone, etc., are optional and therefore, are not needed for the normal use of the application.
-
 - This application is used to, by means of a device that the user constructs and places on his motorcycle, to locate it at any time by sending his location to his user account.
-
 - The last coordinates of the motorcycle are stored in the server and no history of them is saved.
-
 - The user has at his disposal a button in the settings of the application to delete his account and all the data associated with it.
-
 - This application does not use analytics and does not transfer user data to third parties, nor does it exploit usage data for its benefit.
-
 - The developer of this project is not responsible under any circumstances, that the position of the vehicle is not registered correctly.
 
 ### LICENSE
