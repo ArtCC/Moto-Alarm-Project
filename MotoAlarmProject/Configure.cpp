@@ -12,6 +12,11 @@ String userPhone = "";
 String userId = "";
 String userToken = "";
 
+// Files card
+String tokenFile = "token.txt";
+String userIdFile = "userId.txt";
+String userPhoneFile = "userPhone.txt";
+
 // Others
 bool firstInit = true;
 
@@ -119,6 +124,7 @@ void configureServices() {
   activateBluetoothModule();
   activateGPS();
   activateSIM();
+  configSDCard();
   configureGPRSConnection();
   configureOTAUpdate();
 }
@@ -134,20 +140,23 @@ void startAllServices() {
 
   unsigned long currentMillisUpdateForSendData = millis();
 
-  if ((unsigned long)(currentMillisUpdateForSendData - previousMillisForSendData) >= getValueForDeviceUpdateTime()) {
+  if (!firstInit) {
 
-    if (debug) {
+    if ((unsigned long)(currentMillisUpdateForSendData - previousMillisForSendData) >= getValueForDeviceUpdateTime()) {
 
-      Serial.println("Time for data user new update:");
-      Serial.println(currentMillisUpdateForSendData);
-      Serial.println(previousMillisForSendData);
-      Serial.println(getValueForDeviceUpdateTime());
-      Serial.println("");
+      if (debug) {
+
+        Serial.println("Time for data user new update:");
+        Serial.println(currentMillisUpdateForSendData);
+        Serial.println(previousMillisForSendData);
+        Serial.println(getValueForDeviceUpdateTime());
+        Serial.println("");
+      }
+
+      setStatusToUpdateDataToOnUtil();
+
+      previousMillisForSendData = millis();
     }
-
-    setStatusToUpdateDataToOnUtil();
-
-    previousMillisForSendData = millis();
   }
 }
 
@@ -216,27 +225,69 @@ void resetByCode() {
 
 void setUserToken(String &string) {
   userToken = string;
+
+  deleteFileFromSDCard(tokenFile);
+  setDataInFile(tokenFile, userToken);
 }
 
 void setUserId(String &string) {
   userId = string;
+
+  deleteFileFromSDCard(userIdFile);
+  setDataInFile(userIdFile, userId);
 }
 
 void setUserPhone(String &string) {
   userPhone = string;
+
+  deleteFileFromSDCard(userPhoneFile);
+  setDataInFile(userPhoneFile, userPhone);
 }
 
 String getUserToken() {
+
+  if (checkIFFileExistInSDCard(tokenFile)) {
+
+    userToken = getDataFromFile(tokenFile);
+
+    if (debug) {
+
+      Serial.println("Token from SD Card:");
+      Serial.println(userToken);
+    }
+  }
 
   return userToken;
 }
 
 String getUserId() {
 
+  if (checkIFFileExistInSDCard(userIdFile)) {
+
+    userId = getDataFromFile(userIdFile);
+
+    if (debug) {
+
+      Serial.println("User id from SD Card:");
+      Serial.println(userId);
+    }
+  }
+
   return userId;
 }
 
 String getUserPhone() {
+
+  if (checkIFFileExistInSDCard(userPhoneFile)) {
+
+    userPhone = getDataFromFile(userPhoneFile);
+
+    if (debug) {
+
+      Serial.println("User phone from SD Card:");
+      Serial.println(userPhone);
+    }
+  }
 
   return userPhone;
 }

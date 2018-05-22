@@ -2,6 +2,8 @@
 #include "ImportClasses.h"
 
 // Properties
+bool controlForSendingSMS = false;
+
 // SMS text
 String statusFromSMS = "status";
 String batteryFromSMS = "battery";
@@ -122,10 +124,7 @@ void receivedSMS() {
       Serial.println(message);
     }
 
-    if (LSMS.available()) {
-
-      LSMS.flush();
-    }
+    LSMS.flush();
 
     if (message == statusWatchFromSMS ||
         message == batteryWatchFromSMS ||
@@ -209,38 +208,57 @@ void receivedSMS() {
 }
 
 void sendSMSToPhoneNumber(const String &phone, const String &textString) {
-  char convertPhone[15];
-  phone.toCharArray(convertPhone, 15);
-  char *finalPhone = convertPhone;
 
-  char toChar[100];
-  textString.toCharArray(toChar, 100);
-  char *text = toChar;
+  if (!controlForSendingSMS) {
 
-  LSMS.beginSMS(finalPhone);
-  LSMS.print(text);
+    if (LSMS.available()) {
 
-  if (debug) {
+      LSMS.flush();
+    }
 
-    Serial.println("Sending sms with status...");
-  }
+    controlForSendingSMS = true;
 
-  if (LSMS.endSMS()) {
+    String phoneClean = phone;
+    phoneClean.trim();
 
     if (debug) {
 
-      Serial.println("SMS send ok");
+      Serial.println("Phone:");
+      Serial.println(phoneClean);
+      Serial.println("Text:");
+      Serial.println(textString);
     }
-  } else {
+
+    char convertPhone[15];
+    phoneClean.toCharArray(convertPhone, 15);
+    char *finalPhone = convertPhone;
+
+    char toChar[100];
+    textString.toCharArray(toChar, 100);
+    char *text = toChar;
+
+    LSMS.beginSMS(finalPhone);
+    LSMS.print(text);
 
     if (debug) {
 
-      Serial.println("SMS send KO");
+      Serial.println("Sending sms with status...");
     }
-  }
 
-  if (LSMS.available()) {
+    if (LSMS.endSMS()) {
 
-    LSMS.flush();
+      if (debug) {
+
+        Serial.println("SMS send ok");
+      }
+    } else {
+
+      if (debug) {
+
+        Serial.println("SMS send KO");
+      }
+    }
+
+    controlForSendingSMS = false;
   }
 }

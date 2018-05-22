@@ -61,6 +61,8 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
   if (differencePitch > 20 || differenceRoll > 20) {
 
+    sendDataToServerForAlarmIsActive = true;
+
     if (activateGPSData()) {
 
       String textString = textForAlarmSMS + String(getVelocity()) + "m/s";
@@ -76,8 +78,6 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
       sendSMSToPhoneNumber(getUserPhone(), textForAlarmSMSWithoutLocation);
     }
-
-    sendDataToServerForAlarmIsActive = true;
 
     if (debug) {
 
