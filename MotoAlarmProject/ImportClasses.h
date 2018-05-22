@@ -30,6 +30,7 @@
 #include "Configure.h"
 #include "Battery.h"
 #include "Bluetooth.h"
+#include "Card.h"
 #include "GPS.h"
 #include "GSM.h"
 #include "MPU6050Utils.h"

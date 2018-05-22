@@ -1,0 +1,4 @@
+/*
+   Card class
+   All functions for save and get data from SD card
+*/
