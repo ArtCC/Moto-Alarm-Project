@@ -121,6 +121,8 @@ I use FreedomPop SIM, it is free with:
 
 [FreedomPop website](https://es.freedompop.com/es?experience=organic.default "FreedomPop")
 
+It is also necessary to add a <b>micro sd card</b> to your Linkit One, since your user data that is sent by bluetooth to the board, is stored so you can restart the device remotely. This data is updated when you activate the service again using the bluetooth. This is important :)
+
 Once you have everything configured in the Arduino IDE to use your new Linkit One board, you can already clone this repository on your computer and access the MotoAlarmProject folder and open the <b>MotoAlarmProject.ino</b> file.
 
 You need to download and install two libraries that are used in the project in the Arduino IDE:
@@ -150,7 +152,7 @@ Your configuration data is in this class, but you only need to add the following
 
 ```
 // APN
-#define APN_NAME = "apnName";
+#define APN_NAME = "";
 #define APN_USER = "";
 #define APN_PASSWORD = "";
 ```
