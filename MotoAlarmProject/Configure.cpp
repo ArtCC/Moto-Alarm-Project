@@ -66,7 +66,7 @@ void configureGPRSConnection() {
 
 void configureForFirstInit() {
 
-  if (firstInit) {
+  if (firstInit && activateGPSData()) {
 
     if (getDeviceUpdateTime()) {
 
@@ -99,17 +99,17 @@ void setStatusToUpdateDataToOnUtil() {
       getBatteryLevel(),
       getBatteryChargeStatus()
     );
-  } else {
-
-    // Not update user data
-    setStatusToUpdateDataToOffUtil(true);
   }
 }
 
 void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
-  setStatusToUpdateDataToOff(getBatteryLevel(),
-                             getBatteryChargeStatus(),
-                             gpsError);
+
+  if (activateGPSData()) {
+
+    setStatusToUpdateDataToOff(getBatteryLevel(),
+                               getBatteryChargeStatus(),
+                               gpsError);
+  }
 }
 
 // Public functions

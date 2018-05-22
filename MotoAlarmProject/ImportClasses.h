@@ -22,6 +22,7 @@
 #include <LGPRSClient.h>
 #include <LGPRSServer.h>
 #include <LTask.h>
+#include <LSD.h>
 
 #include "vmbtgatt.h"
 

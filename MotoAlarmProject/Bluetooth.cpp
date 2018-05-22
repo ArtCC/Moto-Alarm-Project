@@ -37,8 +37,20 @@ void receivedNewMessageFromBluetooth(String &message) {
   String userIdPrefix = "usrId:";
   String userPhonePrefix = "phone:";
   String tokenPrefix = "token:";
+  String tokenDelete = "delete";
 
-  if (checkIfStringContainOtherString(message, userIdPrefix)) {
+  if (checkIfStringContainOtherString(message, tokenDelete)) {
+
+    String emptyToken = "";
+
+    setUserToken(emptyToken);
+    temporalUserToken = "Bearer ";
+
+    if (debug) {
+
+      Serial.print("Delete user token: ");
+    }
+  } else if (checkIfStringContainOtherString(message, userIdPrefix)) {
 
     String finalMessage = message;
     finalMessage.replace(userIdPrefix, "");

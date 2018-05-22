@@ -47,8 +47,6 @@ void setPOSTRequest(String &path) {
 
       Serial.println("Disconnecting");
     }
-
-    client.stop();
   } else {
 
     if (debug) {
@@ -56,6 +54,8 @@ void setPOSTRequest(String &path) {
       Serial.println("setPOSTRequest: Connection failed");
     }
   }
+
+  client.stop();
 }
 
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {

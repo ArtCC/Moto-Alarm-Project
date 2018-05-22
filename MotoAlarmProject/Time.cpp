@@ -120,6 +120,8 @@ bool getDeviceUpdateTime() {
     }
   }
 
+  client.stop();
+
   return false;
 }
 
