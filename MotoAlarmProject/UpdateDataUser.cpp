@@ -55,8 +55,6 @@ void setPOSTRequest(String &path) {
 
       Serial.println("setPOSTRequest: Connection failed");
     }
-
-    client.stop();
   }
 }
 

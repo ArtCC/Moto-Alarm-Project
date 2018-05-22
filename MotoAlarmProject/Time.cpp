@@ -29,26 +29,6 @@ bool skipResponseHeadersForTime(char endOfHeaders[]) {
   return ok;
 }
 
-// Close the connection with the HTTP server
-void disconnectForTime() {
-
-  if (debug) {
-
-    while (client.connected()) {
-
-      if (client.available()) {
-
-        char str = client.read();
-        Serial.print(str);
-      }
-    }
-
-    Serial.println("Disconnecting");
-  }
-
-  client.stop();
-}
-
 bool readReponseContentForTime(struct userData* userData) {
   const size_t bufferSize = JSON_ARRAY_SIZE(0) + 2 * JSON_ARRAY_SIZE(1) + 2 * JSON_OBJECT_SIZE(1) + JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(3) + JSON_OBJECT_SIZE(35);
 
@@ -106,8 +86,6 @@ bool sendRequestForTime() {
     Serial.println("sendRequestForTime: Connection failed");
   }
 
-  client.stop();
-
   return false;
 }
 
@@ -121,17 +99,22 @@ bool getDeviceUpdateTime() {
     if (readReponseContentForTime(&userData)) {
 
       updateTime = userData.deviceUpdateTime;
-      disconnectForTime();
 
       if (debug) {
 
+        Serial.println("Disconnecting");
+
         printUserData(&userData);
       }
+
+      client.stop();
 
       return true;
     } else {
 
       updateTime = timeDefault;
+
+      client.stop();
 
       return true;
     }

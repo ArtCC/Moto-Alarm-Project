@@ -37,26 +37,6 @@ bool skipResponseHeadersForWeather(char endOfHeaders[]) {
   return ok;
 }
 
-// Close the connection with the HTTP server
-void disconnectForWeather() {
-
-  if (debug) {
-
-    while (client.connected()) {
-
-      if (client.available()) {
-
-        char str = client.read();
-        Serial.print(str);
-      }
-    }
-
-    Serial.println("Disconnecting");
-  }
-
-  client.stop();
-}
-
 bool readReponseContent(struct weatherClientData* weatherClientData) {
   const size_t bufferSize = JSON_ARRAY_SIZE(1) + JSON_OBJECT_SIZE(1) + 2 * JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(4) + JSON_OBJECT_SIZE(5) + JSON_OBJECT_SIZE(6) + JSON_OBJECT_SIZE(12);
 
@@ -149,12 +129,14 @@ bool getWeatherForMotorbikeLocation() {
       temperatureString = weatherClientData.temperature;
       humidityString = weatherClientData.humidity;
 
-      disconnectForWeather();
-
       if (debug) {
+
+        Serial.println("Disconnecting");
 
         printclientDataForWeather(&weatherClientData);
       }
+
+      client.stop();
 
       return true;
     }

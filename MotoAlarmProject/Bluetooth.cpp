@@ -3,7 +3,7 @@
 #include "GATTService.h"
 
 // Properties
-GATTService serv;
+GATTService service;
 
 String temporalUserToken = "Bearer ";
 
@@ -18,7 +18,7 @@ void activateBluetoothModule() {
     }
   }
 
-  if (LGATTServer.begin(1, &serv)) {
+  if (LGATTServer.begin(1, &service)) {
 
     if (debug) {
 
@@ -73,6 +73,8 @@ void receivedNewMessageFromBluetooth(String &message) {
       Serial.println("Status for service: ");
       Serial.println((getServiceStatus()) ? "On" : "Off");
     }
+
+    setStatusToUpdateDataToOnUtil();
   } else if (checkIfStringContainOtherString(message, serviceOff)) {
 
     setServiceStatus(false);
