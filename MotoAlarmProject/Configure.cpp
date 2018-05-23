@@ -263,7 +263,10 @@ String getUserId() {
     userId = getDataFromFile(userIdFile);
   }
 
-  return userId;
+  String modifyUserId = userId;
+  modifyUserId.trim();
+
+  return modifyUserId;
 }
 
 String getUserPhone() {
@@ -273,5 +276,8 @@ String getUserPhone() {
     userPhone = getDataFromFile(userPhoneFile);
   }
 
-  return userPhone;
+  String modifyUserPhone = userPhone;
+  modifyUserPhone.trim();
+
+  return modifyUserPhone;
 }
