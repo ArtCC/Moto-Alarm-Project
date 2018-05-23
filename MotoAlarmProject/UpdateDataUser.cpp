@@ -6,6 +6,10 @@ void setPOSTRequest(String &path) {
 
   if (client.connect(mapServer, port)) {
 
+    String thisLength = String(path.length());
+    String token = "Authorization: " + getUserToken();
+    String postPathWithUserId = "POST /wp-json/wp/v2/users/" + getUserId();
+
     if (debug) {
 
       Serial.println("Success");
@@ -15,20 +19,18 @@ void setPOSTRequest(String &path) {
       Serial.println("Path:");
       Serial.println(path);
       Serial.println("Token:");
-      Serial.println(getUserToken());
+      Serial.println(token);
       Serial.println("User id:");
-      Serial.println(getUserId());
+      Serial.println(postPathWithUserId);
     }
 
-    String thisLength = String(path.length());
-
-    client.print("POST /wp-json/wp/v2/users/" + getUserId());
+    client.print(postPathWithUserId);
     client.println(" HTTP/1.1");
     client.println("Content-Type: application/json; charset=UTF-8");
     client.println("Content-Length: " + thisLength);
     client.print("Host: ");
     client.println(mapServer);
-    client.println("Authorization: " + getUserToken());
+    client.println(token);
     client.print("\n" + path);
     client.print(char(26));
     client.println("Connection: close");
@@ -47,6 +49,8 @@ void setPOSTRequest(String &path) {
 
       Serial.println("Disconnecting");
     }
+
+    client.stop();
   } else {
 
     if (debug) {
@@ -54,8 +58,6 @@ void setPOSTRequest(String &path) {
       Serial.println("setPOSTRequest: Connection failed");
     }
   }
-
-  client.stop();
 }
 
 void setUpdateDataUserToServer(const String &latitude, const String &longitude, const String &batteryLevel, const String &batteryStatus) {

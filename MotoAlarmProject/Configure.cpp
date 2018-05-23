@@ -71,7 +71,7 @@ void configureGPRSConnection() {
 
 void configureForFirstInit() {
 
-  if (firstInit && activateGPSData()) {
+  if (firstInit) {
 
     if (getDeviceUpdateTime()) {
 
@@ -104,17 +104,16 @@ void setStatusToUpdateDataToOnUtil() {
       getBatteryLevel(),
       getBatteryChargeStatus()
     );
+  } else {
+
+    setStatusToUpdateDataToOffUtil(true);
   }
 }
 
 void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
-
-  if (activateGPSData()) {
-
-    setStatusToUpdateDataToOff(getBatteryLevel(),
-                               getBatteryChargeStatus(),
-                               gpsError);
-  }
+  setStatusToUpdateDataToOff(getBatteryLevel(),
+                             getBatteryChargeStatus(),
+                             gpsError);
 }
 
 // Public functions
@@ -249,15 +248,12 @@ String getUserToken() {
   if (checkIFFileExistInSDCard(tokenFile)) {
 
     userToken = getDataFromFile(tokenFile);
-
-    if (debug) {
-
-      Serial.println("Token from SD Card:");
-      Serial.println(userToken);
-    }
   }
 
-  return userToken;
+  String modifyToken = userToken;
+  modifyToken.trim();
+
+  return modifyToken;
 }
 
 String getUserId() {
@@ -265,12 +261,6 @@ String getUserId() {
   if (checkIFFileExistInSDCard(userIdFile)) {
 
     userId = getDataFromFile(userIdFile);
-
-    if (debug) {
-
-      Serial.println("User id from SD Card:");
-      Serial.println(userId);
-    }
   }
 
   return userId;
@@ -281,12 +271,6 @@ String getUserPhone() {
   if (checkIFFileExistInSDCard(userPhoneFile)) {
 
     userPhone = getDataFromFile(userPhoneFile);
-
-    if (debug) {
-
-      Serial.println("User phone from SD Card:");
-      Serial.println(userPhone);
-    }
   }
 
   return userPhone;

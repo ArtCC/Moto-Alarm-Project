@@ -118,35 +118,28 @@ bool sendRequestForWeatherForMotorbikeLocation() {
 // Public functions
 bool getWeatherForMotorbikeLocation() {
 
-  if (activateGPSData()) {
+  if (sendRequestForWeatherForMotorbikeLocation() && skipResponseHeadersForWeather("\r\n\r\n")) {
 
-    if (sendRequestForWeatherForMotorbikeLocation() && skipResponseHeadersForWeather("\r\n\r\n")) {
+    weatherClientData weatherClientData;
 
-      weatherClientData weatherClientData;
+    if (readReponseContent(&weatherClientData)) {
 
-      if (readReponseContent(&weatherClientData)) {
+      weatherTitleString = weatherClientData.weatherTitle;
+      cityString = weatherClientData.city;
+      temperatureString = weatherClientData.temperature;
+      humidityString = weatherClientData.humidity;
 
-        weatherTitleString = weatherClientData.weatherTitle;
-        cityString = weatherClientData.city;
-        temperatureString = weatherClientData.temperature;
-        humidityString = weatherClientData.humidity;
+      if (debug) {
 
-        if (debug) {
+        Serial.println("Disconnecting");
 
-          Serial.println("Disconnecting");
-
-          printclientDataForWeather(&weatherClientData);
-        }
-
-        client.stop();
-
-        return true;
+        printclientDataForWeather(&weatherClientData);
       }
+
+      client.stop();
+
+      return true;
     }
-
-    client.stop();
-
-    return false;
   }
 
   return false;

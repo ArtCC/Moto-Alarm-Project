@@ -82,7 +82,7 @@ bool setDataInFile(String &fileNameString, String &dataString) {
 
   if (debug) {
 
-    Serial.println("Error opening: ");
+    Serial.print("Error opening: ");
     Serial.println("fileName");
   }
 
@@ -114,14 +114,14 @@ String getDataFromFile(String &fileNameString) {
 
     if (debug) {
 
-      Serial.println("Error opening: ");
+      Serial.print("Error opening: ");
       Serial.println("fileName");
     }
   }
 
   if (debug) {
 
-    Serial.println("getDataFromFile:String: ");
+    Serial.print("getDataFromFile:String: ");
     Serial.println(dataString);
   }
 
