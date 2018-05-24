@@ -9,6 +9,11 @@ String temporalUserToken = "Bearer ";
 
 // Functions
 void activateBluetoothModule() {
+  String deviceName = getDeviceNameForBluetooth();
+
+  char toChar[100];
+  deviceName.toCharArray(toChar, 100);
+  char *bluetoothDeviceName = toChar;
 
   if (LBTServer.begin((uint8_t *)bluetoothDeviceName)) {
 
@@ -37,9 +42,13 @@ void receivedNewMessageFromBluetooth(String &message) {
   String userIdPrefix = "usrId:";
   String userPhonePrefix = "phone:";
   String tokenPrefix = "token:";
-  String tokenDelete = "delete";
+  String tokenDeletePrefix = "delete";
+  String apnNamePrefix = "apnNa:";
+  String apnUserPrefix = "apnUs:";
+  String apnPasswordPrefix = "apnPs:";
+  String deviceNamePrefix = "dName:";
 
-  if (checkIfStringContainOtherString(message, tokenDelete)) {
+  if (checkIfStringContainOtherString(message, tokenDeletePrefix)) {
 
     String emptyToken = "";
 
@@ -62,6 +71,30 @@ void receivedNewMessageFromBluetooth(String &message) {
     finalMessage.replace(userPhonePrefix, "");
 
     setUserPhone(finalMessage);
+  } else if (checkIfStringContainOtherString(message, apnNamePrefix)) {
+
+    String finalMessage = message;
+    finalMessage.replace(apnNamePrefix, "");
+
+    setAPNName(finalMessage);
+  } else if (checkIfStringContainOtherString(message, apnUserPrefix)) {
+
+    String finalMessage = message;
+    finalMessage.replace(apnUserPrefix, "");
+
+    setAPNUser(finalMessage);
+  } else if (checkIfStringContainOtherString(message, apnPasswordPrefix)) {
+
+    String finalMessage = message;
+    finalMessage.replace(apnPasswordPrefix, "");
+
+    setAPNPassword(finalMessage);
+  } else if (checkIfStringContainOtherString(message, deviceNamePrefix)) {
+
+    String finalMessage = message;
+    finalMessage.replace(deviceNamePrefix, "");
+
+    setDeviceNameForBluetooth(finalMessage);
   } else if (checkIfStringContainOtherString(message, tokenPrefix)) {
 
     String finalMessage = message;

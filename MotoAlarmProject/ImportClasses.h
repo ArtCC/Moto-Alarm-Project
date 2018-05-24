@@ -35,7 +35,6 @@
 #include "GSM.h"
 #include "MPU6050Utils.h"
 #include "PrivateConstants.h"
-#include "PublicConstants.h"
 #include "Time.h"
 #include "UpdateDataUser.h"
 #include "UpdateDevice.h"

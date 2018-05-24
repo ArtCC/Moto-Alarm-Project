@@ -12,10 +12,22 @@ String userPhone = "";
 String userId = "";
 String userToken = "";
 
+// APN
+String apnName = "";
+String apnUser = "";
+String apnPassword = "";
+
+// Device
+String deviceName = "";
+
 // Files card
 String tokenFile = "token.txt";
 String userIdFile = "userId.txt";
 String userPhoneFile = "userPhone.txt";
+String apnNameFile = "apnName.txt";
+String apnUserFile = "apnUser.txt";
+String apnPasswordFile = "apnPassword.txt";
+String deviceNameFile = "deviceName.txt";
 
 // Others
 bool firstInit = true;
@@ -46,14 +58,33 @@ void reset_utils(void) {
 }
 
 void configureGPRSConnection() {
+  String apnNameString = getAPNName();
+  String apnUserString = getAPNUser();
+  String apnPasswordString = getAPNPassword();
+
+  char toCharAPNName[100];
+  apnNameString.toCharArray(toCharAPNName, 100);
+  char *apnName = toCharAPNName;
+
+  char toCharAPNUser[100];
+  apnUserString.toCharArray(toCharAPNUser, 100);
+  char *apnUser = toCharAPNUser;
+
+  char toCharAPNPassword[100];
+  apnPasswordString.toCharArray(toCharAPNPassword, 100);
+  char *apnPassword = toCharAPNPassword;
 
   if (debug) {
 
     Serial.println("APN name: ");
-    Serial.println(APN_NAME);
+    Serial.println(apnNameString);
+    Serial.println("APN user: ");
+    Serial.println(apnUserString);
+    Serial.println("APN password: ");
+    Serial.println(apnPasswordString);
   }
 
-  while (!LGPRS.attachGPRS(APN_NAME, APN_USER, APN_PASSWORD)) {
+  while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
 
     if (debug) {
 
@@ -280,4 +311,88 @@ String getUserPhone() {
   modifyUserPhone.trim();
 
   return modifyUserPhone;
+}
+
+void setAPNName(String &string) {
+  apnName = string;
+
+  deleteFileFromSDCard(apnNameFile);
+  setDataInFile(apnNameFile, apnName);
+}
+
+void setAPNUser(String &string) {
+  apnUser = string;
+
+  deleteFileFromSDCard(apnUserFile);
+  setDataInFile(apnUserFile, apnUser);
+}
+
+void setAPNPassword(String &string) {
+  apnPassword = string;
+
+  deleteFileFromSDCard(apnPasswordFile);
+  setDataInFile(apnPasswordFile, apnPassword);
+}
+
+void setDeviceNameForBluetooth(String &string) {
+  deviceName = string;
+
+  deleteFileFromSDCard(deviceNameFile);
+  setDataInFile(deviceNameFile, deviceName);
+}
+
+String getAPNName() {
+  String modifyApnName = "";
+
+  if (checkIFFileExistInSDCard(apnNameFile)) {
+
+    apnName = getDataFromFile(apnNameFile);
+    modifyApnName = apnName;
+  }
+
+  modifyApnName.trim();
+
+  return modifyApnName;
+}
+
+String getAPNUser() {
+  String modifyApnUser = "";
+
+  if (checkIFFileExistInSDCard(apnUserFile)) {
+
+    apnUser = getDataFromFile(apnUserFile);
+    modifyApnUser = apnUser;
+  }
+
+  modifyApnUser.trim();
+
+  return modifyApnUser;
+}
+
+String getAPNPassword() {
+  String modifyApnPassword = "";
+
+  if (checkIFFileExistInSDCard(apnPasswordFile)) {
+
+    apnPassword = getDataFromFile(apnPasswordFile);
+    modifyApnPassword = apnPassword;
+  }
+
+  modifyApnPassword.trim();
+
+  return modifyApnPassword;
+}
+
+String getDeviceNameForBluetooth() {
+  String modifyDeviceName = "MotoAlarmProject";
+
+  if (checkIFFileExistInSDCard(deviceNameFile)) {
+
+    deviceName = getDataFromFile(deviceNameFile);
+    modifyDeviceName = deviceName;
+  }
+
+  modifyDeviceName.trim();
+
+  return modifyDeviceName;
 }

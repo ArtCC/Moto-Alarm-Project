@@ -50,3 +50,27 @@ String getUserId();
 
 // Get user phone
 String getUserPhone();
+
+// Set apn name
+void setAPNName(String &string);
+
+// Set apn user
+void setAPNUser(String &string);
+
+// Set apn password
+void setAPNPassword(String &string);
+
+// Set device name
+void setDeviceNameForBluetooth(String &string);
+
+// Get apn name
+String getAPNName();
+
+// Get apn user
+String getAPNUser();
+
+// Get apn password
+String getAPNPassword();
+
+// Get device name
+String getDeviceNameForBluetooth();
