@@ -135,29 +135,11 @@ You need to download and install two libraries that are used in the project in t
 
 [OTAUpdate in GitHub](https://github.com/ArtCC/OTAUpdate "OTAUpdate")
 
-The only class in which you need to add your data is in the <b>PublicConstants.h</b> class.
+All the data that your Linkit One needs is sent by bluetooth from the iOS or Android application.
 
-![MacDown Screenshot](Resources/ArduinoIDE.png)
+If you change the default name for your device (MotoAlarmProject) for the bluetooth connection, you have to restart your Linkit One later.
 
-Your configuration data is in this class, but you only need to add the following:
-
-- The name of the device to connect by bluetooth with the iOS application. If you do not modify it in the application or in the device code, it will be 'MotoAlarmProject'.
-
-```
-// Device name
-#define DEVICE_NAME = "MotoAlarmProject";
-```
-
-- To configure internet access from your Linkit One with your SIM card, you must add your operator's configuration. In my case, the APN property is 'internetmas' and the username and password are empty.
-
-```
-// APN
-#define APN_NAME = "";
-#define APN_USER = "";
-#define APN_PASSWORD = "";
-```
-
-- For your Linkit One to send you SMS you have to add your phone in your profile in the iOS or Android application and it will be sent by bluetooth when you activate the service.
+For your Linkit One to send you SMS you have to add your phone in your profile in the iOS or Android application and it will be sent by bluetooth when you activate the service.
 
 You can now upload the code to your Linkit One!
 
