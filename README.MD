@@ -135,7 +135,7 @@ You need to download and install two libraries that are used in the project in t
 
 [OTAUpdate in GitHub](https://github.com/ArtCC/OTAUpdate "OTAUpdate")
 
-All the data that your Linkit One needs is sent by bluetooth from the iOS or Android application.
+<b>All the data that your Linkit One needs is sent by bluetooth from the iOS or Android application.</b>
 
 If you change the default name for your device (MotoAlarmProject) for the bluetooth connection, you have to restart your Linkit One later.
 
