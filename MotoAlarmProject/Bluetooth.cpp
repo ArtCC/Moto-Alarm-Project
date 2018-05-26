@@ -107,9 +107,9 @@ void receivedNewMessageFromBluetooth(String &message) {
       Serial.println("User token");
       Serial.println(temporalUserToken);
     }
-  } else if (checkIfStringContainOtherString(message, serviceOn)) {
 
     setUserToken(temporalUserToken);
+  } else if (checkIfStringContainOtherString(message, serviceOn)) {
 
     setServiceStatus(true);
 

@@ -26,7 +26,7 @@ String userIdFile = "userId.txt";
 String userPhoneFile = "userPhone.txt";
 String apnNameFile = "apnName.txt";
 String apnUserFile = "apnUser.txt";
-String apnPasswordFile = "apnPassword.txt";
+String apnPasswordFile = "apnPass.txt";
 String deviceNameFile = "deviceName.txt";
 
 // Others
