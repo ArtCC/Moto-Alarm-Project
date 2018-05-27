@@ -59,7 +59,7 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
     differenceRoll = roll - firstRoll;
   }
 
-  if (differencePitch > 25 || differenceRoll > 25) {
+  if (differencePitch > 50 && differenceRoll > 50) {
 
     sendDataToServerForAlarmIsActive = true;
 

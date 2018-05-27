@@ -33,7 +33,7 @@
 #include "Card.h"
 #include "GPS.h"
 #include "GSM.h"
-#include "MPU6050Utils.h"
+#include "GyroscopeUtils.h"
 #include "PrivateConstants.h"
 #include "Time.h"
 #include "UpdateDataUser.h"

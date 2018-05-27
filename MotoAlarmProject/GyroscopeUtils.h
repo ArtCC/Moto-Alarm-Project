@@ -1,6 +1,6 @@
 /*
-   MPU6050Utils class
-   All functions for use MPU6050 module
+   GyroscopeUtils class
+   All functions for use Grove - 6-Axis Accelerometer & Gyroscope module
 */
 
 // Function for get value for alarm active or not
