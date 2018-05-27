@@ -74,16 +74,6 @@ void configureGPRSConnection() {
   apnPasswordString.toCharArray(toCharAPNPassword, 100);
   char *apnPassword = toCharAPNPassword;
 
-  if (debug) {
-
-    Serial.println("APN name: ");
-    Serial.println(apnNameString);
-    Serial.println("APN user: ");
-    Serial.println(apnUserString);
-    Serial.println("APN password: ");
-    Serial.println(apnPasswordString);
-  }
-
   while (!LGPRS.attachGPRS(apnName, apnUser, apnPassword)) {
 
     if (debug) {
@@ -151,10 +141,10 @@ void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
 void configureServices() {
   Serial.begin(115200);
 
+  configSDCard();
   activateBluetoothModule();
   activateGPS();
   activateSIM();
-  configSDCard();
   configureGPRSConnection();
   configureOTAUpdate();
 }

@@ -24,20 +24,34 @@ void setup() {
 }
 
 void loop() {
-  startSubscribeServices();
 
-  if (getServiceStatus()) {
+  if (client.connect(mapServer, port)) {
 
-    if (getIfAlarmIsActive()) {
+    client.stop();
 
-      startAllServices();
+    startSubscribeServices();
+
+    if (getServiceStatus()) {
+
+      if (getIfAlarmIsActive()) {
+
+        startAllServices();
+      } else {
+
+        startMPU6050Module();
+      }
     } else {
 
-      startMPU6050Module();
+      stopServices();
     }
   } else {
 
-    stopServices();
+    client.stop();
+
+    if (debug) {
+
+      Serial.println("Error in connection!");
+    }
   }
 }
 

@@ -31,8 +31,8 @@
 #### UPDATE TIMES (For iOS and Android apps):
 
 - With the service deactivated, the status of the battery is sent every <b>24 hours</b>.
-- With the service activated, if the motorcycle with MPU650 module detects movement, it is sent every <b>2 minutes</b>.
-- From the mobile application, you can change the default update time (2 minutes) and adapt it to your needs, but the MPU6050 sensor will activate the services if necessary and save battery ;)
+- With the service activated, if the motorcycle with Grove - 6-Axis Accelerometer & Gyroscope sensor module detects movement, it is sent every <b>2 minutes</b>.
+- From the mobile application, you can change the default update time (2 minutes) and adapt it to your needs, but the Grove - 6-Axis Accelerometer & Gyroscope sensor module will activate the services if necessary and save battery ;)
 
 ### DOWNLOAD iOS VERSION:
 
@@ -83,31 +83,19 @@ In order to use this board with the Arduino IDE, you need to follow some steps:
 
 [Linkit One Guide website](https://docs.labs.mediatek.com/resource/linkit-one/en "SeedStudio")
 
-### MPU6050
+### GROVE - 6-AXIS ACCELEROMETER & GYROSCOPE
 
-MPU6050 sensor module is an integrated 6-axis Motion tracking device.
+Grove - 6-Axis Accelerometer & Gyroscope is a cost-effective Grove sensor integrated with a 3-axis digital accelerometer and a 3-axis digital gyroscope.
 
-It has a 3-axis Gyroscope, 3-axis Accelerometer, Digital Motion Processor and a Temperature sensor, all in a single IC.
+With a serious low power consumption digital chip LSM6DS3 and power supply regulator inside, it features high sensitivity, green tech and low noise interference. It can be configured to different sensitivity levels of acceleration and different angular rate measurement range. Provided with detailed SDK, it can make the prototyping process quicker and easier.
 
-It can accept inputs from other sensors like 3-axis magnetometer or pressure sensor using its Auxiliary I2C bus.
-
-If external 3-axis magnetometer is connected, it can provide complete 9-axis Motion Fusion output.
-
-A microcontroller can communicate with this module using I2C communication protocol. Various parameters can be found by reading values from addresses of certain registers using I2C communication.
-
-Gyroscope and accelerometer reading along X, Y and Z axes are available in 2’s complement form. Temperature reading is also available in signed integer form.
-
-Gyroscope readings are in degrees per second (dps) unit; Accelerometer readings are in g unit; and Temperature reading is in degrees Celsius.
+This product can be used for different applications for tilt, motion, and tap sensing, such as robotics, IoT devices and consumer electronic devices.
 
 This module is used to send movement alert by SMS and not consume battery sending data if they are not necessary to the server.
 
-<b>Connection to Linkit One:</b>
+[Grove - 6-Axis Accelerometer & Gyroscope for Linkit One](https://www.seeedstudio.com/Grove-6-Axis-Accelerometer%26Gyroscope-p-2606.html "Grove - 6-Axis Accelerometer & Gyroscope for Linkit One")
 
-[Tutorial for connection MPU6050 to Linkit One](http://www.instructables.com/id/Interfacing-MPU6050-with-Linkit-One/ "MPU6050 in Linkit One")
-
-![MacDown Screenshot](Resources/MPU6050.jpg)
-
-[MPU6050 in 'Amazon' shop](https://www.amazon.es/SODIAL-MPU-6050-giroscopio-Acelerometro-Arduino/dp/B00K67X810/ref=sr_1_4?ie=UTF8&qid=1525460814&sr=8-4&keywords=mpu6050 "MPU6050")
+![MacDown Screenshot](Resources/Grove.jpg)
 
 ### INSTRUCTIONS
 

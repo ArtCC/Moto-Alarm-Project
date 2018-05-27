@@ -47,4 +47,4 @@ static String textForAlarmSMS = "Hey! I'm moving! Speed: ";
 static String textForAlarmSMSWithoutLocation = "Hey! I'm moving!";
 
 // Show logs, set true
-static bool debug = false;
+static bool debug = true;

@@ -26,7 +26,8 @@ bool checkIFFileExistInSDCard(String &fileNameString) {
 
     if (debug) {
 
-      Serial.println("File exist");
+      Serial.print("File exist: ");
+      Serial.println(fileNameString);
     }
 
     return true;
@@ -34,7 +35,8 @@ bool checkIFFileExistInSDCard(String &fileNameString) {
 
   if (debug) {
 
-    Serial.println("File not exist!");
+    Serial.print("File not exist: ");
+    Serial.println(fileNameString);
   }
 
   return false;
@@ -49,7 +51,8 @@ bool deleteFileFromSDCard(String &fileNameString) {
 
     if (debug) {
 
-      Serial.println("File delete ok");
+      Serial.print("File delete ok: ");
+      Serial.println(fileNameString);
     }
 
     return true;
@@ -57,7 +60,8 @@ bool deleteFileFromSDCard(String &fileNameString) {
 
   if (debug) {
 
-    Serial.println("File not delete!");
+    Serial.print("File not delete: ");
+    Serial.println(fileNameString);
   }
 
   return false;
@@ -83,7 +87,7 @@ bool setDataInFile(String &fileNameString, String &dataString) {
   if (debug) {
 
     Serial.print("Error opening: ");
-    Serial.println("fileName");
+    Serial.println(fileNameString);
   }
 
   return false;
@@ -115,7 +119,7 @@ String getDataFromFile(String &fileNameString) {
     if (debug) {
 
       Serial.print("Error opening: ");
-      Serial.println("fileName");
+      Serial.println(fileNameString);
     }
   }
 
