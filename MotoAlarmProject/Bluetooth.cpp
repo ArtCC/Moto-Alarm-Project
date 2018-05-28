@@ -47,6 +47,7 @@ void receivedNewMessageFromBluetooth(String &message) {
   String apnUserPrefix = "apnUs:";
   String apnPasswordPrefix = "apnPs:";
   String deviceNamePrefix = "dName:";
+  String sendDataEnd = "end";
 
   if (checkIfStringContainOtherString(message, tokenDeletePrefix)) {
 
@@ -107,6 +108,7 @@ void receivedNewMessageFromBluetooth(String &message) {
       Serial.println("User token");
       Serial.println(temporalUserToken);
     }
+  } else if (checkIfStringContainOtherString(message, sendDataEnd)) {
 
     setUserToken(temporalUserToken);
   } else if (checkIfStringContainOtherString(message, serviceOn)) {
