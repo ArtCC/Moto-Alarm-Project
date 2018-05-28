@@ -42,15 +42,6 @@ void setUserId(String &string);
 // Set user phone
 void setUserPhone(String &string);
 
-// Get user token
-String getUserToken();
-
-// Get user id
-String getUserId();
-
-// Get user phone
-String getUserPhone();
-
 // Set apn name
 void setAPNName(String &string);
 
@@ -62,6 +53,15 @@ void setAPNPassword(String &string);
 
 // Set device name
 void setDeviceNameForBluetooth(String &string);
+
+// Get user token
+String getUserToken();
+
+// Get user id
+String getUserId();
+
+// Get user phone
+String getUserPhone();
 
 // Get apn name
 String getAPNName();

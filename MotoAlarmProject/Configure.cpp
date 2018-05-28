@@ -264,6 +264,34 @@ void setUserPhone(String &string) {
   setDataInFile(userPhoneFile, userPhone);
 }
 
+void setAPNName(String &string) {
+  apnName = string;
+
+  deleteFileFromSDCard(apnNameFile);
+  setDataInFile(apnNameFile, apnName);
+}
+
+void setAPNUser(String &string) {
+  apnUser = string;
+
+  deleteFileFromSDCard(apnUserFile);
+  setDataInFile(apnUserFile, apnUser);
+}
+
+void setAPNPassword(String &string) {
+  apnPassword = string;
+
+  deleteFileFromSDCard(apnPasswordFile);
+  setDataInFile(apnPasswordFile, apnPassword);
+}
+
+void setDeviceNameForBluetooth(String &string) {
+  deviceName = string;
+
+  deleteFileFromSDCard(deviceNameFile);
+  setDataInFile(deviceNameFile, deviceName);
+}
+
 String getUserToken() {
 
   if (checkIFFileExistInSDCard(tokenFile)) {
@@ -301,34 +329,6 @@ String getUserPhone() {
   modifyUserPhone.trim();
 
   return modifyUserPhone;
-}
-
-void setAPNName(String &string) {
-  apnName = string;
-
-  deleteFileFromSDCard(apnNameFile);
-  setDataInFile(apnNameFile, apnName);
-}
-
-void setAPNUser(String &string) {
-  apnUser = string;
-
-  deleteFileFromSDCard(apnUserFile);
-  setDataInFile(apnUserFile, apnUser);
-}
-
-void setAPNPassword(String &string) {
-  apnPassword = string;
-
-  deleteFileFromSDCard(apnPasswordFile);
-  setDataInFile(apnPasswordFile, apnPassword);
-}
-
-void setDeviceNameForBluetooth(String &string) {
-  deviceName = string;
-
-  deleteFileFromSDCard(deviceNameFile);
-  setDataInFile(deviceNameFile, deviceName);
 }
 
 String getAPNName() {

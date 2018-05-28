@@ -28,13 +28,21 @@ void sendMessage(String &message) {
 
   if (message == statusFromSMS || message == statusWatchFromSMS) {
 
+    setStatusToUpdateDataToOnUtil();
+
     if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
       sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
     } else {
 
-      String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-      sendSMSToPhoneNumber(getUserPhone(), textString);
+      if (activateGPSData()) {
+
+        String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
+        sendSMSToPhoneNumber(getUserPhone(), textString);
+      } else {
+
+        sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
+      }
     }
   } else if (message == batteryFromSMS || message == batteryWatchFromSMS) {
 
@@ -141,13 +149,21 @@ void receivedSMS() {
 
       if (message == statusFromSMS) {
 
+        setStatusToUpdateDataToOnUtil();
+
         if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
           sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
         } else {
 
-          String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-          sendSMSToPhoneNumber(getUserPhone(), textString);
+          if (activateGPSData()) {
+
+            String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
+            sendSMSToPhoneNumber(getUserPhone(), textString);
+          } else {
+
+            sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
+          }
         }
       } else if (message == batteryFromSMS) {
 
