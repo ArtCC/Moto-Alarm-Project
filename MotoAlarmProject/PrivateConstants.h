@@ -25,6 +25,9 @@ static String serviceOn = "on";
 static String serviceOff = "off";
 static bool serviceActive;
 
+// SD
+static String motorbikePositionHistorial = "positionHistorial.txt";
+
 // Device update
 static bool deviceUpdateEnabled = true;
 #define mapServer_UPDATE "motoalarm-project.com"

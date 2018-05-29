@@ -61,6 +61,8 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
   if (differencePitch > 50 && differenceRoll > 50) {
 
+    deleteFileFromSDCard(motorbikePositionHistorial);
+
     sendDataToServerForAlarmIsActive = true;
 
     if (activateGPSData()) {

@@ -173,6 +173,9 @@ void startAllServices() {
         Serial.println("");
       }
 
+      String location = getLatitude() + "," + getLongitude();
+      setDataInFile(motorbikePositionHistorial, location);
+
       setStatusToUpdateDataToOnUtil();
 
       previousMillisForSendData = millis();
