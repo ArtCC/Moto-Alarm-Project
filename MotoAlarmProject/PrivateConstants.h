@@ -26,7 +26,7 @@ static String serviceOff = "off";
 static bool serviceActive;
 
 // SD
-static String motorbikePositionHistorial = "positionHistorial.txt";
+static String motorbikePositionHistorial = "histLoc.txt";
 
 // Device update
 static bool deviceUpdateEnabled = true;
