@@ -16,14 +16,17 @@ void updateDevice() {
 
   if ((unsigned long)(currentMillisUpdateForOTAUpdate - previousMillisForOTAUpdate) >= intervalUpdateForOTAUpdate) {
 
-    while (true) {
+    if (activateGPSData()) {
 
-      if (OTAUpdate.checkUpdate()) {
+      while (true) {
 
-        OTAUpdate.startUpdate();
+        if (OTAUpdate.checkUpdate()) {
+
+          OTAUpdate.startUpdate();
+        }
       }
-    }
 
-    previousMillisForOTAUpdate = millis();
+      previousMillisForOTAUpdate = millis();
+    }
   }
 }
