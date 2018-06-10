@@ -92,7 +92,7 @@ void configureGPRSConnection() {
 
 void configureForFirstInit() {
 
-  if (firstInit && activateGPSData()) {
+  if (firstInit) {
 
     if (getDeviceUpdateTime()) {
 
@@ -119,21 +119,27 @@ void configureForFirstInit() {
 
 void setStatusToUpdateDataToOnUtil() {
 
-  if (activateGPSData()) {
+  if (checkConnectionIsCorrect()) {
 
-    // Update user data
-    setUpdateDataUserToServer(
-      getLatitude(),
-      getLongitude(),
-      getBatteryLevel(),
-      getBatteryChargeStatus()
-    );
+    if (activateGPSData()) {
+
+      // Update user data
+      setUpdateDataUserToServer(
+        getLatitude(),
+        getLongitude(),
+        getBatteryLevel(),
+        getBatteryChargeStatus()
+      );
+    } else {
+
+      setStatusToUpdateDataToOffUtil(true);
+    }
   }
 }
 
 void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
 
-  if (activateGPSData()) {
+  if (checkConnectionIsCorrect()) {
 
     setStatusToUpdateDataToOff(getBatteryLevel(),
                                getBatteryChargeStatus(),
@@ -160,42 +166,50 @@ void startSubscribeServices() {
 }
 
 void startAllServices() {
-  configureForFirstInit();
 
-  unsigned long currentMillisUpdateForSendData = millis();
+  if (checkConnectionIsCorrect()) {
 
-  if (!firstInit) {
+    configureForFirstInit();
 
-    if ((unsigned long)(currentMillisUpdateForSendData - previousMillisForSendData) >= getValueForDeviceUpdateTime()) {
+    unsigned long currentMillisUpdateForSendData = millis();
 
-      if (debug) {
+    if (!firstInit) {
 
-        Serial.println("Time for data user new update:");
-        Serial.println(currentMillisUpdateForSendData);
-        Serial.println(previousMillisForSendData);
-        Serial.println(getValueForDeviceUpdateTime());
-        Serial.println("");
+      if ((unsigned long)(currentMillisUpdateForSendData - previousMillisForSendData) >= getValueForDeviceUpdateTime()) {
+
+        if (debug) {
+
+          Serial.println("Time for data user new update:");
+          Serial.println(currentMillisUpdateForSendData);
+          Serial.println(previousMillisForSendData);
+          Serial.println(getValueForDeviceUpdateTime());
+          Serial.println("");
+        }
+
+        String location = getLatitude() + "," + getLongitude();
+        setDataInFile(motorbikePositionHistorial, location);
+
+        setStatusToUpdateDataToOnUtil();
+
+        previousMillisForSendData = millis();
       }
-
-      String location = getLatitude() + "," + getLongitude();
-      setDataInFile(motorbikePositionHistorial, location);
-
-      setStatusToUpdateDataToOnUtil();
-
-      previousMillisForSendData = millis();
     }
   }
 }
 
 void stopServices() {
-  unsigned long disabledCurrentMillisUpdate = millis();
 
-  if ((unsigned long)(disabledCurrentMillisUpdate - disabledPreviousMillisUpdate) >= disabledIntervalUpdate) {
+  if (checkConnectionIsCorrect()) {
 
-    // Not update user data
-    setStatusToUpdateDataToOffUtil(false);
+    unsigned long disabledCurrentMillisUpdate = millis();
 
-    disabledPreviousMillisUpdate = millis();
+    if ((unsigned long)(disabledCurrentMillisUpdate - disabledPreviousMillisUpdate) >= disabledIntervalUpdate) {
+
+      // Not update user data
+      setStatusToUpdateDataToOffUtil(false);
+
+      disabledPreviousMillisUpdate = millis();
+    }
   }
 }
 

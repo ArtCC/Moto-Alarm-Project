@@ -31,6 +31,7 @@
 #include "Battery.h"
 #include "Bluetooth.h"
 #include "Card.h"
+#include "Connection.h"
 #include "GPS.h"
 #include "GSM.h"
 #include "GyroscopeUtils.h"

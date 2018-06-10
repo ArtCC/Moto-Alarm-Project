@@ -64,14 +64,11 @@ void sendMessage(String &message) {
     setStatusToUpdateDataToOffUtil(false);
   } else if (message == feelFromSMS || message == feelWatchFromSMS) {
 
-    if (activateGPSData()) {
+    bool weather = getWeatherForMotorbikeLocation();
 
-      bool weather = getWeatherForMotorbikeLocation();
+    if (weather) {
 
-      if (weather) {
-
-        sendSMSToPhoneNumber(getUserPhone(), getFeel());
-      }
+      sendSMSToPhoneNumber(getUserPhone(), getFeel());
     } else {
 
       sendSMSToPhoneNumber(getUserPhone(), textForFeelSMS);
@@ -198,17 +195,14 @@ void receivedSMS() {
         setStatusToUpdateDataToOffUtil(false);
       } else if (message == feelFromSMS) {
 
-        if (activateGPSData()) {
+        bool weather = getWeatherForMotorbikeLocation();
 
-          bool weather = getWeatherForMotorbikeLocation();
+        if (weather) {
 
-          if (weather) {
+          String message = "\"" + getFeel() + "\"";
+          String data = "{\"message_chat\":" + message + "}";
 
-            String message = "\"" + getFeel() + "\"";
-            String data = "{\"message_chat\":" + message + "}";
-
-            setPOSTRequest(data);
-          }
+          setPOSTRequest(data);
         } else {
 
           sendSMSToPhoneNumber(getUserPhone(), textForFeelSMS);
