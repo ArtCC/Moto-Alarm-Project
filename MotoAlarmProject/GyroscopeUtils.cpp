@@ -2,15 +2,15 @@
 #include "ImportClasses.h"
 
 // Properties
-// Control for MPU6050 and get first value
-bool setNewValuesFromMPU6050 = true;
+// Control for LSM6DS30 and get first value
+bool setNewValuesFromGroveSensor = true;
 bool sendDataToServerForAlarmIsActive;
 
 // Accelerometer and gyroscope
-int firstPitch;
-int firstRoll;
-int differencePitch;
-int differenceRoll;
+int firstGyroscopeX;
+int firstGyroscopeY;
+int differenceGyroscopeX;
+int differenceGyroscopeY;
 
 // Public functions
 bool getIfAlarmIsActive() {
@@ -18,48 +18,58 @@ bool getIfAlarmIsActive() {
   return sendDataToServerForAlarmIsActive;
 }
 
-void setSaveValuesFromMPU6050(const bool &newValue) {
-  setNewValuesFromMPU6050 = newValue;
+void setAlarmIsActive(const bool &newValue) {
+  sendDataToServerForAlarmIsActive = newValue;
+}
+
+void setSaveValuesFromGroveSensor(const bool &newValue) {
+  setNewValuesFromGroveSensor = newValue;
   sendDataToServerForAlarmIsActive = false;
 }
 
-void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
+void processValuesFromGroveSensor(float aX,
+                                  float aY,
+                                  float aZ,
+                                  float gX,
+                                  float gY,
+                                  float gZ,
+                                  float temperature) {
 
-  if (setNewValuesFromMPU6050) {
+  if (setNewValuesFromGroveSensor) {
 
     if (debug) {
 
-      Serial.println("Get first parameters for MPU6050");
+      Serial.println("Get first parameters for LSM6DS3");
     }
 
-    firstPitch = pitch;
-    firstRoll = roll;
-    setNewValuesFromMPU6050 = false;
+    firstGyroscopeX = gX;
+    firstGyroscopeY = gY;
+    setNewValuesFromGroveSensor = false;
   }
 
-  if (firstPitch == pitch) {
+  if (firstGyroscopeX == gX) {
 
-    differencePitch = 0;
-  } else if (firstPitch > pitch) {
+    differenceGyroscopeX = 0;
+  } else if (firstGyroscopeX > gX) {
 
-    differencePitch = firstPitch - pitch;
-  } else if (pitch > firstPitch) {
+    differenceGyroscopeX = firstGyroscopeX - gX;
+  } else if (gX > firstGyroscopeX) {
 
-    differencePitch = pitch - firstPitch;
+    differenceGyroscopeX = gX - firstGyroscopeX;
   }
 
-  if (firstRoll == roll) {
+  if (firstGyroscopeY == gY) {
 
-    differenceRoll = 0;
-  } else if (firstRoll > roll) {
+    differenceGyroscopeY = 0;
+  } else if (firstGyroscopeY > gY) {
 
-    differenceRoll = firstRoll - roll;
-  } else if (roll > firstRoll) {
+    differenceGyroscopeY = firstGyroscopeY - gY;
+  } else if (gY > firstGyroscopeY) {
 
-    differenceRoll = roll - firstRoll;
+    differenceGyroscopeY = gY - firstGyroscopeY;
   }
 
-  if (differencePitch > 50 && differenceRoll > 50) {
+  if (differenceGyroscopeX > 50 && differenceGyroscopeY > 50) {
 
     deleteFileFromSDCard(motorbikePositionHistorial);
 
@@ -76,21 +86,35 @@ void processValuesFromMPU6050(int &pitch, int &roll, float &temperature) {
 
   if (debug) {
 
-    Serial.print("First pitch: ");
-    Serial.println(firstPitch);
-    Serial.print("Actual pitch: ");
-    Serial.println(pitch);
-    Serial.print("First roll: ");
-    Serial.println(firstRoll);
-    Serial.print("Actual roll: ");
-    Serial.println(roll);
-    Serial.print("Temp: ");
+    // Accelerometer
+    Serial.print("\nAccelerometer:\n");
+    Serial.print(" X1 = ");
+    Serial.println(aX);
+    Serial.print(" Y1 = ");
+    Serial.println(aY);
+    Serial.print(" Z1 = ");
+    Serial.println(aZ);
+
+    // Gyroscope
+    Serial.print("\nGyroscope:\n");
+    Serial.print(" X1 = ");
+    Serial.println(gX);
+    Serial.print(" Y1 = ");
+    Serial.println(gY);
+    Serial.print(" Z1 = ");
+    Serial.println(gZ);
+
+    // Thermometer
+    Serial.print("\nThermometer: ");
     Serial.print(temperature);
     Serial.println("*C");
-    Serial.print("Difference between pitch: ");
-    Serial.println(differencePitch);
-    Serial.print("Difference between roll: ");
-    Serial.println(differenceRoll);
+    Serial.println();
+
+    // Differences between values
+    Serial.print("Difference between gyroscope X: ");
+    Serial.println(differenceGyroscopeX);
+    Serial.print("Difference between gyroscope Y: ");
+    Serial.println(differenceGyroscopeY);
     Serial.println();
   }
 }

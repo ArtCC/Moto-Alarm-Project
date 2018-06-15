@@ -13,7 +13,6 @@
 #include <OTAUtils.h>
 #include <LStorage.h>
 #include <LFlash.h>
-#include <MPU6050.h>
 #include <ArduinoJson.h>
 #include <LBTServer.h>
 #include <LGATTUUID.h>
@@ -25,6 +24,7 @@
 #include <LSD.h>
 
 #include "vmbtgatt.h"
+#include "Wire.h"
 
 // Custom classes
 #include "Configure.h"
@@ -36,6 +36,7 @@
 #include "GSM.h"
 #include "GyroscopeUtils.h"
 #include "PrivateConstants.h"
+#include "SparkFunLSM6DS3.h"
 #include "Time.h"
 #include "UpdateDataUser.h"
 #include "UpdateDevice.h"

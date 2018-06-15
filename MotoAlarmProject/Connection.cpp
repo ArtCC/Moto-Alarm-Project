@@ -38,6 +38,7 @@ bool checkConnectionIsCorrect() {
 
       if (testCount == 5) {
 
+        sendSMSToPhoneNumber(getUserPhone(), textForResetSMS);
         resetByCode();
       } else {
 
@@ -50,7 +51,7 @@ bool checkConnectionIsCorrect() {
 
         LGPRSClient clientTest;
 
-        if (clientTest.connect(mapServer, port)) {
+        if (clientTest.connect("asasas", port)) {
 
           if (debug) {
 

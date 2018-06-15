@@ -58,6 +58,7 @@ void sendMessage(String &message) {
   } else if (message == desactivateFromSMS || message == desactivateWatchFromSMS) {
 
     setServiceStatus(false);
+    setAlarmIsActive(false);
     sendSMSToPhoneNumber(getUserPhone(), textForDesactivateSMS);
 
     // Not update user data but send disable service
@@ -190,6 +191,7 @@ void receivedSMS() {
         setPOSTRequest(data);
 
         setServiceStatus(false);
+        setAlarmIsActive(false);
 
         // Not update user data but send disable service
         setStatusToUpdateDataToOffUtil(false);

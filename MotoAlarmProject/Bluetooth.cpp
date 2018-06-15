@@ -125,6 +125,7 @@ void receivedNewMessageFromBluetooth(String &message) {
   } else if (checkIfStringContainOtherString(message, serviceOff)) {
 
     setServiceStatus(false);
+    setAlarmIsActive(false);
 
     if (debug) {
 

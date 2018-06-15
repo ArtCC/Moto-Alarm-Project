@@ -111,9 +111,6 @@ void configureForFirstInit() {
 
       firstInit = true;
     }
-  } else {
-
-    firstInit = true;
   }
 }
 

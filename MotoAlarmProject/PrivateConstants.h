@@ -5,9 +5,9 @@
 */
 
 // Properties
-// "Multi-thread" with millis() for update MPU6050 status
-static unsigned long intervalUpdateForMPU6050 = 1000;
-static unsigned long previousMillisForMPU6050 = 0;
+// "Multi-thread" with millis() for update LSM6DS3 status
+static unsigned long intervalUpdateForGroveSensor = 1000;
+static unsigned long previousMillisForGroveSensor = 0;
 
 // Instance for all request
 static LGPRSClient client;

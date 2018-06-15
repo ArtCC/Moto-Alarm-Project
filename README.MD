@@ -29,8 +29,8 @@
 #### UPDATE TIMES (For iOS and Android apps):
 
 - With the service deactivated, the status of the battery is sent every <b>24 hours</b>.
-- With the service activated, if the motorcycle with Grove - 6-Axis Accelerometer & Gyroscope sensor module detects movement, it is sent every <b>2 minutes</b>.
-- From the mobile application, you can change the default update time (2 minutes) and adapt it to your needs, but the Grove - 6-Axis Accelerometer & Gyroscope sensor module will activate the services if necessary and save battery ;)
+- With the service activated, if the motorcycle with Grove 6-Axis Accelerometer & Gyroscope sensor module detects movement, it is sent every <b>2 minutes</b>.
+- From the mobile application, you can change the default update time (2 minutes) and adapt it to your needs, but the Grove 6-Axis Accelerometer & Gyroscope sensor module will activate the services if necessary and save battery ;)
 
 ### DOWNLOAD iOS VERSION:
 
@@ -81,9 +81,9 @@ In order to use this board with the Arduino IDE, you need to follow some steps:
 
 [Linkit One Guide website](https://docs.labs.mediatek.com/resource/linkit-one/en "SeedStudio")
 
-### GROVE - 6-AXIS ACCELEROMETER & GYROSCOPE
+### GROVE 6-AXIS ACCELEROMETER & GYROSCOPE
 
-Grove - 6-Axis Accelerometer & Gyroscope is a cost-effective Grove sensor integrated with a 3-axis digital accelerometer and a 3-axis digital gyroscope.
+Grove 6-Axis Accelerometer & Gyroscope is a cost-effective Grove sensor integrated with a 3-axis digital accelerometer and a 3-axis digital gyroscope.
 
 With a serious low power consumption digital chip LSM6DS3 and power supply regulator inside, it features high sensitivity, green tech and low noise interference. It can be configured to different sensitivity levels of acceleration and different angular rate measurement range. Provided with detailed SDK, it can make the prototyping process quicker and easier.
 
@@ -91,7 +91,7 @@ This product can be used for different applications for tilt, motion, and tap se
 
 This module is used to send movement alert by SMS and not consume battery sending data if they are not necessary to the server.
 
-[Grove - 6-Axis Accelerometer & Gyroscope for Linkit One](https://www.seeedstudio.com/Grove-6-Axis-Accelerometer%26Gyroscope-p-2606.html "Grove - 6-Axis Accelerometer & Gyroscope for Linkit One")
+[Grove 6-Axis Accelerometer & Gyroscope for Linkit One](https://www.seeedstudio.com/Grove-6-Axis-Accelerometer%26Gyroscope-p-2606.html "Grove 6-Axis Accelerometer & Gyroscope for Linkit One")
 
 ![MacDown Screenshot](Resources/Grove.jpg)
 
@@ -117,7 +117,7 @@ You need to download and install two libraries that are used in the project in t
 
 [elapsedMillis in GitHub](https://github.com/pfeerick/elapsedMillis "elapsedMillis")
 
-[MPU6050 in GitHub](https://github.com/jarzebski/Arduino-MPU6050 "MPU6050")
+[Accelerometer and gyroscope LSM6DS3 in GitHub](https://github.com/Seeed-Studio/Accelerometer_And_Gyroscope_LSM6DS3 "Accelerometer and gyroscope LSM6DS3")
 
 [OTAUpdate in GitHub](https://github.com/ArtCC/OTAUpdate "OTAUpdate")
 

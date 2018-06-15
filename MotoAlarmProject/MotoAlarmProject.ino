@@ -14,13 +14,13 @@
 #include "ImportClasses.h"
 
 // Properties
-// Instance for MPU6050 module
-MPU6050 mpu;
+// Create a instance of class LSM6DS3, I2C device address 0x6A
+LSM6DS3 groveSensor(I2C_MODE, 0x6A);
 
 // Public functions
 void setup() {
   configureServices();
-  configureMPU6050Module();
+  configureGroveSensorModule();
 }
 
 void loop() {
@@ -33,7 +33,7 @@ void loop() {
       startAllServices();
     } else {
 
-      startMPU6050Module();
+      startGroveSensorModule();
     }
   } else {
 
@@ -42,42 +42,38 @@ void loop() {
 }
 
 // Private functions
-// MPU6050 config
-void configureMPU6050Module() {
+// LSM6DS3 config
+void configureGroveSensorModule() {
 
   if (debug) {
 
-    Serial.println("Initialize MPU6050");
+    Serial.println("Initialize LSM6DS3");
   }
 
-  while (!mpu.begin(MPU6050_SCALE_2000DPS, MPU6050_RANGE_2G)) {
+  while (groveSensor.begin() != 0) {
 
     if (debug) {
 
-      Serial.println("Could not find a valid MPU6050 sensor, check wiring!");
+      Serial.println("Could not find a valid LSM6DS3 sensor, check wiring!");
     }
 
     delay(100);
   }
 }
 
-void startMPU6050Module() {
-  unsigned long currentMillisUpdateForMPU6050 = millis();
+void startGroveSensorModule() {
+  unsigned long currentMillisUpdateForGroveSensor = millis();
 
-  if ((unsigned long)(currentMillisUpdateForMPU6050 - previousMillisForMPU6050) >= intervalUpdateForMPU6050) {
+  if ((unsigned long)(currentMillisUpdateForGroveSensor - previousMillisForGroveSensor) >= intervalUpdateForGroveSensor) {
 
-    // Read normalized values
-    Vector normAccel = mpu.readNormalizeAccel();
+    processValuesFromGroveSensor(groveSensor.readFloatAccelX(),
+                                 groveSensor.readFloatAccelY(),
+                                 groveSensor.readFloatAccelZ(),
+                                 groveSensor.readFloatGyroX(),
+                                 groveSensor.readFloatGyroY(),
+                                 groveSensor.readFloatGyroZ(),
+                                 groveSensor.readTempC());
 
-    // Calculate pitch, roll, temperature meditions and send to process
-    int pitch = -(atan2(normAccel.XAxis, sqrt(normAccel.YAxis * normAccel.YAxis + normAccel.ZAxis * normAccel.ZAxis)) * 180.0) / M_PI;
-    int roll = (atan2(normAccel.YAxis, normAccel.ZAxis) * 180.0) / M_PI;
-    float temp = mpu.readTemperature();
-
-    processValuesFromMPU6050(pitch,
-                             roll,
-                             temp);
-
-    previousMillisForMPU6050 = millis();
+    previousMillisForGroveSensor = millis();
   }
 }
