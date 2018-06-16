@@ -4,13 +4,10 @@
 // Properties
 // "Multi-thread" with millis()
 unsigned long previousMillisForConnection = 0;
-unsigned long intervalUpdateForConnection = 3600000;
+unsigned long intervalUpdateForConnection = 900000;
 
 bool connectionIsActive = false;
 int testCount = 0;
-
-// SMS text
-String notConnectionForSMS = "Sorry... I don't have internet connection... :(";
 
 // Public functions
 void setConnectionIsActive(const bool &value) {
@@ -38,20 +35,14 @@ bool checkConnectionIsCorrect() {
 
       if (testCount == 5) {
 
-        sendSMSToPhoneNumber(getUserPhone(), textForResetSMS);
         resetByCode();
       } else {
-
-        if (testCount == 1) {
-
-          sendSMSToPhoneNumber(getUserPhone(), notConnectionForSMS);
-        }
 
         testCount += 1;
 
         LGPRSClient clientTest;
 
-        if (clientTest.connect("asasas", port)) {
+        if (clientTest.connect(mapServer, port)) {
 
           if (debug) {
 
@@ -62,7 +53,7 @@ bool checkConnectionIsCorrect() {
 
           clientTest.stop();
 
-          return false;
+          return true;
         } else {
 
           if (debug) {
@@ -74,7 +65,7 @@ bool checkConnectionIsCorrect() {
 
           clientTest.stop();
 
-          return true;
+          return false;
         }
       }
     }

@@ -9,6 +9,9 @@ void configureServices();
 // Subscribe to services
 void startSubscribeServices();
 
+// Check status service and activated or desactivated
+void checkStatusService();
+
 // Start services for detection and send request
 void startAllServices();
 
@@ -74,3 +77,6 @@ String getAPNPassword();
 
 // Get device name
 String getDeviceNameForBluetooth();
+
+// Get service status from SD Card
+bool getServiceStatusFromPersist();

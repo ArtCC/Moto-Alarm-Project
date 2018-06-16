@@ -39,6 +39,8 @@ void loop() {
 
     stopServices();
   }
+
+  checkStatusService();
 }
 
 // Private functions

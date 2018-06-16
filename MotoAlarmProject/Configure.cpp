@@ -28,9 +28,15 @@ String apnNameFile = "apnName.txt";
 String apnUserFile = "apnUser.txt";
 String apnPasswordFile = "apnPass.txt";
 String deviceNameFile = "deviceName.txt";
+String serviceStatusFile = "service.txt";
+
+// Values
+String kServiceStatusActivated = "activated";
+String kServiceStatusDesactivated = "desactivated";
 
 // Others
 bool firstInit = true;
+bool checkStatusServiceValue = false;
 
 // Private functions
 // Reset Controller
@@ -162,6 +168,28 @@ void startSubscribeServices() {
   updateDevice();
 }
 
+void checkStatusService() {
+
+  if (!checkStatusServiceValue) {
+
+    if (debug) {
+
+      Serial.println("Check status service from reset...");
+    }
+
+    if (getServiceStatusFromPersist()) {
+
+      setServiceStatus(true);
+    } else {
+
+      setServiceStatus(false);
+      setAlarmIsActive(false);
+    }
+
+    checkStatusServiceValue = true;
+  }
+}
+
 void startAllServices() {
 
   if (checkConnectionIsCorrect()) {
@@ -212,6 +240,16 @@ void stopServices() {
 
 void setServiceStatus(const bool &value) {
   serviceActive = value;
+
+  deleteFileFromSDCard(serviceStatusFile);
+
+  if (value) {
+
+    setDataInFile(serviceStatusFile, kServiceStatusActivated);
+  } else {
+
+    setDataInFile(serviceStatusFile, kServiceStatusDesactivated);
+  }
 }
 
 bool getServiceStatus() {
@@ -403,4 +441,23 @@ String getDeviceNameForBluetooth() {
   modifyDeviceName.trim();
 
   return modifyDeviceName;
+}
+
+bool getServiceStatusFromPersist() {
+
+  if (checkIFFileExistInSDCard(serviceStatusFile)) {
+
+    String serviceStatus = getDataFromFile(serviceStatusFile);
+    serviceStatus.trim();
+
+    if (serviceStatus == kServiceStatusActivated) {
+
+      return true;
+    } else if (serviceStatus == kServiceStatusActivated) {
+
+      return false;
+    }
+  }
+
+  return false;
 }
