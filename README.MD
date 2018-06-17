@@ -157,14 +157,6 @@ I added a usb charger to the battery in my motorcycle but in positive, that mean
 
 Don't worry, write me to my email and I can build it for you at the price of materials and shipping :)
 
-### DONATE ME WITH PATREON!
-
-Do you like the project? Do you want to continue adding new features and improvements? You can help me through a monthly donation with Patreon :)
-
-![MacDown Screenshot](Resources/Patreon_logo.png)
-
-[Link to my Patreon :)](https://www.patreon.com/artcc)
-
 ### LEGAL CONDITIONS
 
 General regulation of data protection and terms of use:
