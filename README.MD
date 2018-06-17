@@ -6,7 +6,7 @@
 
 [Moto Alarm Project website](https://motoalarm-project.com "Moto Alarm Project")
 
-#### PROJECT FUNCTIONALITIES (For iOS and Android apps):
+#### PROJECT FUNCTIONALITIES (For iOS app):
 
 - You can see the position of your motorcycle at all times.
 - You can see the last update date of your motorcycle's position.
@@ -26,7 +26,7 @@
 - If your motorcycle is moving, speed in meters per second.
 - You can see the battery status of the device.
 
-#### UPDATE TIMES (For iOS and Android apps):
+#### UPDATE TIMES (For iOS app):
 
 - With the service deactivated, the status of the battery is sent every <b>24 hours</b>.
 - With the service activated, if the motorcycle with Grove 6-Axis Accelerometer & Gyroscope sensor module detects movement, it is sent every <b>2 minutes</b>.
@@ -44,10 +44,6 @@
 ![MacDown Screenshot](Resources/iPhone_X_6.png)
 
 ### DOWNLOAD macOS VERSION:
-
-I'm developing this version :)
-
-### DOWNLOAD ANDROID VERSION:
 
 I'm developing this version :)
 
@@ -121,11 +117,11 @@ You need to download and install two libraries that are used in the project in t
 
 [OTAUpdate in GitHub](https://github.com/ArtCC/OTAUpdate "OTAUpdate")
 
-<b>All the data that your Linkit One needs is sent by bluetooth from the iOS or Android application.</b>
+<b>All the data that your Linkit One needs is sent by bluetooth from the iOS application.</b>
 
 If you change the default name for your device (MotoAlarmProject) for the bluetooth connection, you have to restart your Linkit One later.
 
-For your Linkit One to send you SMS you have to add your phone in your profile in the iOS or Android application and it will be sent by bluetooth when you activate the service.
+For your Linkit One to send you SMS you have to add your phone in your profile in the iOS application and it will be sent by bluetooth when you activate the service.
 
 You can now upload the code to your Linkit One!
 
