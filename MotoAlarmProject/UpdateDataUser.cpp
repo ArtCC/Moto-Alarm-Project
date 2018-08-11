@@ -7,8 +7,8 @@ void setPOSTRequest(String &path) {
   if (client.connect(mapServer, port)) {
 
     String thisLength = String(path.length());
-    String token = "Authorization: " + getUserToken();
-    String postPathWithUserId = "POST /wp-json/wp/v2/users/" + getUserId();
+    String token = "Authorization: " + user.getUserToken();
+    String postPathWithUserId = "POST /wp-json/wp/v2/users/" + user.getUserId();
 
     if (debug) {
 

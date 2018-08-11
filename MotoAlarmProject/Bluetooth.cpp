@@ -5,11 +5,9 @@
 // Properties
 GATTService service;
 
-String temporalUserToken = "Bearer ";
-
 // Functions
-void activateBluetoothModule() {
-  String deviceName = getDeviceNameForBluetooth();
+void Bluetooth::activateBluetoothModule() {
+  String deviceName = user.getDeviceNameForBluetooth();
 
   char toChar[100];
   deviceName.toCharArray(toChar, 100);
@@ -38,7 +36,7 @@ void activateBluetoothModule() {
   }
 }
 
-void receivedNewMessageFromBluetooth(String &message) {
+void Bluetooth::receivedNewMessageFromBluetooth(String &message) {
   String userIdPrefix = "usrId:";
   String userPhonePrefix = "phone:";
   String tokenPrefix = "token:";
@@ -53,7 +51,7 @@ void receivedNewMessageFromBluetooth(String &message) {
 
     String emptyToken = "";
 
-    setUserToken(emptyToken);
+    user.setUserToken(emptyToken);
     temporalUserToken = "Bearer ";
 
     if (debug) {
@@ -65,37 +63,37 @@ void receivedNewMessageFromBluetooth(String &message) {
     String finalMessage = message;
     finalMessage.replace(userIdPrefix, "");
 
-    setUserId(finalMessage);
+    user.setUserId(finalMessage);
   } else if (checkIfStringContainOtherString(message, userPhonePrefix)) {
 
     String finalMessage = message;
     finalMessage.replace(userPhonePrefix, "");
 
-    setUserPhone(finalMessage);
+    user.setUserPhone(finalMessage);
   } else if (checkIfStringContainOtherString(message, apnNamePrefix)) {
 
     String finalMessage = message;
     finalMessage.replace(apnNamePrefix, "");
 
-    setAPNName(finalMessage);
+    user.setAPNName(finalMessage);
   } else if (checkIfStringContainOtherString(message, apnUserPrefix)) {
 
     String finalMessage = message;
     finalMessage.replace(apnUserPrefix, "");
 
-    setAPNUser(finalMessage);
+    user.setAPNUser(finalMessage);
   } else if (checkIfStringContainOtherString(message, apnPasswordPrefix)) {
 
     String finalMessage = message;
     finalMessage.replace(apnPasswordPrefix, "");
 
-    setAPNPassword(finalMessage);
+    user.setAPNPassword(finalMessage);
   } else if (checkIfStringContainOtherString(message, deviceNamePrefix)) {
 
     String finalMessage = message;
     finalMessage.replace(deviceNamePrefix, "");
 
-    setDeviceNameForBluetooth(finalMessage);
+    user.setDeviceNameForBluetooth(finalMessage);
   } else if (checkIfStringContainOtherString(message, tokenPrefix)) {
 
     String finalMessage = message;
@@ -110,7 +108,7 @@ void receivedNewMessageFromBluetooth(String &message) {
     }
   } else if (checkIfStringContainOtherString(message, sendDataEnd)) {
 
-    setUserToken(temporalUserToken);
+    user.setUserToken(temporalUserToken);
   } else if (checkIfStringContainOtherString(message, serviceOn)) {
 
     setServiceStatus(true);
@@ -125,7 +123,7 @@ void receivedNewMessageFromBluetooth(String &message) {
   } else if (checkIfStringContainOtherString(message, serviceOff)) {
 
     setServiceStatus(false);
-    setAlarmIsActive(false);
+    gyroscope.setAlarmIsActive(false);
 
     if (debug) {
 
@@ -138,6 +136,6 @@ void receivedNewMessageFromBluetooth(String &message) {
   }
 }
 
-void subscribeToEventsBluetoothModule() {
+void Bluetooth::subscribeToEventsBluetoothModule() {
   LGATTServer.handleEvents();
 }

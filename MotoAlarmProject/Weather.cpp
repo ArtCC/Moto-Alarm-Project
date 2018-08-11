@@ -3,7 +3,7 @@
 
 // Properties
 #define WEATHER_BASE_URL "api.openweathermap.org"
-String openWeatherAPIKey = "7361a32159627d3d34db82854a569bf7";
+String openWeatherAPIKey = "a708d82e019df78b5880aa93cf81fed9";
 String weatherTitleString = "";
 String cityString = "";
 String temperatureString = "";
@@ -118,30 +118,27 @@ bool sendRequestForWeatherForMotorbikeLocation() {
 // Public functions
 bool getWeatherForMotorbikeLocation() {
 
-  if (checkConnectionIsCorrect()) {
+  if (sendRequestForWeatherForMotorbikeLocation() && skipResponseHeadersForWeather("\r\n\r\n")) {
 
-    if (sendRequestForWeatherForMotorbikeLocation() && skipResponseHeadersForWeather("\r\n\r\n")) {
+    weatherClientData weatherClientData;
 
-      weatherClientData weatherClientData;
+    if (readReponseContent(&weatherClientData)) {
 
-      if (readReponseContent(&weatherClientData)) {
+      weatherTitleString = weatherClientData.weatherTitle;
+      cityString = weatherClientData.city;
+      temperatureString = weatherClientData.temperature;
+      humidityString = weatherClientData.humidity;
 
-        weatherTitleString = weatherClientData.weatherTitle;
-        cityString = weatherClientData.city;
-        temperatureString = weatherClientData.temperature;
-        humidityString = weatherClientData.humidity;
+      if (debug) {
 
-        if (debug) {
+        Serial.println("Disconnecting");
 
-          Serial.println("Disconnecting");
-
-          printclientDataForWeather(&weatherClientData);
-        }
-
-        client.stop();
-
-        return true;
+        printclientDataForWeather(&weatherClientData);
       }
+
+      client.stop();
+
+      return true;
     }
   }
 

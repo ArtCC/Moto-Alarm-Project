@@ -7,33 +7,6 @@ unsigned long previousMillisForSendData = 0;
 unsigned long disabledIntervalUpdate = 86400000;
 unsigned long disabledPreviousMillisUpdate = 0;
 
-// User
-String userPhone = "";
-String userId = "";
-String userToken = "";
-
-// APN
-String apnName = "";
-String apnUser = "";
-String apnPassword = "";
-
-// Device
-String deviceName = "";
-
-// Files card
-String tokenFile = "token.txt";
-String userIdFile = "userId.txt";
-String userPhoneFile = "userPhone.txt";
-String apnNameFile = "apnName.txt";
-String apnUserFile = "apnUser.txt";
-String apnPasswordFile = "apnPass.txt";
-String deviceNameFile = "deviceName.txt";
-String serviceStatusFile = "service.txt";
-
-// Values
-String kServiceStatusActivated = "activated";
-String kServiceStatusDesactivated = "desactivated";
-
 // Others
 bool firstInit = true;
 bool checkStatusServiceValue = false;
@@ -64,9 +37,9 @@ void reset_utils(void) {
 }
 
 void configureGPRSConnection() {
-  String apnNameString = getAPNName();
-  String apnUserString = getAPNUser();
-  String apnPasswordString = getAPNPassword();
+  String apnNameString = user.getAPNName();
+  String apnUserString = user.getAPNUser();
+  String apnPasswordString = user.getAPNPassword();
 
   char toCharAPNName[100];
   apnNameString.toCharArray(toCharAPNName, 100);
@@ -122,40 +95,33 @@ void configureForFirstInit() {
 
 void setStatusToUpdateDataToOnUtil() {
 
-  if (checkConnectionIsCorrect()) {
+  if (activateGPSData()) {
 
-    if (activateGPSData()) {
+    // Update user data
+    setUpdateDataUserToServer(
+      getLatitude(),
+      getLongitude(),
+      getBatteryLevel(),
+      getBatteryChargeStatus()
+    );
+  } else {
 
-      // Update user data
-      setUpdateDataUserToServer(
-        getLatitude(),
-        getLongitude(),
-        getBatteryLevel(),
-        getBatteryChargeStatus()
-      );
-    } else {
-
-      setStatusToUpdateDataToOffUtil(true);
-    }
+    setStatusToUpdateDataToOffUtil(true);
   }
 }
 
 void setStatusToUpdateDataToOffUtil(const bool &gpsError) {
-
-  if (checkConnectionIsCorrect()) {
-
-    setStatusToUpdateDataToOff(getBatteryLevel(),
-                               getBatteryChargeStatus(),
-                               gpsError);
-  }
+  setStatusToUpdateDataToOff(getBatteryLevel(),
+                             getBatteryChargeStatus(),
+                             gpsError);
 }
 
 // Public functions
 void configureServices() {
   Serial.begin(115200);
 
-  configSDCard();
-  activateBluetoothModule();
+  card.configSDCard();
+  bluetooth.activateBluetoothModule();
   activateGPS();
   activateSIM();
   configureGPRSConnection();
@@ -164,7 +130,7 @@ void configureServices() {
 
 void startSubscribeServices() {
   receivedSMS();
-  subscribeToEventsBluetoothModule();
+  bluetooth.subscribeToEventsBluetoothModule();
   updateDevice();
 }
 
@@ -177,13 +143,13 @@ void checkStatusService() {
       Serial.println("Check status service from reset...");
     }
 
-    if (getServiceStatusFromPersist()) {
+    if (user.getServiceStatusFromPersist()) {
 
       setServiceStatus(true);
     } else {
 
       setServiceStatus(false);
-      setAlarmIsActive(false);
+      gyroscope.setAlarmIsActive(false);
     }
 
     checkStatusServiceValue = true;
@@ -191,64 +157,56 @@ void checkStatusService() {
 }
 
 void startAllServices() {
+  configureForFirstInit();
 
-  if (checkConnectionIsCorrect()) {
+  unsigned long currentMillisUpdateForSendData = millis();
 
-    configureForFirstInit();
+  if (!firstInit) {
 
-    unsigned long currentMillisUpdateForSendData = millis();
+    if ((unsigned long)(currentMillisUpdateForSendData - previousMillisForSendData) >= getValueForDeviceUpdateTime()) {
 
-    if (!firstInit) {
+      if (debug) {
 
-      if ((unsigned long)(currentMillisUpdateForSendData - previousMillisForSendData) >= getValueForDeviceUpdateTime()) {
-
-        if (debug) {
-
-          Serial.println("Time for data user new update:");
-          Serial.println(currentMillisUpdateForSendData);
-          Serial.println(previousMillisForSendData);
-          Serial.println(getValueForDeviceUpdateTime());
-          Serial.println("");
-        }
-
-        String location = getLatitude() + "," + getLongitude();
-        setDataInFile(motorbikePositionHistorial, location);
-
-        setStatusToUpdateDataToOnUtil();
-
-        previousMillisForSendData = millis();
+        Serial.println("Time for data user new update:");
+        Serial.println(currentMillisUpdateForSendData);
+        Serial.println(previousMillisForSendData);
+        Serial.println(getValueForDeviceUpdateTime());
+        Serial.println("");
       }
+
+      String location = getLatitude() + "," + getLongitude();
+      card.setDataInFile(motorbikePositionHistorial, location);
+
+      setStatusToUpdateDataToOnUtil();
+
+      previousMillisForSendData = millis();
     }
   }
 }
 
 void stopServices() {
+  unsigned long disabledCurrentMillisUpdate = millis();
 
-  if (checkConnectionIsCorrect()) {
+  if ((unsigned long)(disabledCurrentMillisUpdate - disabledPreviousMillisUpdate) >= disabledIntervalUpdate) {
 
-    unsigned long disabledCurrentMillisUpdate = millis();
+    // Not update user data
+    setStatusToUpdateDataToOffUtil(false);
 
-    if ((unsigned long)(disabledCurrentMillisUpdate - disabledPreviousMillisUpdate) >= disabledIntervalUpdate) {
-
-      // Not update user data
-      setStatusToUpdateDataToOffUtil(false);
-
-      disabledPreviousMillisUpdate = millis();
-    }
+    disabledPreviousMillisUpdate = millis();
   }
 }
 
 void setServiceStatus(const bool &value) {
   serviceActive = value;
 
-  deleteFileFromSDCard(serviceStatusFile);
+  card.deleteFileFromSDCard(user.serviceStatusFile);
 
   if (value) {
 
-    setDataInFile(serviceStatusFile, kServiceStatusActivated);
+    card.setDataInFile(user.serviceStatusFile, user.kServiceStatusActivated);
   } else {
 
-    setDataInFile(serviceStatusFile, kServiceStatusDesactivated);
+    card.setDataInFile(user.serviceStatusFile, user.kServiceStatusDesactivated);
   }
 }
 
@@ -297,167 +255,4 @@ void resetByCode() {
   }
 
   reset_utils();
-}
-
-void setUserToken(String &string) {
-  userToken = string;
-
-  deleteFileFromSDCard(tokenFile);
-  setDataInFile(tokenFile, userToken);
-}
-
-void setUserId(String &string) {
-  userId = string;
-
-  deleteFileFromSDCard(userIdFile);
-  setDataInFile(userIdFile, userId);
-}
-
-void setUserPhone(String &string) {
-  userPhone = string;
-
-  deleteFileFromSDCard(userPhoneFile);
-  setDataInFile(userPhoneFile, userPhone);
-}
-
-void setAPNName(String &string) {
-  apnName = string;
-
-  deleteFileFromSDCard(apnNameFile);
-  setDataInFile(apnNameFile, apnName);
-}
-
-void setAPNUser(String &string) {
-  apnUser = string;
-
-  deleteFileFromSDCard(apnUserFile);
-  setDataInFile(apnUserFile, apnUser);
-}
-
-void setAPNPassword(String &string) {
-  apnPassword = string;
-
-  deleteFileFromSDCard(apnPasswordFile);
-  setDataInFile(apnPasswordFile, apnPassword);
-}
-
-void setDeviceNameForBluetooth(String &string) {
-  deviceName = string;
-
-  deleteFileFromSDCard(deviceNameFile);
-  setDataInFile(deviceNameFile, deviceName);
-}
-
-String getUserToken() {
-
-  if (checkIFFileExistInSDCard(tokenFile)) {
-
-    userToken = getDataFromFile(tokenFile);
-  }
-
-  String modifyToken = userToken;
-  modifyToken.trim();
-
-  return modifyToken;
-}
-
-String getUserId() {
-
-  if (checkIFFileExistInSDCard(userIdFile)) {
-
-    userId = getDataFromFile(userIdFile);
-  }
-
-  String modifyUserId = userId;
-  modifyUserId.trim();
-
-  return modifyUserId;
-}
-
-String getUserPhone() {
-
-  if (checkIFFileExistInSDCard(userPhoneFile)) {
-
-    userPhone = getDataFromFile(userPhoneFile);
-  }
-
-  String modifyUserPhone = userPhone;
-  modifyUserPhone.trim();
-
-  return modifyUserPhone;
-}
-
-String getAPNName() {
-  String modifyApnName = "";
-
-  if (checkIFFileExistInSDCard(apnNameFile)) {
-
-    apnName = getDataFromFile(apnNameFile);
-    modifyApnName = apnName;
-  }
-
-  modifyApnName.trim();
-
-  return modifyApnName;
-}
-
-String getAPNUser() {
-  String modifyApnUser = "";
-
-  if (checkIFFileExistInSDCard(apnUserFile)) {
-
-    apnUser = getDataFromFile(apnUserFile);
-    modifyApnUser = apnUser;
-  }
-
-  modifyApnUser.trim();
-
-  return modifyApnUser;
-}
-
-String getAPNPassword() {
-  String modifyApnPassword = "";
-
-  if (checkIFFileExistInSDCard(apnPasswordFile)) {
-
-    apnPassword = getDataFromFile(apnPasswordFile);
-    modifyApnPassword = apnPassword;
-  }
-
-  modifyApnPassword.trim();
-
-  return modifyApnPassword;
-}
-
-String getDeviceNameForBluetooth() {
-  String modifyDeviceName = "MotoAlarmProject";
-
-  if (checkIFFileExistInSDCard(deviceNameFile)) {
-
-    deviceName = getDataFromFile(deviceNameFile);
-    modifyDeviceName = deviceName;
-  }
-
-  modifyDeviceName.trim();
-
-  return modifyDeviceName;
-}
-
-bool getServiceStatusFromPersist() {
-
-  if (checkIFFileExistInSDCard(serviceStatusFile)) {
-
-    String serviceStatus = getDataFromFile(serviceStatusFile);
-    serviceStatus.trim();
-
-    if (serviceStatus == kServiceStatusActivated) {
-
-      return true;
-    } else if (serviceStatus == kServiceStatusActivated) {
-
-      return false;
-    }
-  }
-
-  return false;
 }

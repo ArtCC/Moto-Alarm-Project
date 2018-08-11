@@ -167,7 +167,7 @@ boolean GATTService::onWrite(LGATTWriteRequest &data) {
       Serial.println();
     }
 
-    receivedNewMessageFromBluetooth(messageFromBluetooth);
+    bluetooth.receivedNewMessageFromBluetooth(messageFromBluetooth);
   }
 
   if (data.need_rsp) {

@@ -2,7 +2,7 @@
 #include "ImportClasses.h"
 
 // Public functions
-void configSDCard() {
+void Card::configSDCard() {
 
   if (debug) {
 
@@ -17,7 +17,7 @@ void configSDCard() {
   }
 }
 
-bool checkIFFileExistInSDCard(String &fileNameString) {
+bool Card::checkIFFileExistInSDCard(String &fileNameString) {
   char fileNameInArrayChar[15];
   fileNameString.toCharArray(fileNameInArrayChar, 15);
   char *fileName = fileNameInArrayChar;
@@ -42,7 +42,7 @@ bool checkIFFileExistInSDCard(String &fileNameString) {
   return false;
 }
 
-bool deleteFileFromSDCard(String &fileNameString) {
+bool Card::deleteFileFromSDCard(String &fileNameString) {
   char fileNameInArrayChar[15];
   fileNameString.toCharArray(fileNameInArrayChar, 15);
   char *fileName = fileNameInArrayChar;
@@ -67,7 +67,7 @@ bool deleteFileFromSDCard(String &fileNameString) {
   return false;
 }
 
-bool setDataInFile(String &fileNameString, String &dataString) {
+bool Card::setDataInFile(String &fileNameString, String &dataString) {
   char fileNameInArrayChar[15];
   fileNameString.toCharArray(fileNameInArrayChar, 15);
   char *fileName = fileNameInArrayChar;
@@ -93,7 +93,7 @@ bool setDataInFile(String &fileNameString, String &dataString) {
   return false;
 }
 
-String getDataFromFile(String &fileNameString) {
+String Card::getDataFromFile(String &fileNameString) {
   String dataString = "";
 
   char fileNameInArrayChar[15];

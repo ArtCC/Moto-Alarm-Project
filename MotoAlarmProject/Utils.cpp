@@ -2,6 +2,16 @@
 #include "ImportClasses.h"
 
 // Public functions
+String getBatteryLevel() {
+
+  return String(LBattery.level());
+}
+
+String getBatteryChargeStatus() {
+
+  return String(LBattery.isCharging());
+}
+
 bool stringIsEmpty(String &string) {
   int lengthString = string.length();
 

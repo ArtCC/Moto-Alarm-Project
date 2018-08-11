@@ -1,39 +1,28 @@
 // Import classes and libraries
 #include "ImportClasses.h"
 
-// Properties
-// Control for LSM6DS30 and get first value
-bool setNewValuesFromGroveSensor = true;
-bool sendDataToServerForAlarmIsActive;
-
-// Accelerometer and gyroscope
-int firstGyroscopeX;
-int firstGyroscopeY;
-int differenceGyroscopeX;
-int differenceGyroscopeY;
-
 // Public functions
-bool getIfAlarmIsActive() {
+bool GyroscopeUtils::getIfAlarmIsActive() {
 
   return sendDataToServerForAlarmIsActive;
 }
 
-void setAlarmIsActive(const bool &newValue) {
+void GyroscopeUtils::setAlarmIsActive(const bool &newValue) {
   sendDataToServerForAlarmIsActive = newValue;
 }
 
-void setSaveValuesFromGroveSensor(const bool &newValue) {
+void GyroscopeUtils::setSaveValuesFromGroveSensor(const bool &newValue) {
   setNewValuesFromGroveSensor = newValue;
   sendDataToServerForAlarmIsActive = false;
 }
 
-void processValuesFromGroveSensor(float aX,
-                                  float aY,
-                                  float aZ,
-                                  float gX,
-                                  float gY,
-                                  float gZ,
-                                  float temperature) {
+void GyroscopeUtils::processValuesFromGroveSensor(float aX,
+    float aY,
+    float aZ,
+    float gX,
+    float gY,
+    float gZ,
+    float temperature) {
 
   if (setNewValuesFromGroveSensor) {
 
@@ -71,11 +60,11 @@ void processValuesFromGroveSensor(float aX,
 
   if (differenceGyroscopeX > 50 && differenceGyroscopeY > 50) {
 
-    deleteFileFromSDCard(motorbikePositionHistorial);
+    card.deleteFileFromSDCard(motorbikePositionHistorial);
 
     sendDataToServerForAlarmIsActive = true;
 
-    sendSMSToPhoneNumber(getUserPhone(), textForAlarmSMSWithoutLocation);
+    sendSMSToPhoneNumber(user.getUserPhone(), textForAlarmSMSWithoutLocation);
 
     if (debug) {
 

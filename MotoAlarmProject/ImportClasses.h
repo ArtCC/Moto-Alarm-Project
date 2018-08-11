@@ -28,13 +28,12 @@
 
 // Custom classes
 #include "Configure.h"
-#include "Battery.h"
 #include "Bluetooth.h"
 #include "Card.h"
-#include "Connection.h"
+#include "User.h"
+#include "GyroscopeUtils.h"
 #include "GPS.h"
 #include "GSM.h"
-#include "GyroscopeUtils.h"
 #include "PrivateConstants.h"
 #include "SparkFunLSM6DS3.h"
 #include "Time.h"

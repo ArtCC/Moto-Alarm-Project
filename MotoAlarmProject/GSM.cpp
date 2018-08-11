@@ -32,34 +32,34 @@ void sendMessage(String &message) {
 
     if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
-      sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
+      sendSMSToPhoneNumber(user.getUserPhone(), textForStatusErrorSMS);
     } else {
 
       if (activateGPSData()) {
 
         String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-        sendSMSToPhoneNumber(getUserPhone(), textString);
+        sendSMSToPhoneNumber(user.getUserPhone(), textString);
       } else {
 
-        sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
+        sendSMSToPhoneNumber(user.getUserPhone(), textForStatusErrorSMS);
       }
     }
   } else if (message == batteryFromSMS || message == batteryWatchFromSMS) {
 
     String textString = textForBatterySMS + getBatteryLevel() + "%";
-    sendSMSToPhoneNumber(getUserPhone(), textString);
+    sendSMSToPhoneNumber(user.getUserPhone(), textString);
   } else if (message == activateFromSMS || message == activateWatchFromSMS) {
 
     setServiceStatus(true);
-    sendSMSToPhoneNumber(getUserPhone(), textForActivateSMS);
+    sendSMSToPhoneNumber(user.getUserPhone(), textForActivateSMS);
 
     // Send user data to server
     setStatusToUpdateDataToOnUtil();
   } else if (message == desactivateFromSMS || message == desactivateWatchFromSMS) {
 
     setServiceStatus(false);
-    setAlarmIsActive(false);
-    sendSMSToPhoneNumber(getUserPhone(), textForDesactivateSMS);
+    gyroscope.setAlarmIsActive(false);
+    sendSMSToPhoneNumber(user.getUserPhone(), textForDesactivateSMS);
 
     // Not update user data but send disable service
     setStatusToUpdateDataToOffUtil(false);
@@ -69,14 +69,14 @@ void sendMessage(String &message) {
 
     if (weather) {
 
-      sendSMSToPhoneNumber(getUserPhone(), getFeel());
+      sendSMSToPhoneNumber(user.getUserPhone(), getFeel());
     } else {
 
-      sendSMSToPhoneNumber(getUserPhone(), textForFeelSMS);
+      sendSMSToPhoneNumber(user.getUserPhone(), textForFeelSMS);
     }
   } else if (message == resetFromSMS || message == resetWatchFromSMS) {
 
-    sendSMSToPhoneNumber(getUserPhone(), textForResetSMS);
+    sendSMSToPhoneNumber(user.getUserPhone(), textForResetSMS);
     resetByCode();
   }
 }
@@ -154,16 +154,16 @@ void receivedSMS() {
 
         if (getLatitude() == "0.00000" || getLongitude() == "0.00000") {
 
-          sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
+          sendSMSToPhoneNumber(user.getUserPhone(), textForStatusErrorSMS);
         } else {
 
           if (activateGPSData()) {
 
             String textString = textForStatusSMS + googleMapsURL + getLatitude() + "," + getLongitude() + googleZoom;
-            sendSMSToPhoneNumber(getUserPhone(), textString);
+            sendSMSToPhoneNumber(user.getUserPhone(), textString);
           } else {
 
-            sendSMSToPhoneNumber(getUserPhone(), textForStatusErrorSMS);
+            sendSMSToPhoneNumber(user.getUserPhone(), textForStatusErrorSMS);
           }
         }
       } else if (message == batteryFromSMS) {
@@ -191,7 +191,7 @@ void receivedSMS() {
         setPOSTRequest(data);
 
         setServiceStatus(false);
-        setAlarmIsActive(false);
+        gyroscope.setAlarmIsActive(false);
 
         // Not update user data but send disable service
         setStatusToUpdateDataToOffUtil(false);
@@ -207,7 +207,7 @@ void receivedSMS() {
           setPOSTRequest(data);
         } else {
 
-          sendSMSToPhoneNumber(getUserPhone(), textForFeelSMS);
+          sendSMSToPhoneNumber(user.getUserPhone(), textForFeelSMS);
         }
       } else if (message == resetFromSMS) {
 

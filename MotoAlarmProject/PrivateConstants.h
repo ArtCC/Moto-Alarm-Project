@@ -11,6 +11,10 @@ static unsigned long previousMillisForGroveSensor = 0;
 
 // Instance for all request
 static LGPRSClient client;
+static Bluetooth bluetooth;
+static GyroscopeUtils gyroscope;
+static Card card;
+static User user;
 
 // Max response time from server
 const unsigned long HTTP_TIMEOUT = 10000;

@@ -14,7 +14,6 @@
 #include "ImportClasses.h"
 
 // Properties
-// Create a instance of class LSM6DS3, I2C device address 0x6A
 LSM6DS3 groveSensor(I2C_MODE, 0x6A);
 
 // Public functions
@@ -28,7 +27,7 @@ void loop() {
 
   if (getServiceStatus()) {
 
-    if (getIfAlarmIsActive()) {
+    if (gyroscope.getIfAlarmIsActive()) {
 
       startAllServices();
     } else {
@@ -68,13 +67,13 @@ void startGroveSensorModule() {
 
   if ((unsigned long)(currentMillisUpdateForGroveSensor - previousMillisForGroveSensor) >= intervalUpdateForGroveSensor) {
 
-    processValuesFromGroveSensor(groveSensor.readFloatAccelX(),
-                                 groveSensor.readFloatAccelY(),
-                                 groveSensor.readFloatAccelZ(),
-                                 groveSensor.readFloatGyroX(),
-                                 groveSensor.readFloatGyroY(),
-                                 groveSensor.readFloatGyroZ(),
-                                 groveSensor.readTempC());
+    gyroscope.processValuesFromGroveSensor(groveSensor.readFloatAccelX(),
+                                           groveSensor.readFloatAccelY(),
+                                           groveSensor.readFloatAccelZ(),
+                                           groveSensor.readFloatGyroX(),
+                                           groveSensor.readFloatGyroY(),
+                                           groveSensor.readFloatGyroZ(),
+                                           groveSensor.readTempC());
 
     previousMillisForGroveSensor = millis();
   }

@@ -70,11 +70,11 @@ bool sendRequestForTime() {
       Serial.println(mapServer);
     }
 
-    client.print("GET /wp-json/wp/v2/users/" + getUserId());
+    client.print("GET /wp-json/wp/v2/users/" + user.getUserId());
     client.println(" HTTP/1.0");
     client.print("Host: ");
     client.println(mapServer);
-    client.println("Authorization: " + getUserToken());
+    client.println("Authorization: " + user.getUserToken());
     client.println("Connection: close");
     client.println();
 

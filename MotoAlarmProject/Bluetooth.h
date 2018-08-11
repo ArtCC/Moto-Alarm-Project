@@ -3,11 +3,18 @@
    All functions for use bluetooth module
 */
 
-// Activate bluetooth module
-void activateBluetoothModule();
+class Bluetooth {
+  private:
 
-// Process new message from bluetooth connection
-void receivedNewMessageFromBluetooth(String &message);
+    String temporalUserToken = "Bearer ";
+  public:
 
-// Subscribe to events to bluetooth module
-void subscribeToEventsBluetoothModule();
+    // Activate bluetooth module
+    void activateBluetoothModule();
+
+    // Process new message from bluetooth connection
+    void receivedNewMessageFromBluetooth(String &message);
+
+    // Subscribe to events to bluetooth module
+    void subscribeToEventsBluetoothModule();
+};
