@@ -1,3 +1,5 @@
+This project is deprecated :(
+
 ## DO IT YOURSELF!
 
 # Moto Alarm Project (Linkit One version)
