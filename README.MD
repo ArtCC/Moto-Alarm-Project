@@ -1,4 +1,8 @@
-This project is deprecated :(
+<table>
+  <tr>
+    <th><img src="https://bloximages.chicago2.vip.townnews.com/auburnpub.com/content/tncms/assets/v3/editorial/a/ff/aff9b52a-1dab-11e8-951d-9bc97c0e1314/5a98928397c4a.image.jpg?resize=1200%2C1022" width="300"/></th>
+  </tr>
+</table>
 
 ## DO IT YOURSELF!
 
