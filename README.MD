@@ -4,13 +4,13 @@
   </tr>
 </table>
 
+#### Why? For the battery expense. At the end, for short trips, the battery charge is not enough to last for many days and goes out. It is not a viable project.
+
 ## DO IT YOURSELF!
 
 # Moto Alarm Project (Linkit One version)
 
 ##### LOCATE YOUR MOTORCYCLE 24 HOURS A DAY AND 365 DAYS A YEAR
-
-[Moto Alarm Project website](https://motoalarm-project.com "Moto Alarm Project")
 
 #### PROJECT FUNCTIONALITIES (For iOS app):
 
@@ -39,8 +39,6 @@
 - From the mobile application, you can change the default update time (2 minutes) and adapt it to your needs, but the Grove 6-Axis Accelerometer & Gyroscope sensor module will activate the services if necessary and save battery ;)
 
 ### DOWNLOAD iOS VERSION:
-
-[Moto Alarm Project iOS version](https://itunes.apple.com/us/app/moto-alarm-project/id1313229312?l=es&ls=1&mt=8 "Moto Alarm Project iOS version")
 
 ![MacDown Screenshot](Resources/iPhone_X_1.png)
 ![MacDown Screenshot](Resources/iPhone_X_2.png)
@@ -140,8 +138,6 @@ If you have a 3D printer or know someone who has it, here are the .stl files to 
 ![MacDown Screenshot](Resources/Box_6000_3.jpg)
 ![MacDown Screenshot](Resources/Box_6000_4.jpg)
 ![MacDown Screenshot](Resources/Box_6000_5.jpg)
-
-[STL files in Thingeverse.com by me](https://www.thingiverse.com/thing:2859090 "STL files")
 
 ### BATTERY WITH 6000mAh
 
